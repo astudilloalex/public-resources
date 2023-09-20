@@ -228,6 +228,7 @@ columnaPieAud.classList.add('col-xs-18')
 
 const audio=new Audio()
 audio.controls = true;
+audio.id='audio-source-chat'
 
 columnaPieAud.appendChild(audio)
 
@@ -260,6 +261,7 @@ columnaPieAudDel.appendChild(buttonDel)
 
 const buttonChk=document.createElement('button-icon-chat')
 buttonChk.classList.add('btn-circle')
+buttonChk.id='send-aud-chat'
 
 const imgbtnChk=document.createElement('span-icon-chat')
 imgbtnChk.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="check" aria-hidden="true"><path d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 00-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"></path></svg>'
@@ -287,6 +289,7 @@ if(allowedDomains.includes(window.location.host)){
 
 var contMsg=0
 var audioRecordStartTime;
+let reader
 function createMsgElement(origin,message){
     const actualMsg=document.createElement('list-item-chat')
     const containerMsg=document.createElement('card-chat')        
@@ -308,7 +311,7 @@ function showInitFooter() {
 }
 function playAudio(recorderAudioAsBlob) {
     
-    let reader = new FileReader();
+    reader = new FileReader();
 
     //once content has been read
     reader.onload = (e) => {
@@ -319,7 +322,7 @@ function playAudio(recorderAudioAsBlob) {
         //as pre populating the HTML with a source of empty src causes error
         // if (!audioElementSource) //if its not defined create it (happens first time only)
         //     createSourceForAudioElement();
-        let sourceElement = document.createElement("source");
+        let sourceElement = document.createElement("source");        
         audio.appendChild(sourceElement);
 
         //set the audio element's source using the base64 URL
@@ -363,7 +366,7 @@ jQuery('#send-msg-chat').click(function() {
         createMsgElement(true,response.data.data.content)            
     })
     .catch(function(error){
-        console.log(error)
+        console.error(error)
     })
 })
 jQuery('#activate-rec-chat').click(function(){
@@ -387,8 +390,7 @@ audioRecorder.start()
         //display control buttons to offer the functionality of stop and cancel
         showInitFooter();
     })
-    .catch(error => { //on error
-        console.log(error)
+    .catch(error => { //on error        
         //No Browser Support Error
         if (error.message.includes("mediaDevices API or getUserMedia method is not supported in this browser.")) {
             console.log("To record audio, use browsers like Chrome and Firefox.");                
@@ -396,31 +398,31 @@ audioRecorder.start()
         //Error handling structure
         switch (error.name) {
             case 'AbortError': //error from navigator.mediaDevices.getUserMedia
-                console.log("An AbortError has occured.");
+                console.error("An AbortError has occured.");
                 break;
             case 'NotAllowedError': //error from navigator.mediaDevices.getUserMedia
-                console.log("A NotAllowedError has occured. User might have denied permission.");
+                console.error("A NotAllowedError has occured. User might have denied permission.");
                 break;
             case 'NotFoundError': //error from navigator.mediaDevices.getUserMedia
-                console.log("A NotFoundError has occured.");
+                console.error("A NotFoundError has occured. No Audio Record Device");
                 break;
             case 'NotReadableError': //error from navigator.mediaDevices.getUserMedia
-                console.log("A NotReadableError has occured.");
+                console.error("A NotReadableError has occured.");
                 break;
             case 'SecurityError': //error from navigator.mediaDevices.getUserMedia or from the MediaRecorder.start
-                console.log("A SecurityError has occured.");
+                console.error("A SecurityError has occured.");
                 break;
             case 'TypeError': //error from navigator.mediaDevices.getUserMedia
-                console.log("A TypeError has occured.");
+                console.error("A TypeError has occured.");
                 break;
             case 'InvalidStateError': //error from the MediaRecorder.start
-                console.log("An InvalidStateError has occured.");
+                console.error("An InvalidStateError has occured.");
                 break;
             case 'UnknownError': //error from the MediaRecorder.start
-                console.log("An UnknownError has occured.");
+                console.error("An UnknownError has occured.");
                 break;
             default:
-                console.log("An error occured with the error name " + error.name);
+                console.error("An error occured with the error name " + error.name);
         };
     });
 })
@@ -441,21 +443,47 @@ audioRecorder.stop()
         //Error handling structure
         switch (error.name) {
             case 'InvalidStateError': //error from the MediaRecorder.stop
-                console.log("An InvalidStateError has occured.");
+                console.error("An InvalidStateError has occured.");
                 break;
             default:
-                console.log("An error occured with the error name " + error.name);
+                console.error("An error occured with the error name " + error.name);
         };
     });
 })
 jQuery('#del-rec-chat').click(function(){
     console.log("Canceling audio...");
-
-    //cancel the recording using the audio recording API
+    audio.innerHTML=""
+    
     jQuery("#initRow").toggle(); 
     jQuery("#audRow").toggle();
-    audio.cancel();
     
-    //hide recording control button & return record icon
-    // handleHidingRecordingControlButtons();
 })    
+jQuery('#send-aud-chat').click(function(){
+    var form = new FormData();
+    const blob = new Blob(audioRecorder.audioBlobs,{'type':'audio/mpeg-3'})    
+    form.append("file", blob);
+    axios.post('http://apichatgpt.dev.curbe.com.ec:5000/get-audio', 
+    form,
+    {
+        headers: {
+            "Accept": "application/json",
+            "Content-type": "audio/mpeg-3"
+        }
+    }
+    )
+    .then(result => {
+        createMsgElement(false,result.data.data.content)
+        axios.post('https://apichatgpt.dev.curbe.com.ec/bot-question',{
+        question:result.data.data.content
+    })
+    .then(function (response) {        
+        createMsgElement(true,response.data.data.content)            
+    })
+    .catch(function(error){
+        console.error(error)
+    })
+    })
+    .catch(error=>{
+        console.error("Error al obtener texto")
+    })
+})
