@@ -282,179 +282,178 @@ if(allowedDomains.includes(window.location.host)){
     document.head.appendChild(css)
 }
 
-$(function() {
-    var contMsg=0
-    var audioRecordStartTime;
-    function createMsgElement(origin,message){
-        const actualMsg=document.createElement('list-item-chat')
-        const containerMsg=document.createElement('card-chat')        
-        if(origin){
-            actualMsg.classList.add('inverse-row')
-            containerMsg.classList.add('systemMsg')
-            containerMsg.innerHTML=message
-        }else{
-            containerMsg.classList.add('userMsg')
-            containerMsg.innerHTML=message
-        }        
-        actualMsg.appendChild(containerMsg)
-        listaMsg.appendChild(actualMsg)
-        inputMsg.value=""
-        contenido.scrollTo(0, contenido.scrollHeight);
-    }
-    function showInitFooter() {
-        //clearInterval(elapsedTimeTimer);
-    }
-    function playAudio(recorderAudioAsBlob) {
-        
-        let reader = new FileReader();
 
-        //once content has been read
-        reader.onload = (e) => {
-            //store the base64 URL that represents the URL of the recording audio
-            let base64URL = e.target.result;
+var contMsg=0
+var audioRecordStartTime;
+function createMsgElement(origin,message){
+    const actualMsg=document.createElement('list-item-chat')
+    const containerMsg=document.createElement('card-chat')        
+    if(origin){
+        actualMsg.classList.add('inverse-row')
+        containerMsg.classList.add('systemMsg')
+        containerMsg.innerHTML=message
+    }else{
+        containerMsg.classList.add('userMsg')
+        containerMsg.innerHTML=message
+    }        
+    actualMsg.appendChild(containerMsg)
+    listaMsg.appendChild(actualMsg)
+    inputMsg.value=""
+    contenido.scrollTo(0, contenido.scrollHeight);
+}
+function showInitFooter() {
+    //clearInterval(elapsedTimeTimer);
+}
+function playAudio(recorderAudioAsBlob) {
     
-            //If this is the first audio playing, create a source element
-            //as pre populating the HTML with a source of empty src causes error
-            // if (!audioElementSource) //if its not defined create it (happens first time only)
-            //     createSourceForAudioElement();
-            let sourceElement = document.createElement("source");
-            audio.appendChild(sourceElement);
-    
-            //set the audio element's source using the base64 URL
-            sourceElement.src = base64URL;
-    
-            //set the type of the audio element based on the recorded audio's Blob type
-            let BlobType = recorderAudioAsBlob.type.includes(";") ?
-                recorderAudioAsBlob.type.substr(0, recorderAudioAsBlob.type.indexOf(';')) : recorderAudioAsBlob.type;
-                sourceElement.type = BlobType
-    
-            //call the load method as it is used to update the audio element after changing the source or other settings
-            audio.load();
-    
-            // //play the audio after successfully setting new src and type that corresponds to the recorded audio
-            // console.log("Playing audio...");
-            // audioElement.play();
-    
-            // //Display text indicator of having the audio play in the background
-            // displayTextIndicatorOfAudioPlaying();
-        };
-    
-        //read content and convert it to a URL (base64)
-        reader.readAsDataURL(recorderAudioAsBlob);
-    }
-    $("avatar-chat").click(function() {    
-        $("avatar-chat").toggle('scale');
-        $("container-chat").toggle('scale');
-    })
-    $("#close-container-chat").click(function() {    
-        $("avatar-chat").toggle('scale');
-        $("container-chat").toggle('scale');
-    })
-    $('#send-msg-chat').click(function() {
-        var msgContent=$('.input-chat').val()
-        createMsgElement(false,msgContent)
-        axios.post('https://apichatgpt.dev.curbe.com.ec/bot-question',{
-            question:msgContent
-        })
-        .then(function (response) {
-            contMsg++
-            createMsgElement(true,response.data.data.content)            
-        })
-        .catch(function(error){
-            console.log(error)
-        })
-    })
-    $('#activate-rec-chat').click(function(){
-    $("#initRow").toggle();
-    $("#recRow").toggle();    
-    console.log("Recording Audio...");
-    //If a previous audio recording is playing, pause it
-    let recorderAudioIsPlaying = !audio.paused; // the paused property tells whether the media element is paused or not
-    console.log("paused?", !recorderAudioIsPlaying);
-    // if (recorderAudioIsPlaying) {
-    //     audioElement.pause();
-    //     //also hide the audio playing indicator displayed on the screen        
-    // }
-    //start recording using the audio recording API
-    audioRecorder.start()
-        .then(() => { //on success
+    let reader = new FileReader();
 
-            //store the recording start time to display the elapsed time according to it
-            audioRecordStartTime = new Date();
+    //once content has been read
+    reader.onload = (e) => {
+        //store the base64 URL that represents the URL of the recording audio
+        let base64URL = e.target.result;
 
-            //display control buttons to offer the functionality of stop and cancel
-            showInitFooter();
-        })
-        .catch(error => { //on error
-            //No Browser Support Error
-            if (error.message.includes("mediaDevices API or getUserMedia method is not supported in this browser.")) {
-                console.log("To record audio, use browsers like Chrome and Firefox.");                
-            }
+        //If this is the first audio playing, create a source element
+        //as pre populating the HTML with a source of empty src causes error
+        // if (!audioElementSource) //if its not defined create it (happens first time only)
+        //     createSourceForAudioElement();
+        let sourceElement = document.createElement("source");
+        audio.appendChild(sourceElement);
 
-            //Error handling structure
-            switch (error.name) {
-                case 'AbortError': //error from navigator.mediaDevices.getUserMedia
-                    console.log("An AbortError has occured.");
-                    break;
-                case 'NotAllowedError': //error from navigator.mediaDevices.getUserMedia
-                    console.log("A NotAllowedError has occured. User might have denied permission.");
-                    break;
-                case 'NotFoundError': //error from navigator.mediaDevices.getUserMedia
-                    console.log("A NotFoundError has occured.");
-                    break;
-                case 'NotReadableError': //error from navigator.mediaDevices.getUserMedia
-                    console.log("A NotReadableError has occured.");
-                    break;
-                case 'SecurityError': //error from navigator.mediaDevices.getUserMedia or from the MediaRecorder.start
-                    console.log("A SecurityError has occured.");
-                    break;
-                case 'TypeError': //error from navigator.mediaDevices.getUserMedia
-                    console.log("A TypeError has occured.");
-                    break;
-                case 'InvalidStateError': //error from the MediaRecorder.start
-                    console.log("An InvalidStateError has occured.");
-                    break;
-                case 'UnknownError': //error from the MediaRecorder.start
-                    console.log("An UnknownError has occured.");
-                    break;
-                default:
-                    console.log("An error occured with the error name " + error.name);
-            };
-        });
-    })
-    $('#stop-rec-chat').click(function(){    
-    $("#recRow").toggle(); 
-    $("#audRow").toggle(); 
-    console.log("Stopping Audio Recording...");
-    //stop the recording using the audio recording API
-    audioRecorder.stop()
-        .then(audioAsblob => {
-            //Play recorder audio
-            playAudio(audioAsblob);            
+        //set the audio element's source using the base64 URL
+        sourceElement.src = base64URL;
 
-            //hide recording control button & return record icon
-            showInitFooter();
-        })
-        .catch(error => {
-            //Error handling structure
-            switch (error.name) {
-                case 'InvalidStateError': //error from the MediaRecorder.stop
-                    console.log("An InvalidStateError has occured.");
-                    break;
-                default:
-                    console.log("An error occured with the error name " + error.name);
-            };
-        });
-    })
-    $('#del-rec-chat').click(function(){
-        console.log("Canceling audio...");
+        //set the type of the audio element based on the recorded audio's Blob type
+        let BlobType = recorderAudioAsBlob.type.includes(";") ?
+            recorderAudioAsBlob.type.substr(0, recorderAudioAsBlob.type.indexOf(';')) : recorderAudioAsBlob.type;
+            sourceElement.type = BlobType
 
-        //cancel the recording using the audio recording API
-        $("#initRow").toggle(); 
-        $("#audRow").toggle();
-        audio.cancel();
-        
-        //hide recording control button & return record icon
-        // handleHidingRecordingControlButtons();
-    })    
+        //call the load method as it is used to update the audio element after changing the source or other settings
+        audio.load();
+
+        // //play the audio after successfully setting new src and type that corresponds to the recorded audio
+        // console.log("Playing audio...");
+        // audioElement.play();
+
+        // //Display text indicator of having the audio play in the background
+        // displayTextIndicatorOfAudioPlaying();
+    };
+
+    //read content and convert it to a URL (base64)
+    reader.readAsDataURL(recorderAudioAsBlob);
+}
+jQuery("avatar-chat").click(function() {    
+    jQuery("avatar-chat").toggle('scale');
+    jQuery("container-chat").toggle('scale');
 })
+jQuery("#close-container-chat").click(function() {    
+    jQuery("avatar-chat").toggle('scale');
+    jQuery("container-chat").toggle('scale');
+})
+jQuery('#send-msg-chat').click(function() {
+    var msgContent=jQuery('.input-chat').val()
+    createMsgElement(false,msgContent)
+    axios.post('https://apichatgpt.dev.curbe.com.ec/bot-question',{
+        question:msgContent
+    })
+    .then(function (response) {
+        contMsg++
+        createMsgElement(true,response.data.data.content)            
+    })
+    .catch(function(error){
+        console.log(error)
+    })
+})
+jQuery('#activate-rec-chat').click(function(){
+jQuery("#initRow").toggle();
+jQuery("#recRow").toggle();    
+console.log("Recording Audio...");
+//If a previous audio recording is playing, pause it
+let recorderAudioIsPlaying = !audio.paused; // the paused property tells whether the media element is paused or not
+console.log("paused?", !recorderAudioIsPlaying);
+// if (recorderAudioIsPlaying) {
+//     audioElement.pause();
+//     //also hide the audio playing indicator displayed on the screen        
+// }
+//start recording using the audio recording API
+audioRecorder.start()
+    .then(() => { //on success
+
+        //store the recording start time to display the elapsed time according to it
+        audioRecordStartTime = new Date();
+
+        //display control buttons to offer the functionality of stop and cancel
+        showInitFooter();
+    })
+    .catch(error => { //on error
+        //No Browser Support Error
+        if (error.message.includes("mediaDevices API or getUserMedia method is not supported in this browser.")) {
+            console.log("To record audio, use browsers like Chrome and Firefox.");                
+        }
+
+        //Error handling structure
+        switch (error.name) {
+            case 'AbortError': //error from navigator.mediaDevices.getUserMedia
+                console.log("An AbortError has occured.");
+                break;
+            case 'NotAllowedError': //error from navigator.mediaDevices.getUserMedia
+                console.log("A NotAllowedError has occured. User might have denied permission.");
+                break;
+            case 'NotFoundError': //error from navigator.mediaDevices.getUserMedia
+                console.log("A NotFoundError has occured.");
+                break;
+            case 'NotReadableError': //error from navigator.mediaDevices.getUserMedia
+                console.log("A NotReadableError has occured.");
+                break;
+            case 'SecurityError': //error from navigator.mediaDevices.getUserMedia or from the MediaRecorder.start
+                console.log("A SecurityError has occured.");
+                break;
+            case 'TypeError': //error from navigator.mediaDevices.getUserMedia
+                console.log("A TypeError has occured.");
+                break;
+            case 'InvalidStateError': //error from the MediaRecorder.start
+                console.log("An InvalidStateError has occured.");
+                break;
+            case 'UnknownError': //error from the MediaRecorder.start
+                console.log("An UnknownError has occured.");
+                break;
+            default:
+                console.log("An error occured with the error name " + error.name);
+        };
+    });
+})
+jQuery('#stop-rec-chat').click(function(){    
+jQuery("#recRow").toggle(); 
+jQuery("#audRow").toggle(); 
+console.log("Stopping Audio Recording...");
+//stop the recording using the audio recording API
+audioRecorder.stop()
+    .then(audioAsblob => {
+        //Play recorder audio
+        playAudio(audioAsblob);            
+
+        //hide recording control button & return record icon
+        showInitFooter();
+    })
+    .catch(error => {
+        //Error handling structure
+        switch (error.name) {
+            case 'InvalidStateError': //error from the MediaRecorder.stop
+                console.log("An InvalidStateError has occured.");
+                break;
+            default:
+                console.log("An error occured with the error name " + error.name);
+        };
+    });
+})
+jQuery('#del-rec-chat').click(function(){
+    console.log("Canceling audio...");
+
+    //cancel the recording using the audio recording API
+    jQuery("#initRow").toggle(); 
+    jQuery("#audRow").toggle();
+    audio.cancel();
+    
+    //hide recording control button & return record icon
+    // handleHidingRecordingControlButtons();
+})    
