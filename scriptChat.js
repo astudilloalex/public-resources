@@ -1,4 +1,4 @@
-const allowedDomains = ['localhost', '127.0.0.1']
+const allowedDomains = ['localhost', '127.0.0.1','bajajecuador.com']
 
 const css =document.createElement('link')
 css.href='styleChat.css'
@@ -280,6 +280,8 @@ if(allowedDomains.includes(window.location.host)){
     document.body.appendChild(contenedorchat)
     document.body.appendChild(botonAvatar)
     document.head.appendChild(css)
+}else{
+    console.error("Domain not allowed")
 }
 
 
