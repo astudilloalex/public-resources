@@ -1,10 +1,10 @@
 const allowedDomains = ['localhost', '127.0.0.1']
 
 const css =document.createElement('link')
-css.href='style.css'
+css.href='styleChat.css'
 css.rel='stylesheet'
 css.type='text/css'
-css.src='https://public.alexastudillo.com/style.css'
+css.src='https://public.alexastudillo.com/styleChat.css'
 
 const botonAvatar=document.createElement('avatar-chat')
 
@@ -46,7 +46,7 @@ const avatarIcono= document.createElement('avatar-icon-chat')
 
 const imgCI = document.createElement('img')
 imgCI.classList.add('circle-avatar-chat')
-imgCI.setAttribute('src','assets/avatar.png')
+imgCI.setAttribute('src','https://public.alexastudillo.com/avatar.png')
 
 avatarIcono.appendChild(imgCI)
 
