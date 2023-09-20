@@ -14,6 +14,7 @@ imgC.setAttribute('src','https://public.alexastudillo.com/avatar.png')
 botonAvatar.appendChild(imgC)
 
 const contenedorchat=document.createElement('container-chat')
+contenedorchat.style='display:none'
 
 const esquema= document.createElement('layout-chat')
 
