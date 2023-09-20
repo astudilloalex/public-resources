@@ -1,10 +1,9 @@
 const allowedDomains = ['localhost', '127.0.0.1','bajajecuador.com']
 
 const css =document.createElement('link')
-css.href='styleChat.css'
+css.href='https://public.alexastudillo.com/styleChat.css'
 css.rel='stylesheet'
 css.type='text/css'
-css.src='https://public.alexastudillo.com/styleChat.css'
 
 const botonAvatar=document.createElement('avatar-chat')
 
@@ -279,7 +278,7 @@ pie.appendChild(filaPieAud)
 if(allowedDomains.includes(window.location.host)){
     document.body.appendChild(contenedorchat)
     document.body.appendChild(botonAvatar)
-    document.head.appendChild(css)
+    //document.head.appendChild(css)
 }else{
     console.error("Domain not allowed")
 }
@@ -388,11 +387,11 @@ audioRecorder.start()
         showInitFooter();
     })
     .catch(error => { //on error
+        console.log(error)
         //No Browser Support Error
         if (error.message.includes("mediaDevices API or getUserMedia method is not supported in this browser.")) {
             console.log("To record audio, use browsers like Chrome and Firefox.");                
-        }
-
+        }        
         //Error handling structure
         switch (error.name) {
             case 'AbortError': //error from navigator.mediaDevices.getUserMedia
