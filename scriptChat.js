@@ -4,12 +4,13 @@ const css =document.createElement('link')
 css.href='style.css'
 css.rel='stylesheet'
 css.type='text/css'
+css.src='https://public.alexastudillo.com/style.css'
 
 const botonAvatar=document.createElement('avatar-chat')
 
 const imgC = document.createElement('img')
 imgC.classList.add('circle-avatar-chat')
-imgC.setAttribute('src','assets/avatar.png')
+imgC.setAttribute('src','https://public.alexastudillo.com/avatar.png')
 
 botonAvatar.appendChild(imgC)
 
@@ -184,7 +185,7 @@ columnaPieGifRec.classList.add('col-xs-18')
 
 const gif = document.createElement('img')
 gif.classList.add('gif')
-gif.src='set-diet-sound-bars.gif'
+gif.src='https://public.alexastudillo.com/set-diet-sound-bars.gif'
 
 columnaPieGifRec.appendChild(gif)
 
@@ -352,7 +353,7 @@ $(function() {
     $('#send-msg-chat').click(function() {
         var msgContent=$('.input-chat').val()
         createMsgElement(false,msgContent)
-        axios.post('http://localhost:5000/bot-question',{
+        axios.post('https://apichatgpt.dev.curbe.com.ec/bot-question',{
             question:msgContent
         })
         .then(function (response) {
