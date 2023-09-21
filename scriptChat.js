@@ -4,7 +4,7 @@ const APIDomain='http://localhost:5000/'
 const RepositoryDomain='https://public.alexastudillo.com/'
 
 const css =document.createElement('link')
-css.href='styleChat.css'
+css.href=RepositoryDomain.concat('styleChat.css')
 css.rel='stylesheet'
 css.type='text/css'
 
@@ -305,7 +305,7 @@ pie.appendChild(filaPieAud)
 if(allowedDomainsList.includes(window.location.host)){
     document.body.appendChild(contenedorchat)
     document.body.appendChild(botonAvatar)
-    document.head.appendChild(css)
+    //document.head.appendChild(css)
 }else{
     console.error("Domain not allowed")
 }
@@ -481,56 +481,28 @@ jQuery('#send-aud-chat').click(function(){
         console.error("Error al obtener texto: ".concat(error))
     })
 })
-function handleElapsedRecordingTime() {
-    //display inital time when recording begins
-    columnaPieSgRec.innerHTML="00:00"
-
-    //create an interval that compute & displays elapsed time, as well as, animate red dot - every second
+function handleElapsedRecordingTime() {    
+    columnaPieSgRec.innerHTML="00:00"    
     elapsedTimeTimer = setInterval(() => {
-        //compute the elapsed time every second
-        let elapsedTime = computeElapsedTime(audioRecordStartTime); //pass the actual record start time
-        //display the elapsed time
+        let elapsedTime = computeElapsedTime(audioRecordStartTime);
         columnaPieSgRec.innerHTML=elapsedTime;
-    }, 1000); //every second
+    }, 1000);
 }
-function computeElapsedTime(startTime) {
-    //record end time
-    let endTime = new Date();
-
-    //time difference in ms
-    let timeDiff = endTime - startTime;
-
-    //convert time difference from ms to seconds
-    timeDiff = timeDiff / 1000;
-
-    //extract integer seconds that dont form a minute using %
-    let seconds = Math.floor(timeDiff % 60); //ignoring uncomplete seconds (floor)
-
-    //pad seconds with a zero if neccessary
-    seconds = seconds < 10 ? "0" + seconds : seconds;
-
-    //convert time difference from seconds to minutes using %
-    timeDiff = Math.floor(timeDiff / 60);
-
-    //extract integer minutes that don't form an hour using %
-    let minutes = timeDiff % 60; //no need to floor possible incomplete minutes, becase they've been handled as seconds
-    minutes = minutes < 10 ? "0" + minutes : minutes;
-
-    //convert time difference from minutes to hours
-    timeDiff = Math.floor(timeDiff / 60);
-
-    //extract integer hours that don't form a day using %
-    let hours = timeDiff % 24; //no need to floor possible incomplete hours, becase they've been handled as seconds
-
-    //convert time difference from hours to days
+function computeElapsedTime(startTime) {    
+    let endTime = new Date();    
+    let timeDiff = endTime - startTime;    
+    timeDiff = timeDiff / 1000;    
+    let seconds = Math.floor(timeDiff % 60);    
+    seconds = seconds < 10 ? "0" + seconds : seconds;    
+    timeDiff = Math.floor(timeDiff / 60);    
+    let minutes = timeDiff % 60;
+    minutes = minutes < 10 ? "0" + minutes : minutes;    
+    timeDiff = Math.floor(timeDiff / 60);    
+    let hours = timeDiff % 24;    
     timeDiff = Math.floor(timeDiff / 24);
-
-    // the rest of timeDiff is number of days
-    let days = timeDiff; //add days to hours
-
+    let days = timeDiff;
     let totalHours = hours + (days * 24);
     totalHours = totalHours < 10 ? "0" + totalHours : totalHours;
-
     if (totalHours === "00") {
         return minutes + ":" + seconds;
     } else {
