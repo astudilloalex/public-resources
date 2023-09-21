@@ -1,6 +1,6 @@
 const allowedDomainsList = ['localhost', '127.0.0.1','bajajecuador.com']
 
-const APIDomain='http://localhost:5000/'
+const APIDomain='http://apichatgpt.dev.curbe.com.ec/'
 const RepositoryDomain='https://public.alexastudillo.com/'
 
 const css =document.createElement('link')

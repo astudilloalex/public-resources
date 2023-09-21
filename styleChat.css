@@ -373,3 +373,6 @@ audio{
     overflow-y: auto;
     overflow-x: auto;
 }
+img{
+    width: 32px;
+}
