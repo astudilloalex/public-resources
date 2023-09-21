@@ -350,9 +350,8 @@ card-chat{
     width:-webkit-fill-available;
     height: 40px;
 }
-audio{
-    width: -webkit-fill-available;
-    width: 90%;
+audio{    
+    width: 100%;
 }
 .visible{
     display: none;
