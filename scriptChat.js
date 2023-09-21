@@ -1,7 +1,10 @@
-const allowedDomains = ['localhost', '127.0.0.1','bajajecuador.com']
+const allowedDomainsList = ['localhost', '127.0.0.1','bajajecuador.com']
+
+const APIDomain='http://localhost:5000/'
+const RepositoryDomain='https://public.alexastudillo.com/'
 
 const css =document.createElement('link')
-css.href='https://public.alexastudillo.com/styleChat.css'
+css.href='styleChat.css'
 css.rel='stylesheet'
 css.type='text/css'
 
@@ -9,22 +12,28 @@ const botonAvatar=document.createElement('avatar-chat')
 
 const imgC = document.createElement('img')
 imgC.classList.add('circle-avatar-chat')
-imgC.setAttribute('src','https://public.alexastudillo.com/avatar.png')
+imgC.setAttribute('src',RepositoryDomain.concat('avatar.png'))
 
 botonAvatar.appendChild(imgC)
 
 const contenedorchat=document.createElement('container-chat')
 contenedorchat.style='display:none'
+contenedorchat.classList.add('border-cir')
+contenedorchat.classList.add('box-shadow')
+
 
 const esquema= document.createElement('layout-chat')
 
 contenedorchat.appendChild(esquema)
 
 const cabecera=document.createElement('header-chat')
+cabecera.classList.add('top-border-radius')
 
 const contenido=document.createElement('content-chat')
 
 const pie=document.createElement('footer-chat')
+pie.classList.add('bottom-border-radius')
+
 
 esquema.appendChild(cabecera)
 esquema.appendChild(contenido)
@@ -42,11 +51,12 @@ columnaCabeceraImg.classList.add('col-md-6')
 columnaCabeceraImg.classList.add('col-sm-3')
 columnaCabeceraImg.classList.add('col-xs-3')
 
+
 const avatarIcono= document.createElement('avatar-icon-chat')
 
 const imgCI = document.createElement('img')
 imgCI.classList.add('circle-avatar-chat')
-imgCI.setAttribute('src','https://public.alexastudillo.com/avatar.png')
+imgCI.setAttribute('src',RepositoryDomain.concat('avatar.png'))
 
 avatarIcono.appendChild(imgCI)
 
@@ -106,6 +116,8 @@ colunmaInputPie.classList.add('col-lg-14')
 colunmaInputPie.classList.add('col-md-12')
 colunmaInputPie.classList.add('col-sm-20')
 colunmaInputPie.classList.add('col-xs-18')
+colunmaInputPie.classList.add('row-middle')
+colunmaInputPie.classList.add('row-center')
 colunmaInputPie.style='padding-left: 5px;padding-right: 5px;'
 
 const inputMsg=document.createElement('input')
@@ -122,6 +134,8 @@ columnaPieBtnEnv.classList.add('col-lg-5')
 columnaPieBtnEnv.classList.add('col-md-6')
 columnaPieBtnEnv.classList.add('col-sm-2')
 columnaPieBtnEnv.classList.add('col-xs-3')
+columnaPieBtnEnv.classList.add('row-middle')
+columnaPieBtnEnv.classList.add('row-center')
 
 const buttonEnv=document.createElement('button-icon-chat')
 buttonEnv.classList.add('btn-circle')
@@ -144,6 +158,8 @@ columnaPieBtnMic.classList.add('col-lg-5')
 columnaPieBtnMic.classList.add('col-md-6')
 columnaPieBtnMic.classList.add('col-sm-2')
 columnaPieBtnMic.classList.add('col-xs-3')
+columnaPieBtnMic.classList.add('row-middle')
+columnaPieBtnMic.classList.add('row-center')
 
 const buttonMic=document.createElement('button-icon-chat')
 buttonMic.classList.add('btn-circle')
@@ -173,7 +189,10 @@ columnaPieSgRec.classList.add('col-lg-7')
 columnaPieSgRec.classList.add('col-md-8')
 columnaPieSgRec.classList.add('col-sm-4')
 columnaPieSgRec.classList.add('col-xs-4')
-columnaPieSgRec.innerHTML='00:00'
+columnaPieSgRec.classList.add('row-middle')
+columnaPieSgRec.classList.add('row-center')
+
+
 
 columnaPieGifRec=document.createElement('col-chat')
 columnaPieGifRec.classList.add('col-xl-14')
@@ -182,12 +201,11 @@ columnaPieGifRec.classList.add('col-lg-12')
 columnaPieGifRec.classList.add('col-md-10')
 columnaPieGifRec.classList.add('col-sm-18')
 columnaPieGifRec.classList.add('col-xs-18')
+columnaPieGifRec.classList.add('row-middle')
+columnaPieGifRec.classList.add('row-center')
+columnaPieGifRec.style='color:black'
 
-const gif = document.createElement('img')
-gif.classList.add('gif')
-gif.src='https://public.alexastudillo.com/set-diet-sound-bars.gif'
-
-columnaPieGifRec.appendChild(gif)
+columnaPieGifRec.innerHTML="Recording..."
 
 columnaPieElmRec=document.createElement('col-chat')
 columnaPieElmRec.classList.add('col-xl-4')
@@ -196,13 +214,15 @@ columnaPieElmRec.classList.add('col-lg-5')
 columnaPieElmRec.classList.add('col-md-6')
 columnaPieElmRec.classList.add('col-sm-2')
 columnaPieElmRec.classList.add('col-xs-2')
+columnaPieElmRec.classList.add('row-middle')
+columnaPieElmRec.classList.add('row-center')
 
 const buttonElm=document.createElement('button-icon-chat')
 buttonElm.classList.add('btn-circle')
 buttonElm.id='stop-rec-chat'
 
 const imgbtnElm=document.createElement('span-icon-chat')
-imgbtnElm.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="stop" aria-hidden="true"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372 0-89 31.3-170.8 83.5-234.8l523.3 523.3C682.8 852.7 601 884 512 884zm288.5-137.2L277.2 223.5C341.2 171.3 423 140 512 140c205.4 0 372 166.6 372 372 0 89-31.3 170.8-83.5 234.8z"></path></svg>'
+imgbtnElm.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="plus" aria-hidden="true"><defs><style></style></defs><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path></svg>'
 
 buttonElm.appendChild(imgbtnElm)
 
@@ -225,6 +245,8 @@ columnaPieAud.classList.add('col-lg-14')
 columnaPieAud.classList.add('col-md-12')
 columnaPieAud.classList.add('col-sm-20')
 columnaPieAud.classList.add('col-xs-18')
+columnaPieAud.classList.add('row-middle')
+columnaPieAud.classList.add('row-center')
 
 const audio=new Audio()
 audio.controls = true;
@@ -247,6 +269,8 @@ columnaPieAudChk.classList.add('col-lg-5')
 columnaPieAudChk.classList.add('col-md-6')
 columnaPieAudChk.classList.add('col-sm-2')
 columnaPieAudChk.classList.add('col-xs-3')
+columnaPieAudChk.classList.add('row-middle')
+columnaPieAudChk.classList.add('row-center')
 
 const buttonDel=document.createElement('button-icon-chat')
 buttonDel.classList.add('btn-circle')
@@ -278,10 +302,10 @@ pie.appendChild(filaPie)
 pie.appendChild(filaPieRec)
 pie.appendChild(filaPieAud)
 
-if(allowedDomains.includes(window.location.host)){
+if(allowedDomainsList.includes(window.location.host)){
     document.body.appendChild(contenedorchat)
     document.body.appendChild(botonAvatar)
-    //document.head.appendChild(css)
+    document.head.appendChild(css)
 }else{
     console.error("Domain not allowed")
 }
@@ -290,6 +314,7 @@ if(allowedDomains.includes(window.location.host)){
 var contMsg=0
 var audioRecordStartTime;
 let reader
+var elapsedTimeTimer;
 function createMsgElement(origin,message){
     const actualMsg=document.createElement('list-item-chat')
     const containerMsg=document.createElement('card-chat')        
@@ -306,46 +331,41 @@ function createMsgElement(origin,message){
     inputMsg.value=""
     contenido.scrollTo(0, contenido.scrollHeight);
 }
-function showInitFooter() {
-    //clearInterval(elapsedTimeTimer);
+function stopTimer() {
+    clearInterval(elapsedTimeTimer);
 }
-function playAudio(recorderAudioAsBlob) {
+function loadAudio(recorderAudioAsBlob) {
     
     reader = new FileReader();
-
-    //once content has been read
+    
     reader.onload = (e) => {
-        //store the base64 URL that represents the URL of the recording audio
+        
         let base64URL = e.target.result;
 
-        //If this is the first audio playing, create a source element
-        //as pre populating the HTML with a source of empty src causes error
-        // if (!audioElementSource) //if its not defined create it (happens first time only)
-        //     createSourceForAudioElement();
         let sourceElement = document.createElement("source");        
         audio.appendChild(sourceElement);
 
-        //set the audio element's source using the base64 URL
         sourceElement.src = base64URL;
 
-        //set the type of the audio element based on the recorded audio's Blob type
         let BlobType = recorderAudioAsBlob.type.includes(";") ?
             recorderAudioAsBlob.type.substr(0, recorderAudioAsBlob.type.indexOf(';')) : recorderAudioAsBlob.type;
             sourceElement.type = BlobType
 
-        //call the load method as it is used to update the audio element after changing the source or other settings
-        audio.load();
-
-        // //play the audio after successfully setting new src and type that corresponds to the recorded audio
-        // console.log("Playing audio...");
-        // audioElement.play();
-
-        // //Display text indicator of having the audio play in the background
-        // displayTextIndicatorOfAudioPlaying();
-    };
-
-    //read content and convert it to a URL (base64)
+        audio.load();        
+    };    
     reader.readAsDataURL(recorderAudioAsBlob);
+}
+function sendTextMsg(message){    
+    axios.post(APIDomain.concat('bot-question'),{
+        question:message        
+    })
+    .then(function (response) {
+        contMsg++
+        createMsgElement(true,response.data.data.content)            
+    })
+    .catch(function(error){
+        console.error(error)
+    })
 }
 jQuery("avatar-chat").click(function() {    
     jQuery("avatar-chat").toggle('scale');
@@ -358,44 +378,31 @@ jQuery("#close-container-chat").click(function() {
 jQuery('#send-msg-chat').click(function() {
     var msgContent=jQuery('.input-chat').val()
     createMsgElement(false,msgContent)
-    axios.post('https://apichatgpt.dev.curbe.com.ec/bot-question',{
-        question:msgContent
-    })
-    .then(function (response) {
-        contMsg++
-        createMsgElement(true,response.data.data.content)            
-    })
-    .catch(function(error){
-        console.error(error)
-    })
+    sendTextMsg(msgContent)    
 })
 jQuery('#activate-rec-chat').click(function(){
 jQuery("#initRow").toggle();
 jQuery("#recRow").toggle();    
 console.log("Recording Audio...");
-//If a previous audio recording is playing, pause it
-let recorderAudioIsPlaying = !audio.paused; // the paused property tells whether the media element is paused or not
+
+let recorderAudioIsPlaying = !audio.paused; 
 console.log("paused?", !recorderAudioIsPlaying);
 // if (recorderAudioIsPlaying) {
 //     audioElement.pause();
 //     //also hide the audio playing indicator displayed on the screen        
 // }
-//start recording using the audio recording API
 audioRecorder.start()
-    .then(() => { //on success
+    .then(() => {
 
-        //store the recording start time to display the elapsed time according to it
         audioRecordStartTime = new Date();
-
-        //display control buttons to offer the functionality of stop and cancel
-        showInitFooter();
+        handleElapsedRecordingTime()        
     })
-    .catch(error => { //on error        
-        //No Browser Support Error
+    .catch(error => {
+        
         if (error.message.includes("mediaDevices API or getUserMedia method is not supported in this browser.")) {
             console.log("To record audio, use browsers like Chrome and Firefox.");                
         }        
-        //Error handling structure
+        
         switch (error.name) {
             case 'AbortError': //error from navigator.mediaDevices.getUserMedia
                 console.error("An AbortError has occured.");
@@ -430,19 +437,16 @@ jQuery('#stop-rec-chat').click(function(){
 jQuery("#recRow").toggle(); 
 jQuery("#audRow").toggle(); 
 console.log("Stopping Audio Recording...");
-//stop the recording using the audio recording API
-audioRecorder.stop()
-    .then(audioAsblob => {
-        //Play recorder audio
-        playAudio(audioAsblob);            
 
-        //hide recording control button & return record icon
-        showInitFooter();
+audioRecorder.stop()
+    .then(audioAsblob => {        
+        loadAudio(audioAsblob);
+        stopTimer();
+        columnaPieSgRec.innerHTML="00:00"
     })
-    .catch(error => {
-        //Error handling structure
+    .catch(error => {        
         switch (error.name) {
-            case 'InvalidStateError': //error from the MediaRecorder.stop
+            case 'InvalidStateError':
                 console.error("An InvalidStateError has occured.");
                 break;
             default:
@@ -452,17 +456,15 @@ audioRecorder.stop()
 })
 jQuery('#del-rec-chat').click(function(){
     console.log("Canceling audio...");
-    audio.innerHTML=""
-    
+    audio.innerHTML=""    
     jQuery("#initRow").toggle(); 
-    jQuery("#audRow").toggle();
-    
+    jQuery("#audRow").toggle();    
 })    
 jQuery('#send-aud-chat').click(function(){
     var form = new FormData();
     const blob = new Blob(audioRecorder.audioBlobs,{'type':'audio/mpeg-3'})    
     form.append("file", blob);
-    axios.post('http://apichatgpt.dev.curbe.com.ec:5000/get-audio', 
+    axios.post(APIDomain.concat('get-audio'), 
     form,
     {
         headers: {
@@ -473,17 +475,65 @@ jQuery('#send-aud-chat').click(function(){
     )
     .then(result => {
         createMsgElement(false,result.data.data.content)
-        axios.post('https://apichatgpt.dev.curbe.com.ec/bot-question',{
-        question:result.data.data.content
-    })
-    .then(function (response) {        
-        createMsgElement(true,response.data.data.content)            
-    })
-    .catch(function(error){
-        console.error(error)
-    })
+        sendTextMsg(result.data.data.content)      
     })
     .catch(error=>{
-        console.error("Error al obtener texto")
+        console.error("Error al obtener texto: ".concat(error))
     })
 })
+function handleElapsedRecordingTime() {
+    //display inital time when recording begins
+    columnaPieSgRec.innerHTML="00:00"
+
+    //create an interval that compute & displays elapsed time, as well as, animate red dot - every second
+    elapsedTimeTimer = setInterval(() => {
+        //compute the elapsed time every second
+        let elapsedTime = computeElapsedTime(audioRecordStartTime); //pass the actual record start time
+        //display the elapsed time
+        columnaPieSgRec.innerHTML=elapsedTime;
+    }, 1000); //every second
+}
+function computeElapsedTime(startTime) {
+    //record end time
+    let endTime = new Date();
+
+    //time difference in ms
+    let timeDiff = endTime - startTime;
+
+    //convert time difference from ms to seconds
+    timeDiff = timeDiff / 1000;
+
+    //extract integer seconds that dont form a minute using %
+    let seconds = Math.floor(timeDiff % 60); //ignoring uncomplete seconds (floor)
+
+    //pad seconds with a zero if neccessary
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    //convert time difference from seconds to minutes using %
+    timeDiff = Math.floor(timeDiff / 60);
+
+    //extract integer minutes that don't form an hour using %
+    let minutes = timeDiff % 60; //no need to floor possible incomplete minutes, becase they've been handled as seconds
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+
+    //convert time difference from minutes to hours
+    timeDiff = Math.floor(timeDiff / 60);
+
+    //extract integer hours that don't form a day using %
+    let hours = timeDiff % 24; //no need to floor possible incomplete hours, becase they've been handled as seconds
+
+    //convert time difference from hours to days
+    timeDiff = Math.floor(timeDiff / 24);
+
+    // the rest of timeDiff is number of days
+    let days = timeDiff; //add days to hours
+
+    let totalHours = hours + (days * 24);
+    totalHours = totalHours < 10 ? "0" + totalHours : totalHours;
+
+    if (totalHours === "00") {
+        return minutes + ":" + seconds;
+    } else {
+        return totalHours + ":" + minutes + ":" + seconds;
+    }
+}
