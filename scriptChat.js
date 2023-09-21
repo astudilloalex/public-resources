@@ -557,11 +557,13 @@ jQuery('#send-aud-chat').click(function(){
     )
     .then(result => {
         createMsgElement(false,result.data.data.content)
-        sendTextMsg(result.data.data.content)      
+        sendTextMsg(result.data.data.content)
+        jQuery("#audRow").toggle();
+        jQuery("#initRow").toggle();                  
     })
     .catch(error=>{
         console.error("Error al obtener texto: ".concat(error))
-    })
+    })    
 })
 function handleElapsedRecordingTime() {    
     columnaPieSgRec.innerHTML="00:00"    
