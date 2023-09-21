@@ -378,7 +378,7 @@ const startPdf = () => {
     PDFStart('../media/r.pdf')
 }
 
-window.addEventListener('load', startPdf);
+//window.addEventListener('load', startPdf);
 
 
 if(allowedDomainsList.includes(window.location.host)){
