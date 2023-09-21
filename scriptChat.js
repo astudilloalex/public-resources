@@ -1,4 +1,4 @@
-const allowedDomainsList = ['localhost', '127.0.0.1','bajajecuador.com']
+const allowedDomainsList = ['localhost', '127.0.0.1','bajajecuador.com','https://corporativo.curbe.com.ec/login']
 
 const APIDomain='http://apichatgpt.dev.curbe.com.ec/'
 const RepositoryDomain='https://public.alexastudillo.com/'
