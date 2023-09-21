@@ -302,12 +302,93 @@ pie.appendChild(filaPie)
 pie.appendChild(filaPieRec)
 pie.appendChild(filaPieAud)
 
+const pdfContainer=document.createElement('pdf-container-chat')
+
+const pdfAntBtn= document.createElement('button-pdf-chat')
+
+const pdfSigBtn= document.createElement('button-pdf-chat')
+
+const pdfZmIBtn= document.createElement('button-pdf-chat')
+
+const pdfZmOBtn= document.createElement('button-pdf-chat')
+
+const pdfViewer=document.createElement('canvas')
+pdfViewer.classList('double-overflow')
+pdfViewer.id='pdf-canvas-chat'
+
+pdfContainer.appendChild(pdfViewer)
+
+
+
+
+const PDFStart = nameRoute => {           
+    let loadingTask = pdfjsLib.getDocument(nameRoute),
+        pdfDoc = null,
+        canvas = document.querySelector('#pdf-canvas-chat'),
+        ctx = canvas.getContext('2d'),
+        scale = 1.5,
+        numPage = 1;
+
+        const GeneratePDF = numPage => {
+
+            pdfDoc.getPage(numPage).then(page => {
+
+                let viewport = page.getViewport({ scale: scale });
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+                
+                let renderContext = {
+                    canvasContext : ctx,
+                    viewport:  viewport
+                }
+
+                page.render(renderContext);
+            })
+            document.querySelector('#npages').innerHTML = numPage;
+
+        }
+
+        const PrevPage = () => {
+            if(numPage === 1){
+                return
+            }
+            numPage--;
+            GeneratePDF(numPage);
+        }
+
+        const NextPage = () => {
+            if(numPage >= pdfDoc.numPages){
+                return
+            }
+            numPage++;
+            GeneratePDF(numPage);
+        }
+
+        document.querySelector('#prev').addEventListener('click', PrevPage)
+        document.querySelector('#next').addEventListener('click', NextPage )
+
+        loadingTask.promise.then(pdfDoc_ => {
+            pdfDoc = pdfDoc_;
+            document.querySelector('#npages').innerHTML = pdfDoc.numPages;
+            GeneratePDF(numPage)
+        });
+}
+
+const startPdf = () => {
+    PDFStart('../media/r.pdf')
+}
+
+window.addEventListener('load', startPdf);
+
+
 if(allowedDomainsList.includes(window.location.host)){
     document.body.appendChild(contenedorchat)
     document.body.appendChild(botonAvatar)
     //document.head.appendChild(css)
+    // document.body.appendChild(pdfContainer)
 }else{
     console.error("Domain not allowed")
+    console.info(window.location.host)
 }
 
 
@@ -349,7 +430,7 @@ function loadAudio(recorderAudioAsBlob) {
 
         let BlobType = recorderAudioAsBlob.type.includes(";") ?
             recorderAudioAsBlob.type.substr(0, recorderAudioAsBlob.type.indexOf(';')) : recorderAudioAsBlob.type;
-            sourceElement.type = BlobType
+            sourceElement.type=BlobType
 
         audio.load();        
     };    
@@ -367,6 +448,7 @@ function sendTextMsg(message){
         console.error(error)
     })
 }
+
 jQuery("avatar-chat").click(function() {    
     jQuery("avatar-chat").toggle('scale');
     jQuery("container-chat").toggle('scale');
