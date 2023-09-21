@@ -9,7 +9,7 @@ avatar-chat {
 }
 .circle-avatar-chat{
     border-radius: 50%;
-    width: 32px;
+    width: inherit;
 }
 layout-chat{
     width: 100%;
