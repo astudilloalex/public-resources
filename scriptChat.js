@@ -313,7 +313,7 @@ const pdfZmIBtn= document.createElement('button-pdf-chat')
 const pdfZmOBtn= document.createElement('button-pdf-chat')
 
 const pdfViewer=document.createElement('canvas')
-pdfViewer.classList('double-overflow')
+pdfViewer.classList.add('double-overflow')
 pdfViewer.id='pdf-canvas-chat'
 
 pdfContainer.appendChild(pdfViewer)
@@ -388,7 +388,7 @@ if(allowedDomainsList.includes(window.location.host)){
     // document.body.appendChild(pdfContainer)
 }else{
     console.error("Domain not allowed")
-    console.info(window.location.host)
+    console.error(window.location.host)
 }
 
 
