@@ -75,6 +75,19 @@ row-chat{
     flex: 0 0 83.33333333%;
     max-width: 83.33333333%;
 }
+.col-24 {
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.col-6 {
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+.col-4 {
+    flex: 0 0 16.6666667%;
+    max-width: 16.6666667%;
+}
+
 container-chat {        
 width: 100%;
 height: 100%;
@@ -260,6 +273,16 @@ button-icon-chat{
     display: inline-block;
     text-align: center;
 }
+button-pdf-chat{
+    cursor: pointer;
+    transition: all .3s cubic-bezier(.645,.045,.355,1);
+    position: relative;
+    font-weight: 400;
+    white-space: nowrap;
+    height: 32px;    
+    display: inline-block;
+    text-align: center;
+}
 span-chat{
     font-size: 20px;
     color: white;
@@ -373,4 +396,8 @@ audio{
 .double-overflow{
     overflow-y: auto;
     overflow-x: auto;
+}
+.pdfViewer{
+    width: 100%;
+    height: 60vh;
 }

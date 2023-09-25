@@ -21,7 +21,6 @@ contenedorchat.style='display:none'
 contenedorchat.classList.add('border-cir')
 contenedorchat.classList.add('box-shadow')
 
-
 const esquema= document.createElement('layout-chat')
 
 contenedorchat.appendChild(esquema)
@@ -33,7 +32,6 @@ const contenido=document.createElement('content-chat')
 
 const pie=document.createElement('footer-chat')
 pie.classList.add('bottom-border-radius')
-
 
 esquema.appendChild(cabecera)
 esquema.appendChild(contenido)
@@ -50,7 +48,6 @@ columnaCabeceraImg.classList.add('col-lg-5')
 columnaCabeceraImg.classList.add('col-md-6')
 columnaCabeceraImg.classList.add('col-sm-3')
 columnaCabeceraImg.classList.add('col-xs-3')
-
 
 const avatarIcono= document.createElement('avatar-icon-chat')
 
@@ -192,8 +189,6 @@ columnaPieSgRec.classList.add('col-xs-4')
 columnaPieSgRec.classList.add('row-middle')
 columnaPieSgRec.classList.add('row-center')
 
-
-
 columnaPieGifRec=document.createElement('col-chat')
 columnaPieGifRec.classList.add('col-xl-14')
 columnaPieGifRec.classList.add('col-xxl-16')
@@ -288,7 +283,7 @@ buttonChk.classList.add('btn-circle')
 buttonChk.id='send-aud-chat'
 
 const imgbtnChk=document.createElement('span-icon-chat')
-imgbtnChk.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="check" aria-hidden="true"><path d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 00-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"></path></svg>'
+imgbtnChk.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em"><path d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 00-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"></path></svg>'
 
 buttonChk.appendChild(imgbtnChk)
 
@@ -302,123 +297,249 @@ pie.appendChild(filaPie)
 pie.appendChild(filaPieRec)
 pie.appendChild(filaPieAud)
 
-const pdfContainer=document.createElement('pdf-container-chat')
+var loadingTask,pdfDoc,canvas,ctx,scale,numPage
+var pdfExists=false
 
-const filaBtnPdf=document.createElement('row-chat')
-
-const columnaAntPdf=document.createElement('col-chat')
-const btnAntPdf=document.createElement('button-chat')
-const imgAntPdf='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="check" aria-hidden="true"><path d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 00-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"></path></svg>'
-
-const columnaPosPdf=document.createElement('col-chat')
-const btnPosPdf=document.createElement('button-chat')
-const imgPosPdf='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="check" aria-hidden="true"><path d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 00-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"></path></svg>'
-
-const columnaZmInPdf=document.createElement('col-chat')
-const btnZmIn=document.createElement('button-chat')
-const imgZmIn=document.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="check" aria-hidden="true"><path d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 00-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"></path></svg>'
-
-const columnaZmOutPdf=document.createElement('col-chat')
-const btnZmOut=document.createElement('button-chat')
-const imgZmOut=document.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="check" aria-hidden="true"><path d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 00-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"></path></svg>'
-
-const pdfViewer=document.createElement('canvas')
-pdfViewer.classList.add('double-overflow')
-pdfViewer.id='pdf-canvas-chat'
-
-pdfContainer.appendChild(pdfViewer)
-
-const PDFStart = nameRoute => {           
-    let loadingTask = pdfjsLib.getDocument(nameRoute),
-        pdfDoc = null,
-        canvas = document.querySelector('#pdf-canvas-chat'),
-        ctx = canvas.getContext('2d'),
-        scale = 1.5,
-        numPage = 1;
-    const GeneratePDF = numPage => {
-        pdfDoc.getPage(numPage).then(page => {
-            let viewport = page.getViewport({ scale: scale });
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;                
-            let renderContext = {
-                canvasContext : ctx,
-                viewport:  viewport
-            }
-            page.render(renderContext);
-        })
-        document.querySelector('#npages').innerHTML = numPage;
-    }
-    const PrevPage = () => {
-        if(numPage === 1){
-            return
-        }
-        numPage--;
-        GeneratePDF(numPage);
-    }
-
-    const NextPage = () => {
-        if(numPage >= pdfDoc.numPages){
-            return
-        }
-        numPage++;
-        GeneratePDF(numPage);
-    }
-
-    document.querySelector('#prev').addEventListener('click', PrevPage)
-    document.querySelector('#next').addEventListener('click', NextPage )
-
+function readPDF(path){
+    initFunctions()
+    loadingTask=pdfjsLib.getDocument(path)
     loadingTask.promise.then(pdfDoc_ => {
         pdfDoc = pdfDoc_;
-        document.querySelector('#npages').innerHTML = pdfDoc.numPages;
-        GeneratePDF(numPage)
+        document.querySelector('#numMax').innerHTML ="de ".concat(pdfDoc.numPages);
+        renderPDF()
     });
 }
 
-const startPdf = () => {
-    PDFStart('../media/r.pdf')
+function initFunctions(){    
+    pdfDoc= null
+    canvas= document.querySelector('#pdf-canvas-chat')
+    ctx= canvas.getContext('2d')
+    scale=1
+    numPage=1
+    document.querySelector('#prev').addEventListener('click', prevPage)
+    document.querySelector('#next').addEventListener('click', nextPage)
+    document.querySelector('#ZmIn').addEventListener('click', ZoomIn)
+    document.querySelector('#ZmOut').addEventListener('click', ZoomOut)
 }
 
-//window.addEventListener('load', startPdf);
+function renderPDF(){    
+    pdfDoc.getPage(numPage).then(page=>{
+        let viewport=page.getViewport({scale:scale});
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+        let renderContext = {
+            canvasContext : ctx,
+            viewport:  viewport
+        }
+        page.render(renderContext);
+    })
+    pdfExists=true
+}
 
+function prevPage(){
+    if(numPage === 1){
+        return
+    }
+    numPage-=1;
+    document.querySelector('#numAct').innerHTML=numPage
+    renderPDF();
+}
+
+function nextPage(){
+    if(numPage >= pdfDoc.numPages){
+        return
+    }
+    numPage+=1;
+    document.querySelector('#numAct').innerHTML=numPage
+    renderPDF();
+}
+
+function ZoomIn(){
+    if(scale >= 3){
+        return
+    }
+    scale+=0.25;
+    renderPDF();
+}
+
+function ZoomOut(){
+    if(scale <= 0.25){
+        return
+    }
+    scale-=0.25
+    renderPDF();
+}
 
 if(allowedDomainsList.includes(window.location.host)){
     document.body.appendChild(contenedorchat)
     document.body.appendChild(botonAvatar)
-    //document.head.appendChild(css)
-    // document.body.appendChild(pdfContainer)
+    // document.head.appendChild(css)    
 }else{
     console.error("Domain not allowed")
-    console.error(window.location.host)
+    console.info(window.location.host)
 }
-
 
 var contMsg=0
 var audioRecordStartTime;
 let reader
 var elapsedTimeTimer;
+
 function createMsgElement(origin,message){
     const actualMsg=document.createElement('list-item-chat')
-    const containerMsg=document.createElement('card-chat')        
+    const containerMsg=document.createElement('card-chat')
     if(origin){
         actualMsg.classList.add('inverse-row')
         containerMsg.classList.add('systemMsg')
-        containerMsg.innerHTML=message
+        if(message.search(".pdf{1}")!=-1){
+            if(pdfExists){
+                deletePdfViewer()
+            }
+            createPDFViewer(containerMsg)            
+        }else{
+            containerMsg.innerHTML=message
+        }
     }else{
         containerMsg.classList.add('userMsg')
         containerMsg.innerHTML=message
-    }        
+    }
     actualMsg.appendChild(containerMsg)
     listaMsg.appendChild(actualMsg)
     inputMsg.value=""
+    if(message.search(".pdf{1}")!=-1){
+        readPDF(message.substring(message.indexOf("pdf")+3,message.indexOf(".pdf")+4))        
+    }    
     contenido.scrollTo(0, contenido.scrollHeight);
 }
+
+function createPDFViewer(element){
+    const pdfContainer=document.createElement('pdf-container-chat')
+
+    const filaCnvPDF=document.createElement('row-chat')
+    filaCnvPDF.style='height: 54vh;'
+    filaCnvPDF.classList.add('double-overflow')
+
+    const columnaCnvPDF=document.createElement('col-chat')
+    columnaCnvPDF.classList.add('col-24')    
+
+    const pdfViewer=document.createElement('canvas')    
+    pdfViewer.id='pdf-canvas-chat'
+
+    columnaCnvPDF.appendChild(pdfViewer)
+
+    filaCnvPDF.appendChild(columnaCnvPDF)
+    
+    const filaBtnPdf=document.createElement('row-chat')
+    filaBtnPdf.style='height: 6vh;'
+    const columnaBtnAnt=document.createElement('col-chat')
+    columnaBtnAnt.classList.add('col-4')
+    columnaBtnAnt.classList.add('row-middle')
+    columnaBtnAnt.classList.add('row-center')
+    
+    const pdfAntBtn= document.createElement('button-pdf-chat')
+    pdfAntBtn.id='prev'
+    const imgAntBtn= document.createElement('span-icon-chat')
+    imgAntBtn.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"/></svg>'
+    
+    pdfAntBtn.appendChild(imgAntBtn)
+    columnaBtnAnt.appendChild(pdfAntBtn)
+    
+    const columnaBtnSig=document.createElement('col-chat')
+    columnaBtnSig.classList.add('col-4')
+    columnaBtnSig.classList.add('row-middle')
+    columnaBtnSig.classList.add('row-center')
+    
+    const pdfSigBtn= document.createElement('button-pdf-chat')
+    pdfSigBtn.id='next'
+    const imgSigBtn=document.createElement('span-icon-chat')
+    imgSigBtn.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"/></svg>'
+    
+    pdfSigBtn.appendChild(imgSigBtn)
+    
+    columnaBtnSig.appendChild(pdfSigBtn)
+    
+    const columnaBtnZmI=document.createElement('col-chat')
+    columnaBtnZmI.classList.add('col-4')
+    columnaBtnZmI.classList.add('row-middle')
+    columnaBtnZmI.classList.add('row-center')
+    
+    const pdfZmIBtn= document.createElement('button-pdf-chat')
+    pdfZmIBtn.id='ZmIn'
+    const imgZmIn=document.createElement('span-icon-chat')
+    imgZmIn.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em"><path d="M637 443H519V309c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v134H325c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h118v134c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V519h118c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8zm284 424L775 721c122.1-148.9 113.6-369.5-26-509-148-148.1-388.4-148.1-537 0-148.1 148.6-148.1 389 0 537 139.5 139.6 360.1 148.1 509 26l146 146c3.2 2.8 8.3 2.8 11 0l43-43c2.8-2.7 2.8-7.8 0-11zM696 696c-118.8 118.7-311.2 118.7-430 0-118.7-118.8-118.7-311.2 0-430 118.8-118.7 311.2-118.7 430 0 118.7 118.8 118.7 311.2 0 430z"/></svg>'
+    
+    pdfZmIBtn.appendChild(imgZmIn)
+    
+    columnaBtnZmI.appendChild(pdfZmIBtn)
+    
+    const columnaBtnZmO=document.createElement('col-chat')
+    columnaBtnZmO.classList.add('col-4')
+    columnaBtnZmO.classList.add('row-middle')
+    columnaBtnZmO.classList.add('row-center')
+    
+    const pdfZmOBtn= document.createElement('button-pdf-chat')
+    pdfZmOBtn.id='ZmOut'
+    const imgZmOt=document.createElement('span-icon-chat')
+    imgZmOt.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em"><path d="M637 443H325c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h312c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8zm284 424L775 721c122.1-148.9 113.6-369.5-26-509-148-148.1-388.4-148.1-537 0-148.1 148.6-148.1 389 0 537 139.5 139.6 360.1 148.1 509 26l146 146c3.2 2.8 8.3 2.8 11 0l43-43c2.8-2.7 2.8-7.8 0-11zM696 696c-118.8 118.7-311.2 118.7-430 0-118.7-118.8-118.7-311.2 0-430 118.8-118.7 311.2-118.7 430 0 118.7 118.8 118.7 311.2 0 430z"/></svg>'
+    
+    pdfZmOBtn.appendChild(imgZmOt)
+    
+    columnaBtnZmO.appendChild(pdfZmOBtn)
+    
+    const columnaNumPagAct=document.createElement('col-chat')
+    columnaNumPagAct.id='numAct'
+    columnaNumPagAct.classList.add('col-4')
+    columnaNumPagAct.classList.add('row-middle')
+    columnaNumPagAct.classList.add('row-center')
+    columnaNumPagAct.innerHTML='1'
+    
+    const columnaNumPagMax=document.createElement('col-chat')
+    columnaNumPagMax.id='numMax'
+    columnaNumPagMax.classList.add('col-4')
+    columnaNumPagMax.classList.add('row-middle')
+    columnaNumPagMax.classList.add('row-center')
+    columnaNumPagMax.innerHTML='de 1'
+    
+    filaBtnPdf.appendChild(columnaBtnAnt)
+    filaBtnPdf.appendChild(columnaBtnSig)
+    filaBtnPdf.appendChild(columnaBtnZmI)
+    filaBtnPdf.appendChild(columnaBtnZmO)
+    filaBtnPdf.appendChild(columnaNumPagAct)
+    filaBtnPdf.appendChild(columnaNumPagMax)
+    
+    pdfContainer.appendChild(filaCnvPDF)
+    pdfContainer.appendChild(filaBtnPdf)
+
+    element.classList.add('pdfViewer')
+    element.appendChild(pdfContainer)    
+}
+
+function deletePdfViewer(){
+    if(pdfExists){
+        document.querySelector('#prev').innerHTML=""
+        document.querySelector('#prev').id=""
+        document.querySelector('#next').innerHTML=""
+        document.querySelector('#next').id=""
+        document.querySelector('#ZmOut').innerHTML=""
+        document.querySelector('#ZmOut').id=""
+        document.querySelector('#ZmIn').innerHTML=""
+        document.querySelector('#ZmIn').id=""
+        document.querySelector('#pdf-canvas-chat').id=""
+        document.querySelector('#numMax').innerHTML=""
+        document.querySelector('#numMax').id=""
+        document.querySelector('#numAct').innerHTML=""
+        document.querySelector('#numAct').id=""
+        pdfExists=false
+    }
+}
+
 function stopTimer() {
     clearInterval(elapsedTimeTimer);
 }
+
 function loadAudio(recorderAudioAsBlob) {
     
     reader = new FileReader();
-    
+
     reader.onload = (e) => {
         
         let base64URL = e.target.result;
@@ -432,59 +553,60 @@ function loadAudio(recorderAudioAsBlob) {
             recorderAudioAsBlob.type.substr(0, recorderAudioAsBlob.type.indexOf(';')) : recorderAudioAsBlob.type;
             sourceElement.type=BlobType
 
-        audio.load();        
-    };    
+        audio.load();
+    };
     reader.readAsDataURL(recorderAudioAsBlob);
 }
-function sendTextMsg(message){    
+
+function sendTextMsg(message){
     axios.post(APIDomain.concat('bot-question'),{
-        question:message        
+        question:message
     })
     .then(function (response) {
         contMsg++
-        createMsgElement(true,response.data.data.content)            
+        createMsgElement(true,response.data.data.content)
     })
     .catch(function(error){
         console.error(error)
     })
 }
 
-jQuery("avatar-chat").click(function() {    
+jQuery("avatar-chat").click(function() {
     jQuery("avatar-chat").toggle('scale');
     jQuery("container-chat").toggle('scale');
 })
-jQuery("#close-container-chat").click(function() {    
+
+jQuery("#close-container-chat").click(function() {
     jQuery("avatar-chat").toggle('scale');
     jQuery("container-chat").toggle('scale');
 })
+
 jQuery('#send-msg-chat').click(function() {
     var msgContent=jQuery('.input-chat').val()
     createMsgElement(false,msgContent)
-    sendTextMsg(msgContent)    
+    sendTextMsg(msgContent)
 })
+
 jQuery('#activate-rec-chat').click(function(){
 jQuery("#initRow").toggle();
-jQuery("#recRow").toggle();    
+jQuery("#recRow").toggle();
 console.log("Recording Audio...");
 
-let recorderAudioIsPlaying = !audio.paused; 
+let recorderAudioIsPlaying = !audio.paused;
 console.log("paused?", !recorderAudioIsPlaying);
 // if (recorderAudioIsPlaying) {
 //     audioElement.pause();
-//     //also hide the audio playing indicator displayed on the screen        
+//     //also hide the audio playing indicator displayed on the screen
 // }
 audioRecorder.start()
     .then(() => {
-
         audioRecordStartTime = new Date();
-        handleElapsedRecordingTime()        
+        handleElapsedRecordingTime()
     })
     .catch(error => {
-        
         if (error.message.includes("mediaDevices API or getUserMedia method is not supported in this browser.")) {
-            console.log("To record audio, use browsers like Chrome and Firefox.");                
-        }        
-        
+            console.log("To record audio, use browsers like Chrome and Firefox.");
+        }
         switch (error.name) {
             case 'AbortError': //error from navigator.mediaDevices.getUserMedia
                 console.error("An AbortError has occured.");
@@ -515,18 +637,18 @@ audioRecorder.start()
         };
     });
 })
-jQuery('#stop-rec-chat').click(function(){    
-jQuery("#recRow").toggle(); 
-jQuery("#audRow").toggle(); 
-console.log("Stopping Audio Recording...");
 
+jQuery('#stop-rec-chat').click(function(){
+jQuery("#recRow").toggle();
+jQuery("#audRow").toggle();
+console.log("Stopping Audio Recording...");
 audioRecorder.stop()
-    .then(audioAsblob => {        
+    .then(audioAsblob => {
         loadAudio(audioAsblob);
         stopTimer();
         columnaPieSgRec.innerHTML="00:00"
     })
-    .catch(error => {        
+    .catch(error => {
         switch (error.name) {
             case 'InvalidStateError':
                 console.error("An InvalidStateError has occured.");
@@ -536,17 +658,19 @@ audioRecorder.stop()
         };
     });
 })
+
 jQuery('#del-rec-chat').click(function(){
     console.log("Canceling audio...");
-    audio.innerHTML=""    
-    jQuery("#initRow").toggle(); 
-    jQuery("#audRow").toggle();    
-})    
+    audio.innerHTML=""
+    jQuery("#initRow").toggle();
+    jQuery("#audRow").toggle();
+})
+
 jQuery('#send-aud-chat').click(function(){
     var form = new FormData();
-    const blob = new Blob(audioRecorder.audioBlobs,{'type':'audio/mpeg-3'})    
+    const blob = new Blob(audioRecorder.audioBlobs,{'type':'audio/mpeg-3'})
     form.append("file", blob);
-    axios.post(APIDomain.concat('get-audio'), 
+    axios.post(APIDomain.concat('get-audio'),
     form,
     {
         headers: {
@@ -558,31 +682,33 @@ jQuery('#send-aud-chat').click(function(){
     .then(result => {
         createMsgElement(false,result.data.data.content)
         sendTextMsg(result.data.data.content)
+        jQuery("#initRow").toggle();
         jQuery("#audRow").toggle();
-        jQuery("#initRow").toggle();                  
     })
     .catch(error=>{
         console.error("Error al obtener texto: ".concat(error))
-    })    
+    })
 })
-function handleElapsedRecordingTime() {    
-    columnaPieSgRec.innerHTML="00:00"    
+
+function handleElapsedRecordingTime() {
+    columnaPieSgRec.innerHTML="00:00"
     elapsedTimeTimer = setInterval(() => {
         let elapsedTime = computeElapsedTime(audioRecordStartTime);
         columnaPieSgRec.innerHTML=elapsedTime;
     }, 1000);
 }
-function computeElapsedTime(startTime) {    
-    let endTime = new Date();    
-    let timeDiff = endTime - startTime;    
-    timeDiff = timeDiff / 1000;    
-    let seconds = Math.floor(timeDiff % 60);    
-    seconds = seconds < 10 ? "0" + seconds : seconds;    
-    timeDiff = Math.floor(timeDiff / 60);    
+
+function computeElapsedTime(startTime) {
+    let endTime = new Date();
+    let timeDiff = endTime - startTime;
+    timeDiff = timeDiff / 1000;
+    let seconds = Math.floor(timeDiff % 60);
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    timeDiff = Math.floor(timeDiff / 60);
     let minutes = timeDiff % 60;
-    minutes = minutes < 10 ? "0" + minutes : minutes;    
-    timeDiff = Math.floor(timeDiff / 60);    
-    let hours = timeDiff % 24;    
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    timeDiff = Math.floor(timeDiff / 60);
+    let hours = timeDiff % 24;
     timeDiff = Math.floor(timeDiff / 24);
     let days = timeDiff;
     let totalHours = hours + (days * 24);
