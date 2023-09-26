@@ -71,7 +71,7 @@ columnaCabeceraTit.classList.add('col-lg-15')
 columnaCabeceraTit.classList.add('col-md-13')
 columnaCabeceraTit.classList.add('col-sm-19')
 columnaCabeceraTit.classList.add('col-xs-19')
-columnaCabeceraTit.innerHTML='Chatbot'
+columnaCabeceraTit.innerHTML='Gala, Asistencia al cliente'
 
 filaCabecera.appendChild(columnaCabeceraTit)
 
