@@ -421,7 +421,7 @@ if(allowedDomainsList.includes(window.location.host)){
     document.body.appendChild(botonAvatar)
     // document.head.appendChild(css)
     document.head.appendChild(font)
-    document.head.appendChild(pdfjs)
+    //document.head.appendChild(pdfjs)
 }else{
     console.error("Domain not allowed")
     console.info(window.location.host)
