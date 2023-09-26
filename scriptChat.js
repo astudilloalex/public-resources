@@ -100,7 +100,6 @@ contenido.appendChild(listaMsg)
 
 const listaitemMsg=document.createElement('list-item-chat')
 
-
 const filaPie= document.createElement('row-chat')
 filaPie.classList.add('row-middle')
 filaPie.classList.add('row-center')
@@ -297,6 +296,48 @@ pie.appendChild(filaPie)
 pie.appendChild(filaPieRec)
 pie.appendChild(filaPieAud)
 
+window.onload=obtainToken;
+
+function generateLoading(origin){
+    const actualMsg=document.createElement('list-item-chat')
+    actualMsg.id="loading"
+    if(origin){
+        actualMsg.classList.add('inverse-row')
+    }
+        
+    const loadingIcon=document.createElement('loading-chat')
+    loadingIcon.classList.add('lds-dual-ring')
+    loadingIcon.id="loadingIcon"
+        
+    actualMsg.appendChild(loadingIcon)
+    listaMsg.appendChild(actualMsg)
+    inputMsg.value=""
+    
+    contenido.scrollTo(0, contenido.scrollHeight);
+}
+
+function deleteLoading(){
+    jQuery('#loading').remove()
+}
+
+function obtainToken(){    
+    axios.post(APIDomain.concat('token'),{
+        username:'initUserTest',
+        password:'initP455W0RD'        
+    })
+    .then(function (response) {        
+        sessionStorage.setItem('token',response.data.token);
+        jQuery("avatar-chat").click(function() {
+            jQuery("avatar-chat").toggle('scale');
+            jQuery("container-chat").toggle('scale');
+        })
+
+    })
+    .catch(function(error){
+        console.error(error)
+    })
+}
+
 var loadingTask,pdfDoc,canvas,ctx,scale,numPage
 var pdfExists=false
 
@@ -394,7 +435,7 @@ function createMsgElement(origin,message){
             if(pdfExists){
                 deletePdfViewer()
             }
-            createPDFViewer(containerMsg)            
+            createPDFViewer(containerMsg)
         }else{
             containerMsg.innerHTML=message
         }
@@ -406,8 +447,8 @@ function createMsgElement(origin,message){
     listaMsg.appendChild(actualMsg)
     inputMsg.value=""
     if(message.search(".pdf{1}")!=-1){
-        readPDF(message.substring(message.indexOf("pdf")+3,message.indexOf(".pdf")+4))        
-    }    
+        readPDF(message.substring(message.indexOf("pdf")+3,message.indexOf(".pdf")+4))
+    }
     contenido.scrollTo(0, contenido.scrollHeight);
 }
 
@@ -559,22 +600,24 @@ function loadAudio(recorderAudioAsBlob) {
 }
 
 function sendTextMsg(message){
+    generateLoading(true)
     axios.post(APIDomain.concat('bot-question'),{
         question:message
+    },
+    {
+        headers: {
+            Authorization: "Bearer ".concat(sessionStorage.getItem('token'))
+        }
     })
     .then(function (response) {
         contMsg++
+        deleteLoading()
         createMsgElement(true,response.data.data.content)
     })
     .catch(function(error){
         console.error(error)
     })
 }
-
-jQuery("avatar-chat").click(function() {
-    jQuery("avatar-chat").toggle('scale');
-    jQuery("container-chat").toggle('scale');
-})
 
 jQuery("#close-container-chat").click(function() {
     jQuery("avatar-chat").toggle('scale');
@@ -667,6 +710,7 @@ jQuery('#del-rec-chat').click(function(){
 })
 
 jQuery('#send-aud-chat').click(function(){
+    generateLoading(false)
     var form = new FormData();
     const blob = new Blob(audioRecorder.audioBlobs,{'type':'audio/mpeg-3'})
     form.append("file", blob);
@@ -675,11 +719,13 @@ jQuery('#send-aud-chat').click(function(){
     {
         headers: {
             "Accept": "application/json",
-            "Content-type": "audio/mpeg-3"
+            "Content-type": "audio/mpeg-3",
+            Authorization: "Bearer ".concat(sessionStorage.getItem('token'))
         }
     }
     )
     .then(result => {
+        deleteLoading()
         createMsgElement(false,result.data.data.content)
         sendTextMsg(result.data.data.content)
         jQuery("#initRow").toggle();
