@@ -320,18 +320,17 @@ function deleteLoading(){
     jQuery('#loading').remove()
 }
 
-function obtainToken(){    
+function obtainToken(){
     axios.post(APIDomain.concat('token'),{
         username:'initUserTest',
         password:'initP455W0RD'        
     })
-    .then(function (response) {        
+    .then(function (response) {
         sessionStorage.setItem('token',response.data.token);
         jQuery("avatar-chat").click(function() {
             jQuery("avatar-chat").toggle('scale');
             jQuery("container-chat").toggle('scale');
         })
-
     })
     .catch(function(error){
         console.error(error)
@@ -630,6 +629,16 @@ jQuery('#send-msg-chat').click(function() {
     sendTextMsg(msgContent)
 })
 
+jQuery('.input-chat').keypress(function(e) {
+    var key = e.which;
+    if(key==13)
+    {
+        var msgContent=jQuery('.input-chat').val()
+        createMsgElement(false,msgContent)
+        sendTextMsg(msgContent)
+    }
+})
+
 jQuery('#activate-rec-chat').click(function(){
 jQuery("#initRow").toggle();
 jQuery("#recRow").toggle();
@@ -763,5 +772,10 @@ function computeElapsedTime(startTime) {
         return minutes + ":" + seconds;
     } else {
         return totalHours + ":" + minutes + ":" + seconds;
+    }
+}
+var dictionary={
+    'recording':{
+        'es':'Grabando'
     }
 }
