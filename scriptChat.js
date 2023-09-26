@@ -348,7 +348,7 @@ var pdfExists=false
 
 function readPDF(path){
     initFunctions()
-    loadingTask=pdfjsLib.getDocument(path)
+    loadingTask=pdfjsLib.getDocument(RepositoryDomain.concat(path))
     loadingTask.promise.then(pdfDoc_ => {
         pdfDoc = pdfDoc_;
         document.querySelector('#numMax').innerHTML ="de ".concat(pdfDoc.numPages);
