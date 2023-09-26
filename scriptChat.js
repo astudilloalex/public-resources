@@ -11,6 +11,9 @@ css.type='text/css'
 const font =document.createElement('style')
 font.innerHTML="@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');"
 
+const pdfjs=document.createElement('script')
+pdfjs.src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"
+
 const botonAvatar=document.createElement('avatar-chat')
 
 const imgC = document.createElement('img')
@@ -418,6 +421,7 @@ if(allowedDomainsList.includes(window.location.host)){
     document.body.appendChild(botonAvatar)
     // document.head.appendChild(css)
     document.head.appendChild(font)
+    document.head.appendChild(pdfjs)
 }else{
     console.error("Domain not allowed")
     console.info(window.location.host)
