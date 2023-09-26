@@ -8,6 +8,9 @@ css.href=RepositoryDomain.concat('styleChat.css')
 css.rel='stylesheet'
 css.type='text/css'
 
+const font =document.createElement('style')
+font.innerHTML="@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');"
+
 const botonAvatar=document.createElement('avatar-chat')
 
 const imgC = document.createElement('img')
@@ -413,7 +416,8 @@ function ZoomOut(){
 if(allowedDomainsList.includes(window.location.host)){
     document.body.appendChild(contenedorchat)
     document.body.appendChild(botonAvatar)
-    // document.head.appendChild(css)    
+    // document.head.appendChild(css)
+    document.head.appendChild(font)
 }else{
     console.error("Domain not allowed")
     console.info(window.location.host)
@@ -772,10 +776,5 @@ function computeElapsedTime(startTime) {
         return minutes + ":" + seconds;
     } else {
         return totalHours + ":" + minutes + ":" + seconds;
-    }
-}
-var dictionary={
-    'recording':{
-        'es':'Grabando'
     }
 }

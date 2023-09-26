@@ -426,3 +426,7 @@ audio{
         transform: rotate(360deg);
     }
 }
+container-chat > *{
+    font-family: 'Lato', sans-serif;
+    
+}
