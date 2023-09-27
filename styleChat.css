@@ -87,6 +87,14 @@ row-chat{
     flex: 0 0 16.6666667%;
     max-width: 16.6666667%;
 }
+.col-8 {
+    flex: 0 0 33.3333334%;
+    max-width: 33.3333334%;
+}
+.col-16 {
+    flex: 0 0 66.6666667%;
+    max-width: 66.6666667%;
+}
 
 container-chat {        
 width: 100%;
@@ -428,5 +436,5 @@ audio{
 }
 container-chat > *{
     font-family: 'Lato', sans-serif;
-    
+
 }

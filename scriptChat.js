@@ -419,7 +419,7 @@ function ZoomOut(){
 if(allowedDomainsList.includes(window.location.host)){
     document.body.appendChild(contenedorchat)
     document.body.appendChild(botonAvatar)
-    // document.head.appendChild(css)
+    // document.head.appendChild(css)    
     document.head.appendChild(font)
     document.head.appendChild(pdfjs)
 }else{
@@ -442,7 +442,8 @@ function createMsgElement(origin,message){
             if(pdfExists){
                 deletePdfViewer()
             }
-            createPDFViewer(containerMsg)
+            // createPDFViewer(containerMsg)
+            downloadPDF(message.substring(message.indexOf("pdf")+3,message.indexOf(".pdf")+4),containerMsg)
         }else{
             containerMsg.innerHTML=message
         }
@@ -453,9 +454,9 @@ function createMsgElement(origin,message){
     actualMsg.appendChild(containerMsg)
     listaMsg.appendChild(actualMsg)
     inputMsg.value=""
-    if(message.search(".pdf{1}")!=-1){
-        readPDF(message.substring(message.indexOf("pdf")+3,message.indexOf(".pdf")+4))
-    }
+    // if(message.search(".pdf{1}")!=-1){
+    //     readPDF(message.substring(message.indexOf("pdf")+3,message.indexOf(".pdf")+4))
+    // }
     contenido.scrollTo(0, contenido.scrollHeight);
 }
 
@@ -558,7 +559,7 @@ function createPDFViewer(element){
     pdfContainer.appendChild(filaBtnPdf)
 
     element.classList.add('pdfViewer')
-    element.appendChild(pdfContainer)    
+    element.appendChild(pdfContainer)
 }
 
 function deletePdfViewer(){
@@ -578,6 +579,42 @@ function deletePdfViewer(){
         document.querySelector('#numAct').id=""
         pdfExists=false
     }
+}
+
+function downloadPDF(fileName,element){
+    const filaDscPdf = document.createElement('row-chat')
+
+    const columnaIcono=document.createElement('col-chat')
+    columnaIcono.classList.add('col-4')
+    columnaIcono.classList.add('row-middle')
+    columnaIcono.classList.add('row-center')    
+    columnaIcono.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="40px" height="40px"><path d="M531.3 574.4l.3-1.4c5.8-23.9 13.1-53.7 7.4-80.7-3.8-21.3-19.5-29.6-32.9-30.2-15.8-.7-29.9 8.3-33.4 21.4-6.6 24-.7 56.8 10.1 98.6-13.6 32.4-35.3 79.5-51.2 107.5-29.6 15.3-69.3 38.9-75.2 68.7-1.2 5.5.2 12.5 3.5 18.8 3.7 7 9.6 12.4 16.5 15 3 1.1 6.6 2 10.8 2 17.6 0 46.1-14.2 84.1-79.4 5.8-1.9 11.8-3.9 17.6-5.9 27.2-9.2 55.4-18.8 80.9-23.1 28.2 15.1 60.3 24.8 82.1 24.8 21.6 0 30.1-12.8 33.3-20.5 5.6-13.5 2.9-30.5-6.2-39.6-13.2-13-45.3-16.4-95.3-10.2-24.6-15-40.7-35.4-52.4-65.8zM421.6 726.3c-13.9 20.2-24.4 30.3-30.1 34.7 6.7-12.3 19.8-25.3 30.1-34.7zm87.6-235.5c5.2 8.9 4.5 35.8.5 49.4-4.9-19.9-5.6-48.1-2.7-51.4.8.1 1.5.7 2.2 2zm-1.6 120.5c10.7 18.5 24.2 34.4 39.1 46.2-21.6 4.9-41.3 13-58.9 20.2-4.2 1.7-8.3 3.4-12.3 5 13.3-24.1 24.4-51.4 32.1-71.4zm155.6 65.5c.1.2.2.5-.4.9h-.2l-.2.3c-.8.5-9 5.3-44.3-8.6 40.6-1.9 45 7.3 45.1 7.4zm191.4-388.2L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494z"/></svg>'
+    
+    const columnaNombre=document.createElement('col-chat')
+    columnaNombre.classList.add('col-16')
+    columnaNombre.classList.add('row-middle')
+    columnaNombre.classList.add('row-center')
+    columnaNombre.innerHTML=fileName
+
+    const columnaDescargar=document.createElement('col-chat')
+    columnaDescargar.id='downloadPDF'
+    columnaDescargar.classList.add('col-4')
+    columnaDescargar.classList.add('row-middle')
+    columnaDescargar.classList.add('row-center')
+
+    const linkDesc= document.createElement('a')
+    linkDesc.href=RepositoryDomain.concat(fileName)
+    linkDesc.download=fileName
+    linkDesc.style="color:#ffffff"
+    linkDesc.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="32px" height="40px"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"/></svg>'   
+
+    columnaDescargar.appendChild(linkDesc)
+    
+    filaDscPdf.appendChild(columnaIcono)
+    filaDscPdf.appendChild(columnaNombre)
+    filaDscPdf.appendChild(columnaDescargar)    
+
+    element.appendChild(filaDscPdf)        
 }
 
 function stopTimer() {
@@ -781,4 +818,26 @@ function computeElapsedTime(startTime) {
     } else {
         return totalHours + ":" + minutes + ":" + seconds;
     }
+}
+var dictionary={
+    'Recording...':{
+        'es':'Grabando...'
+    }
+}
+
+window.onlanguagechange=(event)=>{
+    current_lang_index = ++current_lang_index % 2;
+    current_lang = langs[current_lang_index];
+    translate();
+}
+
+var langs = ['es','us'];
+var current_lang_index = 0;
+var current_lang = langs[current_lang_index];
+
+function translate() {
+    $("[data-translate]").each(function(){
+        var key = $(this).data('translate');
+        $(this).html(dictionary[key][current_lang] || "N/A");
+    });
 }
