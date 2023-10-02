@@ -1,311 +1,290 @@
-const allowedDomainsList = ['localhost', '127.0.0.1','bajajecuador.com','corporativo.curbe.com.ec','ebi.corp.ec']
+// ** Creacion de elemntos de chat en pagina web, inyeccion de html dentro de elemento body
 
-const APIDomain='https://apichatgpt.dev.curbe.com.ec/'
-const RepositoryDomain='https://public.alexastudillo.com/'
+//Lista de dominios permitidos
+const dominiosPermitidos = ['localhost', '127.0.0.1','bajajecuador.com','corporativo.curbe.com.ec','ebi.corp.ec']
 
+//Localicazion URL de servicio
+const dominioAPI='https://apichatgpt.dev.curbe.com.ec/'
+//Localicazion URL de repositorio contenedor
+const dominioRepositorio='https://public.alexastudillo.com/'
+
+//Creacion de elemento link de css
 const css =document.createElement('link')
-css.href=RepositoryDomain.concat('styleChat.css')
+css.href=dominioRepositorio.concat('styleChat.css')
 css.rel='stylesheet'
 css.type='text/css'
 
-const font =document.createElement('style')
-font.innerHTML="@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');"
+//Creacion de elemento link fuente
+const fuente =document.createElement('style')
+fuente.innerHTML="@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');"
 
-const pdfjs=document.createElement('script')
-pdfjs.src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"
-
+// **Inicio creacion de elemnto flotante de inicio
+//Creacion de elemento de imagen avatar inicio chat
 const botonAvatar=document.createElement('avatar-chat')
 
-const imgC = document.createElement('img')
-imgC.classList.add('circle-avatar-chat')
-imgC.setAttribute('src',RepositoryDomain.concat('avatar.png'))
+    //Creacion elemento img, lector de imagenes
+    const imgAvatar = document.createElement('img')
+    imgAvatar.classList.add('circle-avatar-chat')
+    imgAvatar.src=dominioRepositorio.concat('avatar.png')
 
-botonAvatar.appendChild(imgC)
+    //Adicion de la imagen al boton
+    botonAvatar.appendChild(imgAvatar)
+// **Fin de creacion de elemnto flotante de inicio
 
+// ** Inicio creacion de contenedor de chat
+//Creacion de contenedor de elemento mensajeria
 const contenedorchat=document.createElement('container-chat')
-contenedorchat.style='display:none'
+contenedorchat.style.display='none'
 contenedorchat.classList.add('border-cir')
 contenedorchat.classList.add('box-shadow')
 
-const esquema= document.createElement('layout-chat')
+    // ** Inicio creacion de esquema de vista chat
+    //Creacion elemnto de esquema de vista
+    const esquema= document.createElement('layout-chat')
+        //Creacion elemento de cabecera de esquema
+        const cabecera=document.createElement('header-chat')
+        cabecera.classList.add('top-border-radius')
 
+            //Creacion de elementos de cabecera
+            const filaCabecera =document.createElement('row-chat')
+            filaCabecera.classList.add('row-middle')
+            filaCabecera.classList.add('row-center')
+
+                //Creacion contenedor de columna para imagen
+                const columnaCabeceraImg=document.createElement('col-chat')
+                columnaCabeceraImg.classList.add('col-xl-4')
+                columnaCabeceraImg.classList.add('col-xxl-3')
+                columnaCabeceraImg.classList.add('col-lg-5')
+                columnaCabeceraImg.classList.add('col-md-6')
+                columnaCabeceraImg.classList.add('col-sm-3')
+                columnaCabeceraImg.classList.add('col-xs-3')
+
+                    //Creacion contenedor para icono de avatar
+                    const avatarIcono= document.createElement('avatar-icon-chat')
+
+                        //Creacion de elemento imagen para avatar boton inicio
+                        const imgAvatarIcn = document.createElement('img')
+                        imgAvatarIcn.classList.add('circle-avatar-chat')
+                        imgAvatarIcn.src=dominioRepositorio.concat('avatar.png')
+
+                    //Adicion de elemento imagen a icono de avatar inicio
+                    avatarIcono.appendChild(imgAvatarIcn)
+
+                //Adicion de elemento imagen a columna de imagen
+                columnaCabeceraImg.appendChild(avatarIcono)
+
+                const columnaCabeceraTit=document.createElement('col-chat')
+                columnaCabeceraTit.classList.add('col-xl-17')
+                columnaCabeceraTit.classList.add('col-xxl-19')
+                columnaCabeceraTit.classList.add('col-lg-15')
+                columnaCabeceraTit.classList.add('col-md-13')
+                columnaCabeceraTit.classList.add('col-sm-19')
+                columnaCabeceraTit.classList.add('col-xs-19')
+                columnaCabeceraTit.innerHTML='Gala, Asistencia al cliente'
+
+                const columnaCabeceraBtn = document.createElement('col-chat')
+                columnaCabeceraBtn.classList.add('col-xl-3')
+                columnaCabeceraBtn.classList.add('col-xxl-2')
+                columnaCabeceraBtn.classList.add('col-lg-4')
+                columnaCabeceraBtn.classList.add('col-md-5')
+                columnaCabeceraBtn.classList.add('col-sm-2')
+                columnaCabeceraBtn.classList.add('col-xs-2')
+
+                    const btnSalida= document.createElement('button-chat')
+                    btnSalida.id='close-container-chat'
+
+                        const imgbtnSld=document.createElement('span-chat')
+                        imgbtnSld.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="close" aria-hidden="true"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg>'
+
+                    btnSalida.appendChild(imgbtnSld)
+
+                columnaCabeceraBtn.appendChild(btnSalida)            
+
+            //Adicion de elemento de columna a fila cabecera
+            filaCabecera.appendChild(columnaCabeceraImg)
+            filaCabecera.appendChild(columnaCabeceraTit)
+            filaCabecera.appendChild(columnaCabeceraBtn)
+            
+        cabecera.appendChild(filaCabecera)
+
+        //Creacion de elemento contenido de esquema
+        const contenido=document.createElement('content-chat')
+
+            const listaMsg=document.createElement('list-chat')
+        
+        contenido.appendChild(listaMsg)
+
+        //Creacion de elemnto pie de esquema
+        const pie=document.createElement('footer-chat')
+        pie.classList.add('bottom-border-radius')
+
+            const filaPie= document.createElement('row-flex-chat')
+            filaPie.classList.add('row-middle')
+            filaPie.classList.add('row-center')
+            filaPie.id='initRow'
+
+                const colunmaInputPie= document.createElement('col-flex-chat')
+
+                    const inputMsg=document.createElement('textarea')
+                    inputMsg.tabIndex=0
+                    inputMsg.rows=1
+                    inputMsg.placeholder='Escribe un mensaje'
+                    inputMsg.wrap='off'
+                    inputMsg.id="txtMsg"
+                    inputMsg.classList.add('input-chat')
+                    
+                    const buttonMic=document.createElement('button-icon-chat')
+                    buttonMic.id='btn-snd-msg'
+
+                        const imgbtnMic=document.createElement('span-icon-chat')
+                        imgbtnMic.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="24px" height="24px"><path d="M512 624c93.9 0 170-75.2 170-168V232c0-92.8-76.1-168-170-168s-170 75.2-170 168v224c0 92.8 76.1 168 170 168zm330-170c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254S258 594.3 258 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 168.7 126.6 307.9 290 327.6V884H326.7c-13.7 0-24.7 14.3-24.7 32v36c0 4.4 2.8 8 6.2 8h407.6c3.4 0 6.2-3.6 6.2-8v-36c0-17.7-11-32-24.7-32H548V782.1c165.3-18 294-158 294-328.1z"/></svg>'
+
+                    buttonMic.appendChild(imgbtnMic)
+                
+                colunmaInputPie.appendChild(inputMsg)
+                colunmaInputPie.appendChild(buttonMic)
+                
+            filaPie.appendChild(colunmaInputPie)
+
+            // fila de contenido al grabar
+            const filaPieRec= document.createElement('row-flex-chat')
+            filaPieRec.classList.add('row-middle')
+            filaPieRec.classList.add('row-center')
+            filaPieRec.style.backgroundColor='#ffffff'
+            filaPieRec.style.flexDirection='column'
+            filaPieRec.classList.add('visible')
+            filaPieRec.id='recRow'
+
+                contenidoPieRec=document.createElement('col-flex-chat')
+                contenidoPieRec.style.width='100%'
+
+                    const txtPieSgRec=document.createElement('p-chat')
+                    txtPieSgRec.style='color:black'
+                    txtPieSgRec.innerHTML="00:00"
+
+                    const waveAud=document.createElement('canvas')
+                    waveAud.classList.add('canvas-chat')
+                    waveAud.id='wave-aud'
+
+                    const audio=new Audio()
+                    audio.style.display="none"
+                    audio.controls = true;
+                    audio.id='audio-source-chat'
+
+                contenidoPieRec.appendChild(txtPieSgRec)
+                contenidoPieRec.appendChild(waveAud)
+                contenidoPieRec.appendChild(audio)
+
+                const opcionesPieRec=document.createElement('col-flex-chat')
+                opcionesPieRec.style.width="100%"
+                opcionesPieRec.style.display="grid"
+                opcionesPieRec.style.gridAutoFlow="column"
+
+                    const btnElmAud=document.createElement('button-transparent-chat')
+                    btnElmAud.id="del-rec-chat"
+
+                        const imgBtnDel=document.createElement('span-icon-chat')
+                        imgBtnDel.style.color="#667781"
+                        imgBtnDel.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="24px" height="24px"><path d="M864 256H736v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zm-200 0H360v-72h304v72z"/></svg>'
+
+                    btnElmAud.appendChild(imgBtnDel)
+
+                    const btnPausAud=document.createElement('button-transparent-chat')
+                    btnPausAud.id='pause-rec-chat'
+                    btnPausAud.style.justifySelf="center"
+
+                        const imgBtnPas=document.createElement('span-icon-chat')
+                        imgBtnPas.style="color:red"
+                        imgBtnPas.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="30px" height="30px"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M512 140c-205.4 0-372 166.6-372 372s166.6 372 372 372 372-166.6 372-372-166.6-372-372-372zm-80 524c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V360c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v304zm224 0c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V360c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v304z" fill="#ffffff"></path><path d="M424 352h-48c-4.4 0-8 3.6-8 8v304c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V360c0-4.4-3.6-8-8-8zm224 0h-48c-4.4 0-8 3.6-8 8v304c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V360c0-4.4-3.6-8-8-8z"></path></svg>'
+
+                    btnPausAud.appendChild(imgBtnPas)
+
+                    const btnSndAud=document.createElement('button-icon-chat')
+                    btnSndAud.id='stop-rec-chat'
+                    btnSndAud.classList.add('btn-circle')
+                    btnSndAud.style.justifySelf="end"
+                    btnSndAud.style.marginTop="5px"
+                    btnSndAud.style.marginBottom="5px"
+
+                        const imgSndAud=document.createElement('span-icon-chat')
+                        imgSndAud.innerHTML='<svg viewBox="0 0 24 24" focusable="false" height="24px" width="24px" fill="currentColor"><path d="M1.101,21.757L23.8,12.028L1.101,2.3l0.011,7.912l13.623,1.816L1.112,13.845 L1.101,21.757z"></path></svg>'
+
+                    btnSndAud.appendChild(imgSndAud)
+
+                opcionesPieRec.appendChild(btnElmAud)
+                opcionesPieRec.appendChild(btnPausAud)
+                opcionesPieRec.appendChild(btnSndAud)
+
+            filaPieRec.appendChild(contenidoPieRec)
+            filaPieRec.appendChild(opcionesPieRec)
+
+        pie.appendChild(filaPie)
+        pie.appendChild(filaPieRec)
+
+    //Adicion de elemntos: cabecera,contenido y pie al esquema
+    esquema.appendChild(cabecera)
+    esquema.appendChild(contenido)
+    esquema.appendChild(pie)
+    // ** Fin creacion de esquema de vista chat
+
+//Adicion del esquema a contenedor total
 contenedorchat.appendChild(esquema)
 
-const cabecera=document.createElement('header-chat')
-cabecera.classList.add('top-border-radius')
-
-const contenido=document.createElement('content-chat')
-
-const pie=document.createElement('footer-chat')
-pie.classList.add('bottom-border-radius')
-
-esquema.appendChild(cabecera)
-esquema.appendChild(contenido)
-esquema.appendChild(pie)
-
-const filaCabecera =document.createElement('row-chat')
-filaCabecera.classList.add('row-middle')
-filaCabecera.classList.add('row-center')
-
-const columnaCabeceraImg=document.createElement('col-chat')
-columnaCabeceraImg.classList.add('col-xl-4')
-columnaCabeceraImg.classList.add('col-xxl-3')
-columnaCabeceraImg.classList.add('col-lg-5')
-columnaCabeceraImg.classList.add('col-md-6')
-columnaCabeceraImg.classList.add('col-sm-3')
-columnaCabeceraImg.classList.add('col-xs-3')
-
-const avatarIcono= document.createElement('avatar-icon-chat')
-
-const imgCI = document.createElement('img')
-imgCI.classList.add('circle-avatar-chat')
-imgCI.setAttribute('src',RepositoryDomain.concat('avatar.png'))
-
-avatarIcono.appendChild(imgCI)
-
-columnaCabeceraImg.appendChild(avatarIcono)
-
-filaCabecera.appendChild(columnaCabeceraImg)
-
-const columnaCabeceraTit=document.createElement('col-chat')
-columnaCabeceraTit.classList.add('col-xl-17')
-columnaCabeceraTit.classList.add('col-xxl-19')
-columnaCabeceraTit.classList.add('col-lg-15')
-columnaCabeceraTit.classList.add('col-md-13')
-columnaCabeceraTit.classList.add('col-sm-19')
-columnaCabeceraTit.classList.add('col-xs-19')
-columnaCabeceraTit.innerHTML='Gala, Asistencia al cliente'
-
-filaCabecera.appendChild(columnaCabeceraTit)
-
-const columnaCabeceraBtn = document.createElement('col-chat')
-columnaCabeceraBtn.classList.add('col-xl-3')
-columnaCabeceraBtn.classList.add('col-xxl-2')
-columnaCabeceraBtn.classList.add('col-lg-4')
-columnaCabeceraBtn.classList.add('col-md-5')
-columnaCabeceraBtn.classList.add('col-sm-2')
-columnaCabeceraBtn.classList.add('col-xs-2')
-
-const btnSalida= document.createElement('button-chat')
-btnSalida.id='close-container-chat'
-
-const imgbtnSld=document.createElement('span-chat')
-
-imgbtnSld.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="close" aria-hidden="true"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg>'
-
-btnSalida.appendChild(imgbtnSld)
-
-columnaCabeceraBtn.appendChild(btnSalida)
-
-filaCabecera.appendChild(columnaCabeceraBtn)
-
-cabecera.appendChild(filaCabecera)
-
-const listaMsg=document.createElement('list-chat')
-contenido.appendChild(listaMsg)
-
-const listaitemMsg=document.createElement('list-item-chat')
-
-const filaPie= document.createElement('row-chat')
-filaPie.classList.add('row-middle')
-filaPie.classList.add('row-center')
-filaPie.id='initRow'
-
-const colunmaInputPie= document.createElement('col-chat')
-colunmaInputPie.classList.add('col-xl-16')
-colunmaInputPie.classList.add('col-xxl-18')
-colunmaInputPie.classList.add('col-lg-14')
-colunmaInputPie.classList.add('col-md-12')
-colunmaInputPie.classList.add('col-sm-20')
-colunmaInputPie.classList.add('col-xs-18')
-colunmaInputPie.classList.add('row-middle')
-colunmaInputPie.classList.add('row-center')
-colunmaInputPie.style='padding-left: 5px;padding-right: 5px;'
-
-const inputMsg=document.createElement('input')
-inputMsg.classList.add('input-chat')
-
-colunmaInputPie.appendChild(inputMsg)
-
-filaPie.appendChild(colunmaInputPie)
-
-const columnaPieBtnEnv=document.createElement('col-chat')
-columnaPieBtnEnv.classList.add('col-xl-4')
-columnaPieBtnEnv.classList.add('col-xxl-3')
-columnaPieBtnEnv.classList.add('col-lg-5')
-columnaPieBtnEnv.classList.add('col-md-6')
-columnaPieBtnEnv.classList.add('col-sm-2')
-columnaPieBtnEnv.classList.add('col-xs-3')
-columnaPieBtnEnv.classList.add('row-middle')
-columnaPieBtnEnv.classList.add('row-center')
-
-const buttonEnv=document.createElement('button-icon-chat')
-buttonEnv.classList.add('btn-circle')
-buttonEnv.id='send-msg-chat'
-
-const imgbtnEnv=document.createElement('span-icon-chat')
-
-imgbtnEnv.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="send" aria-hidden="true"><defs><style></style></defs><path d="M931.4 498.9L94.9 79.5c-3.4-1.7-7.3-2.1-11-1.2a15.99 15.99 0 00-11.7 19.3l86.2 352.2c1.3 5.3 5.2 9.6 10.4 11.3l147.7 50.7-147.6 50.7c-5.2 1.8-9.1 6-10.3 11.3L72.2 926.5c-.9 3.7-.5 7.6 1.2 10.9 3.9 7.9 13.5 11.1 21.5 7.2l836.5-417c3.1-1.5 5.6-4.1 7.2-7.1 3.9-8 .7-17.6-7.2-21.6zM170.8 826.3l50.3-205.6 295.2-101.3c2.3-.8 4.2-2.6 5-5 1.4-4.2-.8-8.7-5-10.2L221.1 403 171 198.2l628 314.9-628.2 313.2z"></path></svg>'
-
-buttonEnv.appendChild(imgbtnEnv)
-
-columnaPieBtnEnv.appendChild(buttonEnv)
-
-filaPie.appendChild(columnaPieBtnEnv)
-
-const columnaPieBtnMic=document.createElement('col-chat')
-columnaPieBtnMic.classList.add('col-xl-4')
-columnaPieBtnMic.classList.add('col-xxl-3')
-columnaPieBtnMic.classList.add('col-lg-5')
-columnaPieBtnMic.classList.add('col-md-6')
-columnaPieBtnMic.classList.add('col-sm-2')
-columnaPieBtnMic.classList.add('col-xs-3')
-columnaPieBtnMic.classList.add('row-middle')
-columnaPieBtnMic.classList.add('row-center')
-
-const buttonMic=document.createElement('button-icon-chat')
-buttonMic.classList.add('btn-circle')
-buttonMic.id='activate-rec-chat'
-
-const imgbtnMic=document.createElement('span-icon-chat')
-
-imgbtnMic.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="audio" aria-hidden="true"><path d="M842 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254S258 594.3 258 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 168.7 126.6 307.9 290 327.6V884H326.7c-13.7 0-24.7 14.3-24.7 32v36c0 4.4 2.8 8 6.2 8h407.6c3.4 0 6.2-3.6 6.2-8v-36c0-17.7-11-32-24.7-32H548V782.1c165.3-18 294-158 294-328.1zM512 624c93.9 0 170-75.2 170-168V232c0-92.8-76.1-168-170-168s-170 75.2-170 168v224c0 92.8 76.1 168 170 168zm-94-392c0-50.6 41.9-92 94-92s94 41.4 94 92v224c0 50.6-41.9 92-94 92s-94-41.4-94-92V232z"></path></svg>'
-
-buttonMic.appendChild(imgbtnMic)
-
-columnaPieBtnMic.appendChild(buttonMic)
-
-filaPie.appendChild(columnaPieBtnMic)
-
-const filaPieRec= document.createElement('row-chat')
-filaPieRec.classList.add('row-middle')
-filaPieRec.classList.add('row-center')
-filaPieRec.classList.add('visible')
-filaPieRec.id='recRow'
-
-columnaPieSgRec=document.createElement('col-chat')
-columnaPieSgRec.style='color:black'
-columnaPieSgRec.classList.add('col-xl-6')
-columnaPieSgRec.classList.add('col-xxl-5')
-columnaPieSgRec.classList.add('col-lg-7')
-columnaPieSgRec.classList.add('col-md-8')
-columnaPieSgRec.classList.add('col-sm-4')
-columnaPieSgRec.classList.add('col-xs-4')
-columnaPieSgRec.classList.add('row-middle')
-columnaPieSgRec.classList.add('row-center')
-
-columnaPieGifRec=document.createElement('col-chat')
-columnaPieGifRec.classList.add('col-xl-14')
-columnaPieGifRec.classList.add('col-xxl-16')
-columnaPieGifRec.classList.add('col-lg-12')
-columnaPieGifRec.classList.add('col-md-10')
-columnaPieGifRec.classList.add('col-sm-18')
-columnaPieGifRec.classList.add('col-xs-18')
-columnaPieGifRec.classList.add('row-middle')
-columnaPieGifRec.classList.add('row-center')
-columnaPieGifRec.style='color:black'
-
-columnaPieGifRec.innerHTML="Recording..."
-
-columnaPieElmRec=document.createElement('col-chat')
-columnaPieElmRec.classList.add('col-xl-4')
-columnaPieElmRec.classList.add('col-xxl-3')
-columnaPieElmRec.classList.add('col-lg-5')
-columnaPieElmRec.classList.add('col-md-6')
-columnaPieElmRec.classList.add('col-sm-2')
-columnaPieElmRec.classList.add('col-xs-2')
-columnaPieElmRec.classList.add('row-middle')
-columnaPieElmRec.classList.add('row-center')
-
-const buttonElm=document.createElement('button-icon-chat')
-buttonElm.classList.add('btn-circle')
-buttonElm.id='stop-rec-chat'
-
-const imgbtnElm=document.createElement('span-icon-chat')
-imgbtnElm.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="plus" aria-hidden="true"><defs><style></style></defs><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path></svg>'
-
-buttonElm.appendChild(imgbtnElm)
-
-columnaPieElmRec.appendChild(buttonElm)
-
-filaPieRec.appendChild(columnaPieSgRec)
-filaPieRec.appendChild(columnaPieGifRec)
-filaPieRec.appendChild(columnaPieElmRec)
-
-const filaPieAud= document.createElement('row-chat')
-filaPieAud.classList.add('row-middle')
-filaPieAud.classList.add('row-center')
-filaPieAud.classList.add('visible')
-filaPieAud.id='audRow'
-
-columnaPieAud=document.createElement('col-chat')
-columnaPieAud.classList.add('col-xl-16')
-columnaPieAud.classList.add('col-xxl-18')
-columnaPieAud.classList.add('col-lg-14')
-columnaPieAud.classList.add('col-md-12')
-columnaPieAud.classList.add('col-sm-20')
-columnaPieAud.classList.add('col-xs-18')
-columnaPieAud.classList.add('row-middle')
-columnaPieAud.classList.add('row-center')
-
-const audio=new Audio()
-audio.controls = true;
-audio.id='audio-source-chat'
-
-columnaPieAud.appendChild(audio)
-
-columnaPieAudDel=document.createElement('col-chat')
-columnaPieAudDel.classList.add('col-xl-4')
-columnaPieAudDel.classList.add('col-xxl-3')
-columnaPieAudDel.classList.add('col-lg-5')
-columnaPieAudDel.classList.add('col-md-6')
-columnaPieAudDel.classList.add('col-sm-2')
-columnaPieAudDel.classList.add('col-xs-3')
-
-columnaPieAudChk=document.createElement('col-chat')
-columnaPieAudChk.classList.add('col-xl-4')
-columnaPieAudChk.classList.add('col-xxl-3')
-columnaPieAudChk.classList.add('col-lg-5')
-columnaPieAudChk.classList.add('col-md-6')
-columnaPieAudChk.classList.add('col-sm-2')
-columnaPieAudChk.classList.add('col-xs-3')
-columnaPieAudChk.classList.add('row-middle')
-columnaPieAudChk.classList.add('row-center')
-
-const buttonDel=document.createElement('button-icon-chat')
-buttonDel.classList.add('btn-circle')
-buttonDel.id='del-rec-chat'
-
-const imgbtnDel=document.createElement('span-icon-chat')
-imgbtnDel.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="delete" aria-hidden="true"><path d="M360 184h-8c4.4 0 8-3.6 8-8v8h304v-8c0 4.4 3.6 8 8 8h-8v72h72v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80h72v-72zm504 72H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zM731.3 840H292.7l-24.2-512h487l-24.2 512z"></path></svg>'
-
-buttonDel.appendChild(imgbtnDel)
-
-columnaPieAudDel.appendChild(buttonDel)
-
-const buttonChk=document.createElement('button-icon-chat')
-buttonChk.classList.add('btn-circle')
-buttonChk.id='send-aud-chat'
-
-const imgbtnChk=document.createElement('span-icon-chat')
-imgbtnChk.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em"><path d="M912 190h-69.9c-9.8 0-19.1 4.5-25.1 12.2L404.7 724.5 207 474a32 32 0 00-25.1-12.2H112c-6.7 0-10.4 7.7-6.3 12.9l273.9 347c12.8 16.2 37.4 16.2 50.3 0l488.4-618.9c4.1-5.1.4-12.8-6.3-12.8z"></path></svg>'
-
-buttonChk.appendChild(imgbtnChk)
-
-columnaPieAudChk.appendChild(buttonChk)
-
-filaPieAud.appendChild(columnaPieAud)
-filaPieAud.appendChild(columnaPieAudDel)
-filaPieAud.appendChild(columnaPieAudChk)
-
-pie.appendChild(filaPie)
-pie.appendChild(filaPieRec)
-pie.appendChild(filaPieAud)
+// ** Inicio de agrehacion de funcionalidades
+
+// Adicion de elementos a pagina principal
+if(dominiosPermitidos.includes(window.location.host)){
+    document.body.appendChild(contenedorchat)
+    document.body.appendChild(botonAvatar)
+    // document.head.appendChild(css)    
+    document.head.appendChild(fuente)
+}else{
+    console.error("Domain not allowed")
+    console.info(window.location.host)
+}
+
+var msgTipo=true
+var recordPause=false
+var loadingTask,pdfDoc,canvas,ctx,scale,numPage
+var pdfExists=false
+var contMsg=0
+var audioRecordStartTime,elapsedTimeTimer,context;
+var audioRecordPausedTime=0
+let reader
+let elapsedTime
 
 window.onload=obtainToken;
 
+inputMsg.addEventListener('input', () => {    
+    const scrollHeight = inputMsg.scrollHeight;
+    if(!jQuery("#txtMsg").val()){
+        msgTipo=true
+        inputMsg.style.overflowY = 'hidden';
+        inputMsg.style.height = '37px';        
+        cambiarIcnBtnInic()
+    }else {
+        msgTipo=false
+        cambiarIcnBtnInic()
+        if (scrollHeight > 100) {
+            inputMsg.style.overflowY = 'scroll';
+            inputMsg.style.height = '100px';
+        } else {
+            inputMsg.style.overflowY = 'hidden';
+            inputMsg.style.height = scrollHeight + 'px';
+        }
+    }    
+});
+
+function cambiarIcnBtnInic(){
+    if(msgTipo){
+        imgbtnMic.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="24px" height="24px"><path d="M512 624c93.9 0 170-75.2 170-168V232c0-92.8-76.1-168-170-168s-170 75.2-170 168v224c0 92.8 76.1 168 170 168zm330-170c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254S258 594.3 258 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 168.7 126.6 307.9 290 327.6V884H326.7c-13.7 0-24.7 14.3-24.7 32v36c0 4.4 2.8 8 6.2 8h407.6c3.4 0 6.2-3.6 6.2-8v-36c0-17.7-11-32-24.7-32H548V782.1c165.3-18 294-158 294-328.1z"/></svg>'
+    }else{
+        imgbtnMic.innerHTML='<svg viewBox="0 0 24 24" focusable="false" height="24px" width="24px" fill="currentColor"><path d="M1.101,21.757L23.8,12.028L1.101,2.3l0.011,7.912l13.623,1.816L1.112,13.845 L1.101,21.757z"></path></svg>'   
+    }
+}
+
 function generateLoading(origin){
-    const actualMsg=document.createElement('list-item-chat')
+    const actualMsg=document.createElement('list-item-chat')    
     actualMsg.id="loading"
     if(origin){
         actualMsg.classList.add('inverse-row')
@@ -327,7 +306,7 @@ function deleteLoading(){
 }
 
 function obtainToken(){
-    axios.post(APIDomain.concat('token'),{
+    axios.post(dominioAPI.concat('token'),{
         username:'initUserTest',
         password:'initP455W0RD'        
     })
@@ -343,12 +322,9 @@ function obtainToken(){
     })
 }
 
-var loadingTask,pdfDoc,canvas,ctx,scale,numPage
-var pdfExists=false
-
 function readPDF(path){
     initFunctions()
-    loadingTask=pdfjsLib.getDocument(RepositoryDomain.concat(path))
+    loadingTask=pdfjsLib.getDocument(dominioRepositorio.concat(path))
     loadingTask.promise.then(pdfDoc_ => {
         pdfDoc = pdfDoc_;
         document.querySelector('#numMax').innerHTML ="de ".concat(pdfDoc.numPages);
@@ -415,22 +391,6 @@ function ZoomOut(){
     scale-=0.25
     renderPDF();
 }
-
-if(allowedDomainsList.includes(window.location.host)){
-    document.body.appendChild(contenedorchat)
-    document.body.appendChild(botonAvatar)
-    // document.head.appendChild(css)    
-    document.head.appendChild(font)
-    document.head.appendChild(pdfjs)
-}else{
-    console.error("Domain not allowed")
-    console.info(window.location.host)
-}
-
-var contMsg=0
-var audioRecordStartTime;
-let reader
-var elapsedTimeTimer;
 
 function createMsgElement(origin,message){
     const actualMsg=document.createElement('list-item-chat')
@@ -645,7 +605,7 @@ function loadAudio(recorderAudioAsBlob) {
 
 function sendTextMsg(message){
     generateLoading(true)
-    axios.post(APIDomain.concat('bot-question'),{
+    axios.post(dominioAPI.concat('bot-question'),{
         question:message
     },
     {
@@ -668,11 +628,21 @@ jQuery("#close-container-chat").click(function() {
     jQuery("container-chat").toggle('scale');
 })
 
-jQuery('#send-msg-chat').click(function() {
+jQuery('#btn-snd-msg').click(function(){
+    if(!msgTipo){
+        sendMsgTxt()
+        msgTipo=true
+        cambiarIcnBtnInic()
+    }else{
+        startRecording()
+    }
+})
+
+function sendMsgTxt() {    
     var msgContent=jQuery('.input-chat').val()
     createMsgElement(false,msgContent)
     sendTextMsg(msgContent)
-})
+}
 
 jQuery('.input-chat').keypress(function(e) {
     var key = e.which;
@@ -684,17 +654,12 @@ jQuery('.input-chat').keypress(function(e) {
     }
 })
 
-jQuery('#activate-rec-chat').click(function(){
+
+function startRecording(){
 jQuery("#initRow").toggle();
 jQuery("#recRow").toggle();
 console.log("Recording Audio...");
-
 let recorderAudioIsPlaying = !audio.paused;
-console.log("paused?", !recorderAudioIsPlaying);
-// if (recorderAudioIsPlaying) {
-//     audioElement.pause();
-//     //also hide the audio playing indicator displayed on the screen
-// }
 audioRecorder.start()
     .then(() => {
         audioRecordStartTime = new Date();
@@ -732,18 +697,43 @@ audioRecorder.start()
             default:
                 console.error("An error occured with the error name " + error.name);
         };
+        console.log(error)
     });
+}
+
+jQuery('#pause-rec-chat').click(function() {
+    if(!recordPause){
+        audioRecorder.pause()
+        .then(blob=>{
+            loadAudio(blob)
+        })
+        console.log('Recording pause...')
+        recordPause=!recordPause
+        cambiarIconoPause()
+        jQuery('p-chat').toggle()
+        jQuery('canvas').toggle()
+        jQuery('audio').toggle()
+    }else{        
+        audioRecorder.resume()
+        console.log('Recording resume...')
+        recordPause=!recordPause
+        cambiarIconoPause()
+        jQuery('p-chat').toggle()
+        jQuery('canvas').toggle()
+        jQuery('audio').toggle()
+    }
 })
 
 jQuery('#stop-rec-chat').click(function(){
 jQuery("#recRow").toggle();
-jQuery("#audRow").toggle();
+jQuery("#initRow").toggle();
 console.log("Stopping Audio Recording...");
 audioRecorder.stop()
     .then(audioAsblob => {
         loadAudio(audioAsblob);
         stopTimer();
-        columnaPieSgRec.innerHTML="00:00"
+        txtPieSgRec.innerHTML="00:00"
+        sendAudMsg()
     })
     .catch(error => {
         switch (error.name) {
@@ -753,22 +743,22 @@ audioRecorder.stop()
             default:
                 console.error("An error occured with the error name " + error.name);
         };
-    });
+    });    
 })
 
 jQuery('#del-rec-chat').click(function(){
     console.log("Canceling audio...");
     audio.innerHTML=""
     jQuery("#initRow").toggle();
-    jQuery("#audRow").toggle();
+    jQuery("#recRow").toggle();
 })
 
-jQuery('#send-aud-chat').click(function(){
-    generateLoading(false)
+function sendAudMsg(){
+    generateLoading(false)    
     var form = new FormData();
     const blob = new Blob(audioRecorder.audioBlobs,{'type':'audio/mpeg-3'})
     form.append("file", blob);
-    axios.post(APIDomain.concat('get-audio'),
+    axios.post(dominioAPI.concat('get-audio'),
     form,
     {
         headers: {
@@ -781,26 +771,36 @@ jQuery('#send-aud-chat').click(function(){
     .then(result => {
         deleteLoading()
         createMsgElement(false,result.data.data.content)
-        sendTextMsg(result.data.data.content)
-        jQuery("#initRow").toggle();
-        jQuery("#audRow").toggle();
+        sendTextMsg(result.data.data.content)        
     })
     .catch(error=>{
         console.error("Error al obtener texto: ".concat(error))
     })
-})
+}
 
-function handleElapsedRecordingTime() {
-    columnaPieSgRec.innerHTML="00:00"
-    elapsedTimeTimer = setInterval(() => {
-        let elapsedTime = computeElapsedTime(audioRecordStartTime);
-        columnaPieSgRec.innerHTML=elapsedTime;
+function handleElapsedRecordingTime() {    
+    elapsedTimeTimer = window.setInterval(() => {
+        if(!recordPause){            
+            elapsedTime = computeElapsedTime(audioRecordStartTime);            
+            txtPieSgRec.innerHTML=elapsedTime;
+        }else{
+            audioRecordPausedTime+=1000;            
+        }     
     }, 1000);
+}
+
+function cambiarIconoPause(){
+    if(recordPause){
+        imgBtnPas.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="24px" height="24px"><path d="M512 624c93.9 0 170-75.2 170-168V232c0-92.8-76.1-168-170-168s-170 75.2-170 168v224c0 92.8 76.1 168 170 168zm330-170c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254S258 594.3 258 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 168.7 126.6 307.9 290 327.6V884H326.7c-13.7 0-24.7 14.3-24.7 32v36c0 4.4 2.8 8 6.2 8h407.6c3.4 0 6.2-3.6 6.2-8v-36c0-17.7-11-32-24.7-32H548V782.1c165.3-18 294-158 294-328.1z"/></svg>'
+    }else{
+        imgBtnPas.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="30px" height="30px"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M512 140c-205.4 0-372 166.6-372 372s166.6 372 372 372 372-166.6 372-372-166.6-372-372-372zm-80 524c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V360c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v304zm224 0c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V360c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v304z" fill="#ffffff"></path><path d="M424 352h-48c-4.4 0-8 3.6-8 8v304c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V360c0-4.4-3.6-8-8-8zm224 0h-48c-4.4 0-8 3.6-8 8v304c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V360c0-4.4-3.6-8-8-8z"></path></svg>'
+    }
+    
 }
 
 function computeElapsedTime(startTime) {
     let endTime = new Date();
-    let timeDiff = endTime - startTime;
+    let timeDiff = (endTime - startTime) - audioRecordPausedTime;    
     timeDiff = timeDiff / 1000;
     let seconds = Math.floor(timeDiff % 60);
     seconds = seconds < 10 ? "0" + seconds : seconds;

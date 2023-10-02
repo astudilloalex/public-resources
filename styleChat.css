@@ -21,7 +21,7 @@ layout-chat{
 }
 header-chat{
     height: auto;
-    background-color: #0066a0;
+    background-color: #00bc94;
     flex: 0 0 auto;
     line-height: 48px;
 }
@@ -30,9 +30,10 @@ content-chat{
     flex: auto;
     min-height: 0;    
 }
-footer-chat{
-    background-color: white;
+footer-chat{    
     flex: 0 0 auto;
+    min-height: 62px;
+    display: flex;
 }
 row-chat{
     display: flex;
@@ -103,7 +104,7 @@ position: fixed;
 z-index: 99999;
 right: 0px;
 bottom: 0px;
-background-color: whitesmoke;
+background-color: #EFEAE2;
 }
 
 @media (min-width: 576px){
@@ -263,24 +264,34 @@ avatar-icon-chat{
     line-height: 32px;
 }
 button-chat{
-    background-color: #0066a0;
-    cursor: pointer;    
-    position: relative;
-    font-weight: 400;
-    white-space: nowrap;    
+    background-color: #00bc94;
+    cursor: pointer;
     display: inline-block;
 }
-button-icon-chat{
-    background-color: #0066a0;
+button-icon-chat{    
     cursor: pointer;
-    transition: all .3s cubic-bezier(.645,.045,.355,1);
-    position: relative;
-    font-weight: 400;
-    white-space: nowrap;
-    height: 32px;    
-    display: inline-grid;
+    position: relative;        
+    height: 40px;
+    width: 40px;
+    display: flex;
     text-align: center;
     align-content: center;
+    margin-left: 7px;
+    margin-right: 7px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    background-color: #00bc94;
+    border-radius: 50%;
+}
+button-transparent-chat{
+    cursor: pointer;
+    position: relative;        
+    height: 40px;
+    width: 40px;
+    display: flex;
+    text-align: center;
+    align-content: center;
+    margin-left: 7px;
+    margin-right: 7px;
 }
 button-pdf-chat{
     cursor: pointer;
@@ -294,41 +305,42 @@ button-pdf-chat{
 }
 span-chat{
     font-size: 20px;
-    color: white;
-    line-height: 0;
-    text-transform: none;
-    vertical-align: -0.125em;
-    display: inline-block;
-    text-rendering: optimizelegibility;    
+    color: white;    
+    display: inline-grid;    
 }
-span-icon-chat{
-    font-size: 14px;
-    color: white;
-    line-height: 0;
-    text-transform: none;
-    vertical-align: -0.125em;
-    display: inline-block;
-    text-rendering: optimizelegibility;    
+span-icon-chat{   
+    color: #ffffff;
+    display: inline-grid;
+    align-content: center;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
 }
-.input-chat{
-    font-feature-settings: 'tnum';
+.input-chat{    
     position: relative;
-    display: inline-block;
+    display: flex;
+    flex: 1 1 auto;
     min-width: 0;
-    padding: 4px 11px;
-    color: rgba(0,0,0,.85);
-    font-size: 14px;
+    padding: 9px 15px;
+    font-size: 100%;
     border: 1px solid #d9d9d9;
-    border-radius: 2px;
-    transition: all .3s;
-    background-image: none;
-    line-height: 1.5715;
-    background-color: #fff;
-    margin: 0;
-    list-style: none;
-    width: 100%;
-    box-sizing: border-box;
-    font-variant: tabular-nums;
+    border-radius: 18px;
+    background-color: #fff;    
+    width: inherit;    
+    outline: none;
+    user-select: text;
+    white-space: pre-wrap;
+    word-break: break-word;
+    resize: none;
+    overflow-y: hidden;
+    height: 44px;
+    min-height: unset;
+    max-height: 132px;
+    margin: 7px 7px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+.input-chat:focus{
+    box-shadow: none;
 }
 .btn-circle {
     min-width: 32px;
@@ -371,7 +383,7 @@ card-chat{
     flex-direction: row-reverse;
 }
 .systemMsg{    
-    background-color: #e69f00;
+    background-color: #00bc94;
     color: white;
 }
 .userMsg{    
@@ -381,9 +393,6 @@ card-chat{
 .gif{
     width:-webkit-fill-available;
     height: 40px;
-}
-audio{    
-    width: 100%;
 }
 .visible{
     display: none;
@@ -422,8 +431,8 @@ audio{
     height: 32px;
     /* margin: 8px; */
     border-radius: 50%;
-    border: 6px solid #e69f00;
-    border-color: #e69f00 transparent #e69f00 transparent;
+    border: 6px solid #00bc94;
+    border-color: #00bc94 transparent #00bc94 transparent;
     animation: lds-dual-ring 1.2s linear infinite;
 }
 @keyframes lds-dual-ring {
@@ -437,4 +446,32 @@ audio{
 container-chat > *{
     font-family: 'Lato', sans-serif;
 
+}
+row-flex-chat{
+    display: flex;
+    flex: 1;
+}
+col-flex-chat{
+    display: flex;
+    flex: 1 1 auto;
+    height: 100%;
+    align-items: center;
+}
+p-chat {
+    display:inline-flex;
+    max-width: 15%;
+    margin: 0px 5px;
+}
+audio{
+    display: inline-grid;
+    max-width: 100%;
+    flex: 1 1 auto;
+}
+.canvas-chat{
+    height: 30px;
+    display: flex;
+    flex: 1 1 auto;
+    max-width: 85%;
+    margin: 0px 5px;
+    padding-bottom: 7px; 
 }
