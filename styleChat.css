@@ -25,8 +25,7 @@ header-chat{
     flex: 0 0 auto;
     line-height: 48px;
 }
-content-chat{
-    overflow-y: auto;    
+content-chat{      
     flex: auto;
     min-height: 0;    
 }
@@ -179,7 +178,7 @@ background-color: #EFEAE2;
         right: 20px;
         bottom: 85px;
         height: 60%;
-        z-index: 99999;;                
+        z-index: 99999;
     }    
 }
 @media (min-width: 992px){
@@ -325,8 +324,7 @@ span-icon-chat{
     font-size: 100%;
     border: 1px solid #d9d9d9;
     border-radius: 18px;
-    background-color: #fff;    
-    width: inherit;    
+    background-color: #fff;
     outline: none;
     user-select: text;
     white-space: pre-wrap;
@@ -356,11 +354,7 @@ list-chat {
     margin: 0;
     padding: 0;
     color: rgba(0,0,0,.85);
-    font-size: 14px;
-    font-variant: tabular-nums;
-    line-height: 1.5715;
-    list-style: none;
-    font-feature-settings: 'tnum';
+    font-size: 14px;    
     position: relative;
 }
 list-item-chat {    
