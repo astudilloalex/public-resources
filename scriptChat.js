@@ -703,11 +703,11 @@ audioRecorder.start()
 
 jQuery('#pause-rec-chat').click(function() {
     if(!recordPause){
+        console.log('Recording pause...')
         audioRecorder.pause()
         .then(blob=>{
             loadAudio(blob)
-        })
-        console.log('Recording pause...')
+        })        
         recordPause=!recordPause
         cambiarIconoPause()
         jQuery('p-chat').toggle()
@@ -721,7 +721,7 @@ jQuery('#pause-rec-chat').click(function() {
         jQuery('p-chat').toggle()
         jQuery('canvas').toggle()
         jQuery('audio').toggle()
-    }
+    }    
 })
 
 jQuery('#stop-rec-chat').click(function(){
@@ -734,6 +734,7 @@ audioRecorder.stop()
         stopTimer();
         txtPieSgRec.innerHTML="00:00"
         sendAudMsg()
+        recordPause=false
     })
     .catch(error => {
         switch (error.name) {
@@ -748,9 +749,20 @@ audioRecorder.stop()
 
 jQuery('#del-rec-chat').click(function(){
     console.log("Canceling audio...");
+    audioRecorder.cancel()
+    recordPause=false
     audio.innerHTML=""
+    txtPieSgRec.innerHTML="00:00"
+    stopTimer()    
+    if(document.getElementsByTagName('audio')[0].style.display!='none'){
+        jQuery('p-chat').toggle()
+        jQuery('canvas').toggle()
+        jQuery('audio').toggle()
+    }    
     jQuery("#initRow").toggle();
     jQuery("#recRow").toggle();
+    
+    
 })
 
 function sendAudMsg(){
