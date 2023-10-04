@@ -400,6 +400,14 @@ contenedorchat.classList.add('color-back-prin')
                 txtColorPrin.classList.add('input-passwd-chat')
                 txtColorPrin.id='color-pri'
 
+                const btnSndBackColor=document.createElement('button-chat')
+                btnSndBackColor.style.width="auto"
+                btnSndBackColor.id='background-btn'
+                btnSndBackColor.classList.add('block-button')
+                btnSndBackColor.classList.add('color-pri-back')
+                btnSndBackColor.classList.add('color-pri-color')                
+                btnSndBackColor.innerHTML="Guardar Codigo"
+
                 const divElegibleSec=document.createElement('div-chat')
                 divElegibleSec.style.display='flex'
                 divElegibleSec.style.flexDirection='row'
@@ -460,15 +468,24 @@ contenedorchat.classList.add('color-back-prin')
 
                 const txtColorSec=document.createElement('input')
                 txtColorSec.classList.add('input-passwd-chat')
-                txtColorSec.id='color-sec'                
+                txtColorSec.id='color-sec'
+                
+                const btnSndTextColor=document.createElement('button-chat')
+                btnSndTextColor.style.width="auto"
+                btnSndTextColor.id='text-btn'
+                btnSndTextColor.classList.add('block-button')
+                btnSndTextColor.classList.add('color-pri-back')
+                btnSndTextColor.classList.add('color-pri-color')
+                btnSndTextColor.innerHTML="Guardar Codigo"
                             
             divColor.appendChild(etiquetaColorPrin)
             divColor.appendChild(divElegiblePrin)            
             divColor.appendChild(txtColorPrin)
-
+            divColor.appendChild(btnSndBackColor)
             divColor.appendChild(etiquetaColorSec)
             divColor.appendChild(divElegibleSec)            
             divColor.appendChild(txtColorSec)
+            divColor.appendChild(btnSndTextColor)
         
         contenidoVal.appendChild(divToken)
         contenidoVal.appendChild(divColor)
@@ -482,7 +499,7 @@ contenedorchat.classList.add('color-back-prin')
             btnSndTkn.classList.add('color-pri-back')
             btnSndTkn.classList.add('color-pri-color')            
             btnSndTkn.id='snd-token-chat'
-            btnSndTkn.innerHTML="Comprobar"            
+            btnSndTkn.innerHTML="Comprobar"
         
         pieVal.appendChild(btnSndTkn)        
     
@@ -1116,3 +1133,15 @@ function guardarColor(colorFondo){
         console.error(error)
     })
 }
+
+jQuery('#background-btn').click(()=>{
+    const backtxt=jQuery('#color-pri').val()    
+    cambiarFondo(backtxt)
+    guardarFondo(backtxt)
+})
+
+jQuery('#text-btn').click(()=>{
+    const backtxt=jQuery('#color-sec').val()
+    cambiarColor(backtxt)
+    guardarColor(backtxt)
+})
