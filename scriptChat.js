@@ -13,6 +13,7 @@ const css =document.createElement('link')
 css.href=dominioRepositorio.concat('styleChat.css')
 css.rel='stylesheet'
 css.type='text/css'
+css.title='estiloChat'
 
 //Creacion de elemento link fuente
 const fuente =document.createElement('style')
@@ -34,76 +35,78 @@ const botonAvatar=document.createElement('avatar-chat')
 // ** Inicio creacion de contenedor de chat
 //Creacion de contenedor de elemento mensajeria
 const contenedorchat=document.createElement('container-chat')
-contenedorchat.style.display='none'
+contenedorchat.style.display='none'        
 contenedorchat.classList.add('border-cir')
 contenedorchat.classList.add('box-shadow')
+contenedorchat.classList.add('color-back-prin')
 
     // ** Inicio creacion de esquema de vista chat
     //Creacion elemnto de esquema de vista
-    const esquema= document.createElement('layout-chat')
+    const esquema= document.createElement('layout-chat') 
+    esquema.id="esqinit"
         //Creacion elemento de cabecera de esquema
         const cabecera=document.createElement('header-chat')
         cabecera.classList.add('top-border-radius')
+        cabecera.classList.add('color-pri-back')
 
             //Creacion de elementos de cabecera
-            const filaCabecera =document.createElement('row-chat')
+            const filaCabecera =document.createElement('row-flex-chat')
             filaCabecera.classList.add('row-middle')
             filaCabecera.classList.add('row-center')
 
-                //Creacion contenedor de columna para imagen
-                const columnaCabeceraImg=document.createElement('col-chat')
-                columnaCabeceraImg.classList.add('col-xl-4')
-                columnaCabeceraImg.classList.add('col-xxl-3')
-                columnaCabeceraImg.classList.add('col-lg-5')
-                columnaCabeceraImg.classList.add('col-md-6')
-                columnaCabeceraImg.classList.add('col-sm-3')
-                columnaCabeceraImg.classList.add('col-xs-3')
+                //Creacion contenedor para icono de avatar
+                const avatarIcono= document.createElement('avatar-icon-chat') 
+                avatarIcono.style.marginLeft='5px'
+                avatarIcono.style.marginRight='5px'                                     
 
-                    //Creacion contenedor para icono de avatar
-                    const avatarIcono= document.createElement('avatar-icon-chat')
+                    //Creacion de elemento imagen para avatar boton inicio
+                    const imgAvatarIcn = document.createElement('img')
+                    imgAvatarIcn.classList.add('circle-avatar-chat')
+                    imgAvatarIcn.src=dominioRepositorio.concat('avatar.png')
 
-                        //Creacion de elemento imagen para avatar boton inicio
-                        const imgAvatarIcn = document.createElement('img')
-                        imgAvatarIcn.classList.add('circle-avatar-chat')
-                        imgAvatarIcn.src=dominioRepositorio.concat('avatar.png')
+                //Adicion de elemento imagen a icono de avatar inicio
+                avatarIcono.appendChild(imgAvatarIcn)                
 
-                    //Adicion de elemento imagen a icono de avatar inicio
-                    avatarIcono.appendChild(imgAvatarIcn)
+                const columnaCabeceraTit=document.createElement('title-chat')
+                columnaCabeceraTit.style.flex='1 1 auto'                
+                columnaCabeceraTit.classList.add('color-pri-color')
+                columnaCabeceraTit.innerHTML='Gala'                
 
-                //Adicion de elemento imagen a columna de imagen
-                columnaCabeceraImg.appendChild(avatarIcono)
+                const btnSalida= document.createElement('button-icon-chat')
+                btnSalida.style.boxShadow='none'
+                btnSalida.style.width='24px'
+                btnSalida.style.height='24px'
+                btnSalida.classList.add('color-pri-back')
+                btnSalida.classList.add('color-pri-color')
+                btnSalida.id='close-container-chat'
 
-                const columnaCabeceraTit=document.createElement('col-chat')
-                columnaCabeceraTit.classList.add('col-xl-17')
-                columnaCabeceraTit.classList.add('col-xxl-19')
-                columnaCabeceraTit.classList.add('col-lg-15')
-                columnaCabeceraTit.classList.add('col-md-13')
-                columnaCabeceraTit.classList.add('col-sm-19')
-                columnaCabeceraTit.classList.add('col-xs-19')
-                columnaCabeceraTit.innerHTML='Gala, Asistencia al cliente'
+                    const imgbtnSld=document.createElement('span-icon-chat')
+                    imgbtnSld.style.width='24px'
+                    imgbtnSld.style.height='24px'
+                    imgbtnSld.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="24px" height="24px"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg>'
 
-                const columnaCabeceraBtn = document.createElement('col-chat')
-                columnaCabeceraBtn.classList.add('col-xl-3')
-                columnaCabeceraBtn.classList.add('col-xxl-2')
-                columnaCabeceraBtn.classList.add('col-lg-4')
-                columnaCabeceraBtn.classList.add('col-md-5')
-                columnaCabeceraBtn.classList.add('col-sm-2')
-                columnaCabeceraBtn.classList.add('col-xs-2')
+                btnSalida.appendChild(imgbtnSld)
 
-                    const btnSalida= document.createElement('button-chat')
-                    btnSalida.id='close-container-chat'
+                const btnMenu= document.createElement('button-icon-chat')
+                btnMenu.style.boxShadow='none'
+                btnMenu.style.width='24px'
+                btnMenu.style.height='24px'
+                btnMenu.classList.add('color-pri-back')
+                btnMenu.classList.add('color-pri-color')
+                btnMenu.id='menu-container-chat'
 
-                        const imgbtnSld=document.createElement('span-chat')
-                        imgbtnSld.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="1em" height="1em" data-icon="close" aria-hidden="true"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg>'
+                    const imgbtnMenu=document.createElement('span-icon-chat')
+                    imgbtnMenu.style.width='24px'
+                    imgbtnMenu.style.height='24px'
+                    imgbtnMenu.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="24px" height="24px"><path d="M456 231a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0z"/></svg>'
 
-                    btnSalida.appendChild(imgbtnSld)
-
-                columnaCabeceraBtn.appendChild(btnSalida)            
+                btnMenu.appendChild(imgbtnMenu)                
 
             //Adicion de elemento de columna a fila cabecera
-            filaCabecera.appendChild(columnaCabeceraImg)
+            filaCabecera.appendChild(avatarIcono)
             filaCabecera.appendChild(columnaCabeceraTit)
-            filaCabecera.appendChild(columnaCabeceraBtn)
+            filaCabecera.appendChild(btnMenu)
+            filaCabecera.appendChild(btnSalida)
             
         cabecera.appendChild(filaCabecera)
 
@@ -115,11 +118,13 @@ contenedorchat.classList.add('box-shadow')
             divBoton.style="position:absolute;right:15px;bottom:16px;z-index:100001;display:none"
 
                 const btnScrollFin=document.createElement('button-icon-chat')
-                btnScrollFin.style="height: 24px;width: 24px;box-shadow: none;margin:0px;background-color:#667781"
+                btnScrollFin.style="height: 24px;width: 24px;box-shadow: none;margin:0px"
+                btnScrollFin.classList.add('color-ter-back')
                 btnScrollFin.id='btn-scroll'
 
                     const imgAbajo=document.createElement('span-icon-chat')
-                    imgAbajo.style="height: 24px;width: 24px"
+                    imgAbajo.style="height: 24px;width: 24px;"
+                    btnScrollFin.classList.add('color-ter-color')
                     imgAbajo.innerHTML='<svg viewBox="0 0 1024 1024" focusable="false" fill="currentColor" width="24px" height="24px"><path d="M840.4 300H183.6c-19.7 0-30.7 20.8-18.5 35l328.4 380.8c9.4 10.9 27.5 10.9 37 0L858.9 335c12.2-14.2 1.2-35-18.5-35z"/></svg>'
 
                 btnScrollFin.appendChild(imgAbajo)
@@ -157,9 +162,11 @@ contenedorchat.classList.add('box-shadow')
                     inputMsg.classList.add('input-chat')
                     
                     const buttonMic=document.createElement('button-icon-chat')
+                    buttonMic.classList.add('color-pri-back')
                     buttonMic.id='btn-snd-msg'
 
                         const imgbtnMic=document.createElement('span-icon-chat')
+                        imgbtnMic.classList.add('color-pri-color')
                         imgbtnMic.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="24px" height="24px"><path d="M512 624c93.9 0 170-75.2 170-168V232c0-92.8-76.1-168-170-168s-170 75.2-170 168v224c0 92.8 76.1 168 170 168zm330-170c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254S258 594.3 258 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 168.7 126.6 307.9 290 327.6V884H326.7c-13.7 0-24.7 14.3-24.7 32v36c0 4.4 2.8 8 6.2 8h407.6c3.4 0 6.2-3.6 6.2-8v-36c0-17.7-11-32-24.7-32H548V782.1c165.3-18 294-158 294-328.1z"/></svg>'
 
                     buttonMic.appendChild(imgbtnMic)
@@ -225,11 +232,13 @@ contenedorchat.classList.add('box-shadow')
                     const btnSndAud=document.createElement('button-icon-chat')
                     btnSndAud.id='stop-rec-chat'
                     btnSndAud.classList.add('btn-circle')
+                    btnSndAud.classList.add('color-pri-back')
                     btnSndAud.style.justifySelf="end"
                     btnSndAud.style.marginTop="5px"
                     btnSndAud.style.marginBottom="5px"
 
                         const imgSndAud=document.createElement('span-icon-chat')
+                        imgSndAud.classList.add('color-pri-color')
                         imgSndAud.innerHTML='<svg viewBox="0 0 24 24" focusable="false" height="24px" width="24px" fill="currentColor"><path d="M1.101,21.757L23.8,12.028L1.101,2.3l0.011,7.912l13.623,1.816L1.112,13.845 L1.101,21.757z"></path></svg>'
 
                     btnSndAud.appendChild(imgSndAud)
@@ -250,8 +259,241 @@ contenedorchat.classList.add('box-shadow')
     esquema.appendChild(pie)
     // ** Fin creacion de esquema de vista chat
 
+    // ** Inicio de creacion de seccion validacion
+    const esquemaValidacion=document.createElement('layout-chat')
+    esquemaValidacion.style.display='none'
+    esquemaValidacion.id="esqval"
+
+
+        const cabeceraValidacion=document.createElement('header-chat')
+        cabeceraValidacion.classList.add('top-border-radius')
+        cabeceraValidacion.classList.add('color-pri-back')        
+
+            //Creacion de elementos de cabecera
+            const filaCabeceraValidacion =document.createElement('row-flex-chat')
+            filaCabeceraValidacion.classList.add('row-middle')
+            filaCabeceraValidacion.classList.add('row-center')
+                
+                //Creacion contenedor para icono de avatar
+                const avatarIconoValidacion= document.createElement('avatar-icon-chat')
+                avatarIconoValidacion.style.marginLeft='5px'
+                avatarIconoValidacion.style.marginRight='5px'
+
+                    //Creacion de elemento imagen para avatar boton inicio
+                    const imgAvatarIcnVal = document.createElement('img')
+                    imgAvatarIcnVal.classList.add('circle-avatar-chat')                    
+                    imgAvatarIcnVal.src=dominioRepositorio.concat('avatar.png')
+
+                //Adicion de elemento imagen a icono de avatar inicio
+                avatarIconoValidacion.appendChild(imgAvatarIcnVal)
+
+                const columnaCabeceraTitVal=document.createElement('title-chat')                
+                columnaCabeceraTitVal.style.flex='1 1 auto'
+                columnaCabeceraTitVal.classList.add('color-pri-color')
+                columnaCabeceraTitVal.innerHTML='Configuracion Tema'               
+
+                const btnSalidaVal= document.createElement('button-icon-chat')
+                btnSalidaVal.classList.add('color-pri-back')
+                btnSalidaVal.classList.add('color-pri-color')
+                btnSalidaVal.style.width='24px'
+                btnSalidaVal.style.height='24px'
+                btnSalidaVal.style.boxShadow='none'
+                btnSalidaVal.id='close-container-val-chat'
+                
+
+                    const imgbtnSldVal=document.createElement('span-icon-chat')
+                    imgbtnSldVal.style.width='24px'
+                    imgbtnSldVal.style.height='24px'
+                    imgbtnSldVal.innerHTML='<svg viewBox="64 64 896 896" focusable="false" height="24px" width="24px" fill="currentColor"><path d="M872 474H286.9l350.2-304c5.6-4.9 2.2-14-5.2-14h-88.5c-3.9 0-7.6 1.4-10.5 3.9L155 487.8a31.96 31.96 0 000 48.3L535.1 866c1.5 1.3 3.3 2 5.2 2h91.5c7.4 0 10.8-9.2 5.2-14L286.9 550H872c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"/></svg>'
+
+                btnSalidaVal.appendChild(imgbtnSldVal)                            
+
+            //Adicion de elemento de columna a fila cabecera
+            filaCabeceraValidacion.appendChild(avatarIconoValidacion)
+            filaCabeceraValidacion.appendChild(columnaCabeceraTitVal)
+            filaCabeceraValidacion.appendChild(btnSalidaVal)
+            
+        cabeceraValidacion.appendChild(filaCabeceraValidacion)
+
+        const contenidoVal=document.createElement('content-chat')
+
+            const divToken=document.createElement('div-chat')
+            divToken.style.display='flex'
+            divToken.style.flexDirection='column'
+
+                const etiquetaToken=document.createElement('label-chat')                
+                etiquetaToken.setAttribute('for','token')
+                etiquetaToken.innerHTML="Token:"
+
+                const txtToken=document.createElement('input')
+                txtToken.classList.add('input-passwd-chat')
+                txtToken.id='token'
+
+            divToken.appendChild(etiquetaToken)
+            divToken.appendChild(txtToken)
+
+            const divColor=document.createElement('div-chat')
+            divColor.style.display='none'
+            divColor.style.flexDirection='column'                        
+            divColor.style.height='100%'
+            divColor.style.overflowY='auto'            
+
+                const divElegiblePrin=document.createElement('div-chat')
+                divElegiblePrin.style.display='flex'
+                divElegiblePrin.style.flexDirection='row'
+                divElegiblePrin.style.flexWrap="wrap"                
+                divElegiblePrin.style.position="relative"
+                divElegiblePrin.style.justifyContent="center"
+
+            
+                    const spanColor1Prin=document.createElement('span-color-chat')                                        
+                    spanColor1Prin.classList.add('cambiar-fondo')
+                    spanColor1Prin.style.backgroundColor='#00bc94'
+                    
+                    const spanColor2Prin=document.createElement('span-color-chat')
+                    spanColor2Prin.classList.add('cambiar-fondo')
+                    spanColor2Prin.style.backgroundColor='#235ba8'
+                    
+                    const spanColor3Prin=document.createElement('span-color-chat')
+                    spanColor3Prin.classList.add('cambiar-fondo')
+                    spanColor3Prin.style.backgroundColor='#cfd6e0'
+                    
+                    const spanColor4Prin=document.createElement('span-color-chat')
+                    spanColor4Prin.classList.add('cambiar-fondo')
+                    spanColor4Prin.style.backgroundColor='#ffffff'
+
+                    const spanColor5Prin=document.createElement('span-color-chat')
+                    spanColor5Prin.classList.add('cambiar-fondo')
+                    spanColor5Prin.style.backgroundColor='#000000'
+
+                    const spanColor6Prin=document.createElement('span-color-chat')
+                    spanColor6Prin.classList.add('cambiar-fondo')
+                    spanColor6Prin.style.backgroundColor='#f49100'
+
+                    const spanColor7Prin=document.createElement('span-color-chat')
+                    spanColor7Prin.classList.add('cambiar-fondo')
+                    spanColor7Prin.style.backgroundColor='#ee2737'
+
+                    const spanColor8Prin=document.createElement('span-color-chat')
+                    spanColor8Prin.classList.add('cambiar-fondo')
+                    spanColor8Prin.style.backgroundColor='#a5b9b2'
+
+                    const spanColor9Prin=document.createElement('span-color-chat')
+                    spanColor9Prin.classList.add('cambiar-fondo')
+                    spanColor9Prin.style.backgroundColor='#857c72'
+
+                divElegiblePrin.appendChild(spanColor1Prin)
+                divElegiblePrin.appendChild(spanColor2Prin)
+                divElegiblePrin.appendChild(spanColor3Prin)
+                divElegiblePrin.appendChild(spanColor4Prin)
+                divElegiblePrin.appendChild(spanColor5Prin)
+                divElegiblePrin.appendChild(spanColor6Prin)
+                divElegiblePrin.appendChild(spanColor7Prin)
+                divElegiblePrin.appendChild(spanColor8Prin)
+                divElegiblePrin.appendChild(spanColor9Prin)
+
+                const etiquetaColorPrin=document.createElement('label-chat')
+                etiquetaColorPrin.setAttribute('for','color-pri')
+                etiquetaColorPrin.innerHTML="Color Primario:"
+
+                const txtColorPrin=document.createElement('input')
+                txtColorPrin.classList.add('input-passwd-chat')
+                txtColorPrin.id='color-pri'
+
+                const divElegibleSec=document.createElement('div-chat')
+                divElegibleSec.style.display='flex'
+                divElegibleSec.style.flexDirection='row'
+                divElegibleSec.style.flexWrap="wrap"                
+                divElegibleSec.style.position="relative"
+                divElegibleSec.style.justifyContent="center"
+
+            
+                    const spanColor1Sec=document.createElement('span-color-chat')
+                    spanColor1Sec.classList.add("cambiar-color")
+                    spanColor1Sec.style.backgroundColor='#00bc94'
+                    
+                    const spanColor2Sec=document.createElement('span-color-chat')
+                    spanColor2Sec.classList.add("cambiar-color")
+                    spanColor2Sec.style.backgroundColor='#235ba8'
+                    
+                    const spanColor3Sec=document.createElement('span-color-chat')
+                    spanColor3Sec.classList.add("cambiar-color")
+                    spanColor3Sec.style.backgroundColor='#cfd6e0'
+                    
+                    const spanColor4Sec=document.createElement('span-color-chat')
+                    spanColor4Sec.classList.add("cambiar-color")
+                    spanColor4Sec.style.backgroundColor='#ffffff'
+
+                    const spanColor5Sec=document.createElement('span-color-chat')
+                    spanColor5Sec.classList.add("cambiar-color")
+                    spanColor5Sec.style.backgroundColor='#000000'
+
+                    const spanColor6Sec=document.createElement('span-color-chat')
+                    spanColor6Sec.classList.add("cambiar-color")
+                    spanColor6Sec.style.backgroundColor='#f49100'
+
+                    const spanColor7Sec=document.createElement('span-color-chat')
+                    spanColor7Sec.classList.add("cambiar-color")
+                    spanColor7Sec.style.backgroundColor='#ee2737'
+
+                    const spanColor8Sec=document.createElement('span-color-chat')
+                    spanColor8Sec.classList.add("cambiar-color")
+                    spanColor8Sec.style.backgroundColor='#a5b9b2'
+
+                    const spanColor9Sec=document.createElement('span-color-chat')
+                    spanColor9Sec.classList.add("cambiar-color")
+                    spanColor9Sec.style.backgroundColor='#857c72'
+
+                divElegibleSec.appendChild(spanColor1Sec)
+                divElegibleSec.appendChild(spanColor2Sec)
+                divElegibleSec.appendChild(spanColor3Sec)
+                divElegibleSec.appendChild(spanColor4Sec)
+                divElegibleSec.appendChild(spanColor5Sec)
+                divElegibleSec.appendChild(spanColor6Sec)
+                divElegibleSec.appendChild(spanColor7Sec)
+                divElegibleSec.appendChild(spanColor8Sec)
+                divElegibleSec.appendChild(spanColor9Sec)
+
+                const etiquetaColorSec=document.createElement('label-chat')
+                etiquetaColorSec.setAttribute('for','color-sec')
+                etiquetaColorSec.innerHTML="Color Texto:"
+
+                const txtColorSec=document.createElement('input')
+                txtColorSec.classList.add('input-passwd-chat')
+                txtColorSec.id='color-sec'                
+                            
+            divColor.appendChild(etiquetaColorPrin)
+            divColor.appendChild(divElegiblePrin)            
+            divColor.appendChild(txtColorPrin)
+
+            divColor.appendChild(etiquetaColorSec)
+            divColor.appendChild(divElegibleSec)            
+            divColor.appendChild(txtColorSec)
+        
+        contenidoVal.appendChild(divToken)
+        contenidoVal.appendChild(divColor)
+
+        const pieVal=document.createElement('footer-chat')
+        pieVal.classList.add('bottom-border-radius')
+        pieVal.id="pie-validacion"
+        
+            const btnSndTkn=document.createElement('button-chat')
+            btnSndTkn.classList.add('block-button')
+            btnSndTkn.classList.add('color-pri-back')
+            btnSndTkn.classList.add('color-pri-color')            
+            btnSndTkn.id='snd-token-chat'
+            btnSndTkn.innerHTML="Comprobar"            
+        
+        pieVal.appendChild(btnSndTkn)        
+    
+    esquemaValidacion.appendChild(cabeceraValidacion)
+    esquemaValidacion.appendChild(contenidoVal)
+    esquemaValidacion.appendChild(pieVal)
+    // ** Fin de seccion validacion
+
 //Adicion del esquema a contenedor total
 contenedorchat.appendChild(esquema)
+contenedorchat.appendChild(esquemaValidacion)
 
 // ** Inicio de agrehacion de funcionalidades
 
@@ -259,7 +501,7 @@ contenedorchat.appendChild(esquema)
 if(dominiosPermitidos.includes(window.location.host)){
     document.body.appendChild(contenedorchat)
     document.body.appendChild(botonAvatar)
-    // document.head.appendChild(css)    
+    document.head.appendChild(css)    
     document.head.appendChild(fuente)
 }else{
     console.error("Domain not allowed")
@@ -337,15 +579,16 @@ function deleteLoading(){
 
 function obtainToken(){
     axios.post(dominioAPI.concat('token'),{
-        username:'initUserTest',
-        password:'initP455W0RD'        
+        domain:window.location.host        
     })
     .then(function (response) {
         sessionStorage.setItem('token',response.data.token);
+        sessionStorage.setItem('id',response.data.id);
         jQuery("avatar-chat").click(function() {
             jQuery("avatar-chat").toggle('scale');
             jQuery("container-chat").toggle('scale');
         })
+        consultarTema()
     })
     .catch(function(error){
         console.error(error)
@@ -354,17 +597,21 @@ function obtainToken(){
 
 function createMsgElement(origin,message){
     const actualMsg=document.createElement('list-item-chat')
-    const containerMsg=document.createElement('card-chat')
+    const containerMsg=document.createElement('card-chat')    
     if(origin){
-        actualMsg.classList.add('inverse-row')
-        containerMsg.classList.add('systemMsg')
+        actualMsg.classList.add('inverse-row')        
+        // containerMsg.classList.add('color-sec-back')
+        // containerMsg.classList.add('color-sec-color')
+        containerMsg.style.backgroundColor="#000000"
+        containerMsg.style.backgroundColor="#FFFFFF"
         if(message.search(".pdf{1}")!=-1){            
             downloadPDF(message.substring(message.indexOf("https"),message.indexOf(".pdf")+4),containerMsg)
         }else{
             containerMsg.innerHTML=message
         }
-    }else{
-        containerMsg.classList.add('userMsg')
+    }else{        
+        containerMsg.classList.add('color-pri-back')
+        containerMsg.classList.add('color-pri-color')
         containerMsg.innerHTML=message
     }
     actualMsg.appendChild(containerMsg)
@@ -447,8 +694,8 @@ function sendTextMsg(message){
     })
     .then(function (response) {
         contMsg++
-        deleteLoading()
-        createMsgElement(true,response.data.data.content)
+        deleteLoading()        
+        createMsgElement(true,response.data)
     })
     .catch(function(error){
         console.error(error)
@@ -615,8 +862,8 @@ function sendAudMsg(){
     )
     .then(result => {
         deleteLoading()
-        createMsgElement(false,result.data.data.content)
-        sendTextMsg(result.data.data.content)        
+        createMsgElement(false,result.data)
+        sendTextMsg(result.data)
     })
     .catch(error=>{
         console.error("Error al obtener texto: ".concat(error))
@@ -685,4 +932,187 @@ function translate() {
         var key = $(this).data('translate');
         $(this).html(dictionary[key][current_lang] || "N/A");
     });
+}
+function buscarTema(){
+    for(let i=0;i<document.styleSheets.length;i++){
+        if(document.styleSheets[i].title==="estiloChat"){
+            return document.styleSheets[i]
+        }
+    }
+}
+function cambiarTema(colorfondo,colortexto){
+    var reglas=buscarTema()
+    for(let i =0;i<reglas.cssRules.length;i++){
+        switch(reglas.cssRules[i].selectorText){
+            case ".color-back-prin":
+                reglas.cssRules[i].style.setProperty('background-color','#EFEAE2')
+                break;
+            case ".color-pri-back":
+                reglas.cssRules[i].style.setProperty('background-color',colorfondo)
+                break;
+            case ".color-pri-color":
+                reglas.cssRules[i].style.setProperty('color',colortexto)
+                break;
+            case ".color-sec-back":
+                reglas.cssRules[i].style.setProperty('background-color',colorfondo)
+                break;
+            case ".color-sec-color":
+                reglas.cssRules[i].style.setProperty('color',colortexto)
+                break;
+            case ".color-ter-back":
+                reglas.cssRules[i].style.setProperty('background-color',colorfondo)
+                break;
+            case ".color-ter-color":
+                reglas.cssRules[i].style.setProperty('color',colortexto)
+                break;
+            case ".lds-dual-ring::after":                
+                reglas.cssRules[i].style.setProperty("border","6px solid "+colorfondo)
+                reglas.cssRules[i].style.setProperty("border-color",colorfondo+" transparent "+colorfondo+"transparent")
+                break;
+        }        
+    }
+}
+function cambiarFondo(colorfondo){
+    var reglas=buscarTema()
+    for(let i =0;i<reglas.cssRules.length;i++){
+        switch(reglas.cssRules[i].selectorText){            
+            case ".color-pri-back":
+                reglas.cssRules[i].style.setProperty('background-color',colorfondo)
+                break;            
+            case ".color-sec-back":
+                reglas.cssRules[i].style.setProperty('background-color',colorfondo)
+                break;            
+            case ".color-ter-back":
+                reglas.cssRules[i].style.setProperty('background-color',colorfondo)
+                break;            
+            case ".lds-dual-ring::after":                
+                reglas.cssRules[i].style.setProperty("border","6px solid "+colorfondo)
+                reglas.cssRules[i].style.setProperty("border-color",colorfondo+" transparent "+colorfondo+"transparent")
+                break;
+        }        
+    }
+}
+function cambiarColor(colortexto){
+    var reglas=buscarTema()
+    for(let i =0;i<reglas.cssRules.length;i++){
+        switch(reglas.cssRules[i].selectorText){
+            case ".color-pri-color":
+                reglas.cssRules[i].style.setProperty('color',colortexto)
+                break;            
+            case ".color-sec-color":
+                reglas.cssRules[i].style.setProperty('color',colortexto)
+                break;            
+            case ".color-ter-color":
+                reglas.cssRules[i].style.setProperty('color',colortexto)
+                break;            
+        }        
+    }
+}
+
+function rgb_to_hex(rgb_color) {
+    if (!rgb_color) return ''
+    return rgb_color
+        .replace(/.*rgba?\(([^(]+)\).*/gi, '$1')
+        .split(',')
+        .splice(0,3)
+        .reduce(function(acc, cur) { return acc+format_hex(cur) }, '');
+}
+
+function format_hex(ns) {
+    var v;
+    return isNaN(v = parseInt(ns)) ? '' : ('00' + v.toString(16)).substr(-2);
+}
+
+jQuery('.cambiar-fondo').click(function(e) {
+    var bColor = jQuery(this).css('background-color');
+    cambiarFondo(bColor)    
+    var hex=rgb_to_hex(bColor)    
+    guardarFondo('#'+hex)
+});
+
+jQuery('.cambiar-color').click(function(e) {
+    var bColor = jQuery(this).css('background-color');    
+    cambiarColor(bColor)
+    var hex=rgb_to_hex(bColor)    
+    guardarColor('#'+hex)
+});
+
+function cambiarEsquema(){
+    desactivarElegirColor()
+    txtToken.value=""
+    jQuery('#esqinit').toggle()
+    jQuery('#esqval').toggle()    
+}
+
+function activarElegirColor(){
+    divColor.style.display='flex'
+    divToken.style.display='none'
+    pieVal.style.display='none'
+}
+function desactivarElegirColor(){
+    divColor.style.display='none'
+    divToken.style.display='flex'
+    pieVal.style.display='flex'
+}
+
+jQuery('#menu-container-chat').click(cambiarEsquema)
+jQuery('#close-container-val-chat').click(cambiarEsquema)
+
+jQuery('#snd-token-chat').click(()=>{
+    axios.post(dominioAPI.concat('verify-auth'),{
+        domain:window.location.host,
+        token:jQuery('#token').val(),
+        id:sessionStorage.getItem('id')
+    })
+    .then(function (response) {        
+        activarElegirColor()
+    })
+    .catch(function(error){
+        txtToken.value=""
+        console.error(error)
+    })
+})
+
+function consultarTema(){
+    axios.post(dominioAPI.concat('consult-style'),{        
+        id:sessionStorage.getItem('id')
+    })
+    .then(function (response) {        
+        cambiarTema(response.data[1],response.data[2])
+    })
+    .catch(function(error){        
+        console.error(error)
+    })
+}
+
+function guardarFondo(colorFondo){
+    axios.post(dominioAPI.concat('save-background'),{        
+        est_emp_id:sessionStorage.getItem('id'),
+        est_color_fondo_prin:'#EFEAE2',
+        est_color_prin_fondo:colorFondo,        
+        est_color_sec_fondo:colorFondo,        
+        est_color_ter_fondo:colorFondo        
+    })
+    .then(function (response) {        
+        console.log("Guardado fondo con exito")
+        console.log(response)
+    })
+    .catch(function(error){        
+        console.error(error)
+    })
+}
+function guardarColor(colorFondo){
+    axios.post(dominioAPI.concat('save-color'),{
+        est_emp_id:sessionStorage.getItem('id'),
+        est_color_prin_color:colorFondo,
+        est_color_sec_color:colorFondo,
+        est_color_ter_color:colorFondo
+    })
+    .then(function (response) {        
+        console.log("Guardado color con exito")
+        console.log(response)
+    })
+    .catch(function(error){        
+        console.error(error)
+    })
 }

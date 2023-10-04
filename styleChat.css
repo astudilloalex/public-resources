@@ -20,12 +20,11 @@ layout-chat{
     min-height: 0;
 }
 header-chat{
-    height: auto;
-    background-color: #00bc94;
+    height: auto;    
     flex: 0 0 auto;
     line-height: 48px;
 }
-content-chat{      
+content-chat{
     flex: auto;
     min-height: 0;    
 }
@@ -252,18 +251,15 @@ background-color: #EFEAE2;
     }    
 }
 col-chat {
-    position: relative;
-    color: white;
+    position: relative;    
 }
 avatar-icon-chat{
-    display: inline-block;
-    color: #fff;
+    display: inline-block;    
     width: 32px;
     height: 32px;
     line-height: 32px;
 }
-button-chat{
-    background-color: #00bc94;
+button-chat{    
     cursor: pointer;
     display: inline-block;
 }
@@ -277,8 +273,7 @@ button-icon-chat{
     align-content: center;
     margin-left: 7px;
     margin-right: 7px;
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-    background-color: #00bc94;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);    
     border-radius: 50%;
 }
 button-transparent-chat{
@@ -292,23 +287,11 @@ button-transparent-chat{
     margin-left: 7px;
     margin-right: 7px;
 }
-button-pdf-chat{
-    cursor: pointer;
-    transition: all .3s cubic-bezier(.645,.045,.355,1);
-    position: relative;
-    font-weight: 400;
-    white-space: nowrap;
-    height: 32px;    
-    display: inline-block;
-    text-align: center;
-}
 span-chat{
-    font-size: 20px;
-    color: white;    
+    font-size: 20px;        
     display: inline-grid;    
 }
-span-icon-chat{   
-    color: #ffffff;
+span-icon-chat{       
     display: inline-grid;
     align-content: center;
     width: 40px;
@@ -340,6 +323,20 @@ span-icon-chat{
 .input-chat:focus{
     box-shadow: none;
 }
+.input-passwd-chat{
+    padding: 9px 15px;
+    font-size: 100%;
+    border: 1px solid #d9d9d9;
+    border-radius: 18px;
+    background-color: #fff;    
+    user-select: text;
+    white-space: pre-wrap;
+    word-break: break-word;        
+    height: 44px;    
+    margin: 7px 7px;    
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    outline: none;
+}
 .btn-circle {
     min-width: 32px;
     padding-right: 0;
@@ -352,8 +349,7 @@ button,input{
 list-chat {
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
-    color: rgba(0,0,0,.85);
+    padding: 0;    
     font-size: 14px;    
     position: relative;
 }
@@ -376,18 +372,6 @@ card-chat{
 .inverse-row{
     flex-direction: row-reverse;
 }
-.systemMsg{    
-    background-color: #00bc94;
-    color: white;
-}
-.userMsg{    
-    background-color: white;
-    color: black;
-}
-.gif{
-    width:-webkit-fill-available;
-    height: 40px;
-}
 .visible{
     display: none;
 }
@@ -409,10 +393,6 @@ card-chat{
     overflow-y: auto;
     overflow-x: auto;
 }
-.pdfViewer{
-    width: 100%;
-    height: 60vh;
-}
 .lds-dual-ring {
     display: inline-block;
     width: 32px;
@@ -422,8 +402,7 @@ card-chat{
     content: " ";
     display: block;
     width: 32px;
-    height: 32px;
-    /* margin: 8px; */
+    height: 32px;    
     border-radius: 50%;
     border: 6px solid #00bc94;
     border-color: #00bc94 transparent #00bc94 transparent;
@@ -468,4 +447,43 @@ audio{
     max-width: 85%;
     margin: 0px 5px;
     padding-bottom: 7px; 
+}
+.color-back-prin{
+    background-color:#EFEAE2;
+}
+.color-pri-back{
+    background-color:#00bc94;
+}
+.color-pri-color{
+    color: #ffffff;
+}
+.color-sec-back{
+    background-color:#ffffff;
+}
+.color-sec-color{
+    color: #000000;
+}
+.color-ter-back{
+    background-color:#00bc94;
+}
+.color-ter-color{
+    color: #ffffff;
+}
+label-chat{
+    margin: 5px 5px;
+}
+.block-button{
+    padding: 9px 15px;
+    height: 44px;
+    margin: 7px 7px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 18px;
+    text-align: center;
+    width: 100%;
+}
+span-color-chat{
+    width: 82px;
+    height: 82px;
+    margin-left: 15px;
+    margin-bottom: 15px;
 }
