@@ -585,8 +585,7 @@ function generateLoading(origin){
         
     actualMsg.appendChild(loadingIcon)
     listaMsg.appendChild(actualMsg)
-    inputMsg.value=""
-    
+    inputMsg.value=""    
     divLista.scrollTo(0, divLista.scrollHeight);
 }
 
@@ -700,7 +699,7 @@ function loadAudio(recorderAudioAsBlob) {
     reader.readAsDataURL(recorderAudioAsBlob);
 }
 
-function sendTextMsg(message){
+function sendTextMsg(message){        
     generateLoading(true)
     axios.post(dominioAPI.concat('bot-question'),{
         question:message
@@ -729,7 +728,7 @@ jQuery('#btn-snd-msg').click(function(){
     if(!msgTipo){
         sendMsgTxt()
         msgTipo=true
-        cambiarIcnBtnInic()
+        cambiarIcnBtnInic()        
     }else{
         startRecording()
     }
@@ -738,7 +737,7 @@ jQuery('#btn-snd-msg').click(function(){
 function sendMsgTxt() {    
     var msgContent=jQuery('.input-chat').val()
     createMsgElement(false,msgContent)
-    sendTextMsg(msgContent)
+    sendTextMsg(msgContent)    
 }
 
 jQuery('.input-chat').keypress(function(e) {
@@ -748,6 +747,8 @@ jQuery('.input-chat').keypress(function(e) {
         var msgContent=jQuery('.input-chat').val()
         createMsgElement(false,msgContent)
         sendTextMsg(msgContent)
+        jQuery('#txtMsg').val("")
+        jQuery('#txtMsg').css({'overflowY':'hidden','height':'37px'});
     }
 })
 
