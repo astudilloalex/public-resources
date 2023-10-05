@@ -735,12 +735,12 @@ jQuery('#btn-snd-msg').click(function(){
             sendMsgTxt()
             msgTipo=true
             cambiarIcnBtnInic()
-        }else{
-            jQuery('.input-chat').val("")
-        }        
+        }                
     }else{
         startRecording()
     }
+    jQuery('.input-chat').val("")
+    jQuery('#txtMsg').css({'overflowY':'hidden','height':'37px'});
 })
 
 function sendMsgTxt() {    
