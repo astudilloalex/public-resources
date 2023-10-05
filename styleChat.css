@@ -11,7 +11,7 @@ avatar-chat {
     border-radius: 50%;
     width: inherit;
 }
-layout-chat{
+esquema-chat{
     width: 100%;
     height: 100%;    
     display: flex;
@@ -19,10 +19,10 @@ layout-chat{
     flex-direction: column;
     min-height: 0;
 }
-header-chat{
+cabecera-chat{
     height: auto;    
     flex: 0 0 auto;
-    line-height: 48px;
+    line-height: 52px;
 }
 content-chat{
     flex: auto;
@@ -38,10 +38,10 @@ row-chat{
     flex-flow: row wrap;
     padding: 5px;
 }
-.row-middle{
+.centrado-vertical{
     align-items: center;
 }
-.row-center{
+.centrado-horizontal{
     justify-content: center;
 }
 
@@ -54,8 +54,7 @@ row-chat{
     max-width: 66.6666667%;
 }
 
-
-container-chat {        
+contenedor-chat {        
 width: 100%;
 height: 100%;
 position: fixed;
@@ -65,7 +64,7 @@ bottom: 0px;
 }
 
 @media (min-width: 576px){
-    container-chat{
+    contenedor-chat{
         width: 100%;
         height: 100%;
         position: fixed;
@@ -75,7 +74,7 @@ bottom: 0px;
     }    
 }
 @media (min-width: 768px){    
-    container-chat {
+    contenedor-chat {
         width: 20%;
         position: fixed;
         right: 20px;
@@ -87,11 +86,12 @@ bottom: 0px;
 col-chat {
     position: relative;    
 }
-avatar-icon-chat{
+avatar-icono-chat{
     display: inline-block;    
     width: 32px;
     height: 32px;
     line-height: 32px;
+    margin: 0px 5px;
 }
 button-chat{    
     cursor: pointer;
@@ -209,7 +209,7 @@ card-chat{
 .visible{
     display: none;
 }
-.border-cir{
+.borde-cir{
     border-radius: 10px;
 }
 .top-border-radius{
@@ -220,7 +220,7 @@ card-chat{
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 }
-.box-shadow{
+.no-sombreado{
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 .double-overflow{
@@ -250,11 +250,11 @@ card-chat{
         transform: rotate(360deg);
     }
 }
-container-chat > *{
+contenedor-chat > *{
     font-family: 'Lato', sans-serif;
 
 }
-row-flex-chat{
+fila-flexible-chat{
     display: flex;
     flex: 1;
 }
@@ -282,7 +282,7 @@ audio{
     margin: 0px 5px;
     padding-bottom: 7px; 
 }
-.color-back-prin{
+.color-fondo-prin{
     background-color:#EFEAE2;
 }
 .color-pri-back{

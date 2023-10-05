@@ -24,70 +24,72 @@ fuente.innerHTML="@import url('https://fonts.googleapis.com/css2?family=Lato&dis
 const botonAvatar=document.createElement('avatar-chat')
 
     //Creacion elemento img, lector de imagenes
-    const imgAvatar = document.createElement('img')
-    imgAvatar.classList.add('circle-avatar-chat')
-    imgAvatar.src=dominioRepositorio.concat('avatar.png')
+    const imagenAvatar = new Image()
+    imagenAvatar.classList.add('circle-avatar-chat')
+    imagenAvatar.src=dominioRepositorio.concat('avatar.png')
 
     //Adicion de la imagen al boton
-    botonAvatar.appendChild(imgAvatar)
+    botonAvatar.appendChild(imagenAvatar)
 // **Fin de creacion de elemnto flotante de inicio
 
 // ** Inicio creacion de contenedor de chat
 //Creacion de contenedor de elemento mensajeria
-const contenedorchat=document.createElement('container-chat')
+const contenedorchat=document.createElement('contenedor-chat')
 contenedorchat.style.display='none'        
-contenedorchat.classList.add('border-cir')
-contenedorchat.classList.add('box-shadow')
-contenedorchat.classList.add('color-back-prin')
+contenedorchat.classList.add('borde-cir')
+contenedorchat.classList.add('no-sombreado')
+contenedorchat.classList.add('color-fondo-prin')
 
     // ** Inicio creacion de esquema de vista chat
     //Creacion elemnto de esquema de vista
-    const esquema= document.createElement('layout-chat') 
-    esquema.id="esqinit"
+    const esquema= document.createElement('esquema-chat') 
+    esquema.id="esquema-inicial"
         //Creacion elemento de cabecera de esquema
-        const cabecera=document.createElement('header-chat')
+        const cabecera=document.createElement('cabecera-chat')
         cabecera.classList.add('top-border-radius')
         cabecera.classList.add('color-pri-back')
 
             //Creacion de elementos de cabecera
-            const filaCabecera =document.createElement('row-flex-chat')
-            filaCabecera.classList.add('row-middle')
-            filaCabecera.classList.add('row-center')
+            const contenidoCabecera =document.createElement('fila-flexible-chat')
+            contenidoCabecera.classList.add('centrado-vertical')
+            contenidoCabecera.classList.add('centrado-horizontal')
 
                 //Creacion contenedor para icono de avatar
-                const avatarIcono= document.createElement('avatar-icon-chat') 
-                avatarIcono.style.marginLeft='5px'
-                avatarIcono.style.marginRight='5px'                                     
+                const avatarIcono= document.createElement('avatar-icono-chat')
 
                     //Creacion de elemento imagen para avatar boton inicio
-                    const imgAvatarIcn = document.createElement('img')
-                    imgAvatarIcn.classList.add('circle-avatar-chat')
-                    imgAvatarIcn.src=dominioRepositorio.concat('avatar.png')
+                    const imagenAvatarIcono = new Image()
+                    imagenAvatarIcono.classList.add('circle-avatar-chat')
+                    imagenAvatarIcono.src=dominioRepositorio.concat('avatar.png')
 
                 //Adicion de elemento imagen a icono de avatar inicio
-                avatarIcono.appendChild(imgAvatarIcn)
+                avatarIcono.appendChild(imagenAvatarIcono)
 
                 //Creacion elemento titulo de componente chat
-                const columnaCabeceraTit=document.createElement('title-chat')
-                columnaCabeceraTit.style.flex='1 1 auto'
-                columnaCabeceraTit.classList.add('color-pri-color')
-                columnaCabeceraTit.innerHTML='Gala'
+                const tituloCabecera=document.createElement('title-chat')
+                tituloCabecera.style.flex='1 1 auto'
+                tituloCabecera.classList.add('color-pri-color')
+                tituloCabecera.innerHTML='Gala'
 
+                // Creacion de elemento de botonn salida
                 const btnSalida= document.createElement('button-icon-chat')
                 btnSalida.style.boxShadow='none'
                 btnSalida.style.width='24px'
                 btnSalida.style.height='24px'
                 btnSalida.classList.add('color-pri-back')
                 btnSalida.classList.add('color-pri-color')
-                btnSalida.id='close-container-chat'
+                btnSalida.id='alternarContenedorAvatar'
 
+                    // Creacion de elemento de icono para boton de salida
                     const imgbtnSld=document.createElement('span-icon-chat')
                     imgbtnSld.style.width='24px'
                     imgbtnSld.style.height='24px'
                     imgbtnSld.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="24px" height="24px"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg>'
-
+                
+                // Adicion de imagen a boton 
                 btnSalida.appendChild(imgbtnSld)
 
+                //Creacion de elemento boton de menu
                 const btnMenu= document.createElement('button-icon-chat')
                 btnMenu.style.boxShadow='none'
                 btnMenu.style.width='24px'
@@ -96,20 +98,23 @@ contenedorchat.classList.add('color-back-prin')
                 btnMenu.classList.add('color-pri-color')
                 btnMenu.id='menu-container-chat'
 
+                    // Creacion de elemento imagen icono de boton menu
                     const imgbtnMenu=document.createElement('span-icon-chat')
                     imgbtnMenu.style.width='24px'
                     imgbtnMenu.style.height='24px'
                     imgbtnMenu.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="24px" height="24px"><path d="M456 231a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0z"/></svg>'
 
+                //Adicion de imagen de salida a boton menu
                 btnMenu.appendChild(imgbtnMenu)
 
-            //Adicion de elemento de columna a fila cabecera
-            filaCabecera.appendChild(avatarIcono)
-            filaCabecera.appendChild(columnaCabeceraTit)
-            filaCabecera.appendChild(btnMenu)
-            filaCabecera.appendChild(btnSalida)
+            //Adicion de los elementos: imagen de avatar, titulo,boton menu, boton salida
+            contenidoCabecera.appendChild(avatarIcono)
+            contenidoCabecera.appendChild(tituloCabecera)
+            contenidoCabecera.appendChild(btnMenu)
+            contenidoCabecera.appendChild(btnSalida)
             
-        cabecera.appendChild(filaCabecera)
+        //Adicion de contenido cabecera a elemento cabecera
+        cabecera.appendChild(contenidoCabecera)
 
         //Creacion de elemento contenido de esquema
         const contenido=document.createElement('content-chat')
@@ -147,9 +152,9 @@ contenedorchat.classList.add('color-back-prin')
         const pie=document.createElement('footer-chat')
         pie.classList.add('bottom-border-radius')
 
-            const filaPie= document.createElement('row-flex-chat')
-            filaPie.classList.add('row-middle')
-            filaPie.classList.add('row-center')
+            const filaPie= document.createElement('fila-flexible-chat')
+            filaPie.classList.add('centrado-vertical')
+            filaPie.classList.add('centrado-horizontal')
             filaPie.id='initRow'
 
                 const colunmaInputPie= document.createElement('col-flex-chat')
@@ -178,9 +183,9 @@ contenedorchat.classList.add('color-back-prin')
             filaPie.appendChild(colunmaInputPie)
 
             // fila de contenido al grabar
-            const filaPieRec= document.createElement('row-flex-chat')
-            filaPieRec.classList.add('row-middle')
-            filaPieRec.classList.add('row-center')
+            const filaPieRec= document.createElement('fila-flexible-chat')
+            filaPieRec.classList.add('centrado-vertical')
+            filaPieRec.classList.add('centrado-horizontal')
             filaPieRec.style.backgroundColor='#ffffff'
             filaPieRec.style.flexDirection='column'
             filaPieRec.classList.add('visible')
@@ -261,38 +266,37 @@ contenedorchat.classList.add('color-back-prin')
     // ** Fin creacion de esquema de vista chat
 
     // ** Inicio de creacion de seccion validacion
-    const esquemaValidacion=document.createElement('layout-chat')
+    const esquemaValidacion=document.createElement('esquema-chat')
     esquemaValidacion.style.display='none'
     esquemaValidacion.id="esqval"
-
-
-        const cabeceraValidacion=document.createElement('header-chat')
+    
+        const cabeceraValidacion=document.createElement('cabecera-chat')
         cabeceraValidacion.classList.add('top-border-radius')
-        cabeceraValidacion.classList.add('color-pri-back')        
+        cabeceraValidacion.classList.add('color-pri-back')
 
             //Creacion de elementos de cabecera
-            const filaCabeceraValidacion =document.createElement('row-flex-chat')
-            filaCabeceraValidacion.classList.add('row-middle')
-            filaCabeceraValidacion.classList.add('row-center')
+            const filaCabeceraValidacion =document.createElement('fila-flexible-chat')
+            filaCabeceraValidacion.classList.add('centrado-vertical')
+            filaCabeceraValidacion.classList.add('centrado-horizontal')
                 
                 //Creacion contenedor para icono de avatar
-                const avatarIconoValidacion= document.createElement('avatar-icon-chat')
-                avatarIconoValidacion.style.marginLeft='5px'
-                avatarIconoValidacion.style.marginRight='5px'
+                const avatarIconoValidacion= document.createElement('avatar-icono-chat')                
 
                     //Creacion de elemento imagen para avatar boton inicio
-                    const imgAvatarIcnVal = document.createElement('img')
+                    const imgAvatarIcnVal = new Image()
                     imgAvatarIcnVal.classList.add('circle-avatar-chat')                    
                     imgAvatarIcnVal.src=dominioRepositorio.concat('avatar.png')
 
                 //Adicion de elemento imagen a icono de avatar inicio
                 avatarIconoValidacion.appendChild(imgAvatarIcnVal)
 
+                // Creacion de titulo de cabecera
                 const columnaCabeceraTitVal=document.createElement('title-chat')
                 columnaCabeceraTitVal.style.flex='1 1 auto'
                 columnaCabeceraTitVal.classList.add('color-pri-color')
                 columnaCabeceraTitVal.innerHTML='Configuracion Tema'
 
+                // Creacion de boton 
                 const btnSalidaVal= document.createElement('button-icon-chat')
                 btnSalidaVal.classList.add('color-pri-back')
                 btnSalidaVal.classList.add('color-pri-color')
@@ -312,8 +316,8 @@ contenedorchat.classList.add('color-back-prin')
             //Adicion de elemento de columna a fila cabecera
             filaCabeceraValidacion.appendChild(avatarIconoValidacion)
             filaCabeceraValidacion.appendChild(columnaCabeceraTitVal)
-            filaCabeceraValidacion.appendChild(btnSalidaVal)
-            
+            filaCabeceraValidacion.appendChild(btnSalidaVal)            
+        
         cabeceraValidacion.appendChild(filaCabeceraValidacion)
 
         const contenidoVal=document.createElement('content-chat')
@@ -523,6 +527,7 @@ if(dominiosPermitidos.includes(window.location.host)){
 }else{
     console.error("Domain not allowed")
     console.info(window.location.host)
+    window.alert("Dominio no permitido")
 }
 
 var msgTipo=true
@@ -532,7 +537,7 @@ var audioRecordStartTime,elapsedTimeTimer,context;
 var audioRecordPausedTime=0
 let elapsedTime
 
-window.onload=obtainToken;
+window.onload=obtenernToken;
 
 inputMsg.addEventListener('input', () => {
     const scrollHeight = inputMsg.scrollHeight;
@@ -591,21 +596,24 @@ function deleteLoading(){
     jQuery('#loading').remove()
 }
 
-function obtainToken(){
+function alternarContenedorAvatar(){
+    jQuery("avatar-chat").toggle('scale');
+    jQuery("contenedor-chat").toggle('scale');
+}
+
+function obtenernToken(){
     axios.post(dominioAPI.concat('token'),{
         domain:window.location.host
     })
     .then(function (response) {
         sessionStorage.setItem('token',response.data.token);
         sessionStorage.setItem('id',response.data.id);
-        jQuery("avatar-chat").click(function() {
-            jQuery("avatar-chat").toggle('scale');
-            jQuery("container-chat").toggle('scale');
-        })
+        jQuery("avatar-chat").click(alternarContenedorAvatar)
         consultarTema()
     })
     .catch(function(error){
         console.error(error)
+        window.alert("Error al tratar de obtener token de seguridad")
     })
 }
 
@@ -639,22 +647,22 @@ function downloadPDF(fileName,element){
 
     const columnaIcono=document.createElement('col-chat')
     columnaIcono.classList.add('col-4')
-    columnaIcono.classList.add('row-middle')
-    columnaIcono.classList.add('row-center')
+    columnaIcono.classList.add('centrado-vertical')
+    columnaIcono.classList.add('centrado-horizontal')
     columnaIcono.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="40px" height="40px"><path d="M531.3 574.4l.3-1.4c5.8-23.9 13.1-53.7 7.4-80.7-3.8-21.3-19.5-29.6-32.9-30.2-15.8-.7-29.9 8.3-33.4 21.4-6.6 24-.7 56.8 10.1 98.6-13.6 32.4-35.3 79.5-51.2 107.5-29.6 15.3-69.3 38.9-75.2 68.7-1.2 5.5.2 12.5 3.5 18.8 3.7 7 9.6 12.4 16.5 15 3 1.1 6.6 2 10.8 2 17.6 0 46.1-14.2 84.1-79.4 5.8-1.9 11.8-3.9 17.6-5.9 27.2-9.2 55.4-18.8 80.9-23.1 28.2 15.1 60.3 24.8 82.1 24.8 21.6 0 30.1-12.8 33.3-20.5 5.6-13.5 2.9-30.5-6.2-39.6-13.2-13-45.3-16.4-95.3-10.2-24.6-15-40.7-35.4-52.4-65.8zM421.6 726.3c-13.9 20.2-24.4 30.3-30.1 34.7 6.7-12.3 19.8-25.3 30.1-34.7zm87.6-235.5c5.2 8.9 4.5 35.8.5 49.4-4.9-19.9-5.6-48.1-2.7-51.4.8.1 1.5.7 2.2 2zm-1.6 120.5c10.7 18.5 24.2 34.4 39.1 46.2-21.6 4.9-41.3 13-58.9 20.2-4.2 1.7-8.3 3.4-12.3 5 13.3-24.1 24.4-51.4 32.1-71.4zm155.6 65.5c.1.2.2.5-.4.9h-.2l-.2.3c-.8.5-9 5.3-44.3-8.6 40.6-1.9 45 7.3 45.1 7.4zm191.4-388.2L639.4 73.4c-6-6-14.1-9.4-22.6-9.4H192c-17.7 0-32 14.3-32 32v832c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V311.3c0-8.5-3.4-16.7-9.4-22.7zM790.2 326H602V137.8L790.2 326zm1.8 562H232V136h302v216a42 42 0 0042 42h216v494z"/></svg>'
     
     const columnaNombre=document.createElement('col-chat')
     columnaNombre.classList.add('col-16')
-    columnaNombre.classList.add('row-middle')
-    columnaNombre.classList.add('row-center')
+    columnaNombre.classList.add('centrado-vertical')
+    columnaNombre.classList.add('centrado-horizontal')
     columnaNombre.innerHTML=fileName.substring(fileName.lastIndexOf('/')+1,fileName.indexOf(".pdf")+4)
 
     const columnaDescargar=document.createElement('col-chat')
     columnaDescargar.id='downloadPDF'
     
     columnaDescargar.classList.add('col-4')
-    columnaDescargar.classList.add('row-middle')
-    columnaDescargar.classList.add('row-center')
+    columnaDescargar.classList.add('centrado-vertical')
+    columnaDescargar.classList.add('centrado-horizontal')
 
     const linkDesc= document.createElement('a')
     linkDesc.href=fileName
@@ -714,19 +722,21 @@ function sendTextMsg(message){
     })
     .catch(function(error){
         console.error(error)
+        window.alert("Error al enviar mensaje")
     })
 }
 
-jQuery("#close-container-chat").click(function() {
-    jQuery("avatar-chat").toggle('scale');
-    jQuery("container-chat").toggle('scale');
-})
+jQuery("#alternarContenedorAvatar").click(alternarContenedorAvatar)
 
 jQuery('#btn-snd-msg').click(function(){
     if(!msgTipo){
-        sendMsgTxt()
-        msgTipo=true
-        cambiarIcnBtnInic()        
+        if(validarMensaje(jQuery('.input-chat').val())){
+            sendMsgTxt()
+            msgTipo=true
+            cambiarIcnBtnInic()
+        }else{
+            jQuery('.input-chat').val("")
+        }        
     }else{
         startRecording()
     }
@@ -1066,7 +1076,7 @@ jQuery('.cambiar-color').click(function(e) {
 function cambiarEsquema(){
     desactivarElegirColor()
     txtToken.value=""
-    jQuery('#esqinit').toggle()
+    jQuery('#esquema-inicial').toggle()
     jQuery('#esqval').toggle()    
 }
 
@@ -1096,6 +1106,7 @@ function verificarToken(){
     .catch(function(error){
         txtToken.value=""
         console.error(error)
+        window.alert("Token de seguridad no valido")
     })
 }
 
@@ -1118,7 +1129,8 @@ function consultarTema(){
         cambiarTema(response.data[1],response.data[2])
     })
     .catch(function(error){        
-        console.error(error)
+        console.error("Tema inexistente para empresa")
+        
     })
 }
 
@@ -1136,6 +1148,7 @@ function guardarFondo(colorFondo){
     })
     .catch(function(error){        
         console.error(error)
+        window.alert("Error al guardar el fondo en la base de datos")
     })
 }
 function guardarColor(colorFondo){
@@ -1151,13 +1164,17 @@ function guardarColor(colorFondo){
     })
     .catch(function(error){        
         console.error(error)
+        window.alert("Error al guardar el color en la base de datos")
     })
 }
 
 function cambiarFondoCodigo(){
-    const backtxt=jQuery('#color-pri').val()    
-    cambiarFondo(backtxt)
-    guardarFondo(backtxt)
+    const backtxt=jQuery('#color-pri').val()
+    if(validatHexadecimal(backtxt)){
+        cambiarFondo(backtxt)
+        guardarFondo(backtxt)
+    }
+    jQuery('#color-pri').val("")    
 }
 
 jQuery('#background-btn').click(cambiarFondoCodigo)
@@ -1167,14 +1184,17 @@ jQuery('#color-pri').keypress(function(e) {
     if(key==13)
     {
         cambiarFondoCodigo()
-        jQuery('#color-pri').val("")
+        jQuery('#color-pri').val("")        
     }
 })
 
 function cambiarColorCodigo(){
     const backtxt=jQuery('#color-sec').val()
-    cambiarColor(backtxt)
-    guardarColor(backtxt)
+    if(validatHexadecimal(backtxt)){
+        cambiarColor(backtxt)
+        guardarColor(backtxt)
+    }
+    jQuery('#color-sec').val("")
 }
 
 jQuery('#text-btn').click(cambiarColorCodigo)
@@ -1188,3 +1208,20 @@ jQuery('#color-sec').keypress(function(e) {
     }
 })
 
+function validarMensaje(texto){
+    if(texto && /[a-zA-Z]+/g.test(texto) && !(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(texto))){        
+        return true
+    }else{
+        window.alert("Mensaje Vacio o Invalido")
+        return false
+    }
+}
+
+function validatHexadecimal(hex){
+    if(hex && /^\u0023[0-9A-F]+$/.test(hex)){
+        return true
+    }else{
+        window.alert("Codigo Hexadecimal invalido")
+        return false        
+    }
+}
