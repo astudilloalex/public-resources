@@ -14,6 +14,7 @@ css.href=dominioRepositorio.concat('styleChat.css')
 css.rel='stylesheet'
 css.type='text/css'
 css.title='estiloChat'
+css.crossOrigin="anonymous"
 
 //Creacion de elemento link fuente
 const fuente =document.createElement('style')
