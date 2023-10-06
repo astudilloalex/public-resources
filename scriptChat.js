@@ -27,7 +27,7 @@ const botonAvatar=document.createElement('avatar-chat')
     //Creacion elemento img, lector de imagenes
     const imagenAvatar = new Image()
     imagenAvatar.classList.add('circle-avatar-chat')
-    imagenAvatar.src=dominioRepositorio.concat('avatar.jpeg')
+    imagenAvatar.src=dominioRepositorio.concat('avatarN.png')
 
     //Adicion de la imagen al boton
     botonAvatar.appendChild(imagenAvatar)
@@ -61,7 +61,7 @@ contenedorchat.classList.add('color-fondo-prin')
                     //Creacion de elemento imagen para avatar boton inicio
                     const imagenAvatarIcono = new Image()
                     imagenAvatarIcono.classList.add('circle-avatar-chat')
-                    imagenAvatarIcono.src=dominioRepositorio.concat('avatar.jpeg')
+                    imagenAvatarIcono.src=dominioRepositorio.concat('avatarN.png')
 
                 //Adicion de elemento imagen a icono de avatar inicio
                 avatarIcono.appendChild(imagenAvatarIcono)
@@ -294,7 +294,7 @@ contenedorchat.classList.add('color-fondo-prin')
                     //Creacion de elemento imagen para avatar boton inicio
                     const imgAvatarIcnVal = new Image()
                     imgAvatarIcnVal.classList.add('circle-avatar-chat')                    
-                    imgAvatarIcnVal.src=dominioRepositorio.concat('avatar.jpeg')
+                    imgAvatarIcnVal.src=dominioRepositorio.concat('avatarN.png')
 
                 //Adicion de elemento imagen a icono de avatar inicio
                 avatarIconoValidacion.appendChild(imgAvatarIcnVal)
