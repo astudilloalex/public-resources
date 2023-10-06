@@ -27,7 +27,7 @@ const botonAvatar=document.createElement('avatar-chat')
     //Creacion elemento img, lector de imagenes
     const imagenAvatar = new Image()
     imagenAvatar.classList.add('circle-avatar-chat')
-    imagenAvatar.src=dominioRepositorio.concat('avatar.png')
+    imagenAvatar.src=dominioRepositorio.concat('avatar.jpg')
 
     //Adicion de la imagen al boton
     botonAvatar.appendChild(imagenAvatar)
@@ -61,7 +61,7 @@ contenedorchat.classList.add('color-fondo-prin')
                     //Creacion de elemento imagen para avatar boton inicio
                     const imagenAvatarIcono = new Image()
                     imagenAvatarIcono.classList.add('circle-avatar-chat')
-                    imagenAvatarIcono.src=dominioRepositorio.concat('avatar.png')
+                    imagenAvatarIcono.src=dominioRepositorio.concat('avatar.jpg')
 
                 //Adicion de elemento imagen a icono de avatar inicio
                 avatarIcono.appendChild(imagenAvatarIcono)
@@ -286,7 +286,7 @@ contenedorchat.classList.add('color-fondo-prin')
                     //Creacion de elemento imagen para avatar boton inicio
                     const imgAvatarIcnVal = new Image()
                     imgAvatarIcnVal.classList.add('circle-avatar-chat')                    
-                    imgAvatarIcnVal.src=dominioRepositorio.concat('avatar.png')
+                    imgAvatarIcnVal.src=dominioRepositorio.concat('avatar.jpg')
 
                 //Adicion de elemento imagen a icono de avatar inicio
                 avatarIconoValidacion.appendChild(imgAvatarIcnVal)
@@ -419,7 +419,6 @@ contenedorchat.classList.add('color-fondo-prin')
                 divElegibleSec.style.flexWrap="wrap"
                 divElegibleSec.style.position="relative"
                 divElegibleSec.style.justifyContent="center"
-
             
                     const spanColor1Sec=document.createElement('span-color-chat')
                     spanColor1Sec.classList.add("cambiar-color")
