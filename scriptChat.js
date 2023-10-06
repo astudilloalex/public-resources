@@ -554,6 +554,7 @@ var diccionario={
 }
 
 window.onload=funcionesInicio;
+window.onlanguagechange=obtenerIdioma;
 
 inputMsg.addEventListener('input', () => {
     const scrollHeight = inputMsg.scrollHeight;
@@ -740,8 +741,6 @@ function sendTextMsg(message){
         console.error(error)
         window.alert("Error al enviar mensaje")
     })
-    jQuery('.input-chat').val("")
-    jQuery('#txtMsg').css({'overflowY':'hidden','height':'37px'});    
 }
 
 jQuery("#alternarContenedorAvatar").click(alternarContenedorAvatar)
@@ -758,6 +757,8 @@ jQuery('#btn-snd-msg').click(function(){
     }else{
         startRecording()
     }
+    jQuery('.input-chat').val("")
+    jQuery('#txtMsg').css({'overflowY':'hidden','height':'37px'});
 })
 
 function sendMsgTxt() {    
