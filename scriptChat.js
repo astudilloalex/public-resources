@@ -27,7 +27,7 @@ const botonAvatar=document.createElement('avatar-chat')
     //Creacion elemento img, lector de imagenes
     const imagenAvatar = new Image()
     imagenAvatar.classList.add('circle-avatar-chat')
-    imagenAvatar.src=dominioRepositorio.concat('avatar.jpg')
+    imagenAvatar.src=dominioRepositorio.concat('avatar.png')
 
     //Adicion de la imagen al boton
     botonAvatar.appendChild(imagenAvatar)
@@ -61,7 +61,7 @@ contenedorchat.classList.add('color-fondo-prin')
                     //Creacion de elemento imagen para avatar boton inicio
                     const imagenAvatarIcono = new Image()
                     imagenAvatarIcono.classList.add('circle-avatar-chat')
-                    imagenAvatarIcono.src=dominioRepositorio.concat('avatar.jpg')
+                    imagenAvatarIcono.src=dominioRepositorio.concat('avatar.png')
 
                 //Adicion de elemento imagen a icono de avatar inicio
                 avatarIcono.appendChild(imagenAvatarIcono)
@@ -121,38 +121,47 @@ contenedorchat.classList.add('color-fondo-prin')
         const contenido=document.createElement('content-chat')
         contenido.style="position:relative"
 
+            // Creacion de elemento para boton scroll de mensajes
             const divBoton=document.createElement('div')
             divBoton.style="position:absolute;right:15px;bottom:16px;z-index:100001;display:none"
 
+                //Creacion de elemento boton para scroll fondo
                 const btnScrollFin=document.createElement('button-icon-chat')
                 btnScrollFin.style="height: 24px;width: 24px;box-shadow: none;margin:0px"
                 btnScrollFin.classList.add('color-ter-back')
                 btnScrollFin.id='btn-scroll'
 
+                    //Creacion de imagen para boton imagen
                     const imgAbajo=document.createElement('span-icon-chat')
                     imgAbajo.style="height: 24px;width: 24px;"
-                    btnScrollFin.classList.add('color-ter-color')
+                    imgAbajo.classList.add('color-ter-color')
                     imgAbajo.innerHTML='<svg viewBox="0 0 1024 1024" focusable="false" fill="currentColor" width="24px" height="24px"><path d="M840.4 300H183.6c-19.7 0-30.7 20.8-18.5 35l328.4 380.8c9.4 10.9 27.5 10.9 37 0L858.9 335c12.2-14.2 1.2-35-18.5-35z"/></svg>'
 
+                // Adicion de imagen a boton
                 btnScrollFin.appendChild(imgAbajo)
             
+            // Adicion de boton a contenendor
             divBoton.appendChild(btnScrollFin)
 
+            // Creacion de contenedor de mensajes
             const divLista=document.createElement('div')
             divLista.style="position: absolute;height: 100%;width: 100%;overflow-y:auto"
 
+                // Creacion de elemento padre lista de mensajes
                 const listaMsg=document.createElement('list-chat')
             
+            // Adicion de lista de mensajes a contenedor
             divLista.appendChild(listaMsg)
         
+        // Adicion a contenedores a contenido de esquema
         contenido.appendChild(divBoton)
-        contenido.appendChild(divLista)
-        
+        contenido.appendChild(divLista)        
 
         //Creacion de elemnto pie de esquema
         const pie=document.createElement('footer-chat')
         pie.classList.add('bottom-border-radius')
 
+            // Creacionde elementos parte inferior
             const filaPie= document.createElement('fila-flexible-chat')
             filaPie.classList.add('centrado-vertical')
             filaPie.classList.add('centrado-horizontal')
@@ -162,8 +171,7 @@ contenedorchat.classList.add('color-fondo-prin')
 
                     const inputMsg=document.createElement('textarea')
                     inputMsg.tabIndex=0
-                    inputMsg.rows=1
-                    inputMsg.placeholder='Escribe un mensaje'
+                    inputMsg.rows=1                    
                     inputMsg.wrap='off'
                     inputMsg.id="txtMsg"
                     inputMsg.classList.add('input-chat')
@@ -286,7 +294,7 @@ contenedorchat.classList.add('color-fondo-prin')
                     //Creacion de elemento imagen para avatar boton inicio
                     const imgAvatarIcnVal = new Image()
                     imgAvatarIcnVal.classList.add('circle-avatar-chat')                    
-                    imgAvatarIcnVal.src=dominioRepositorio.concat('avatar.jpg')
+                    imgAvatarIcnVal.src=dominioRepositorio.concat('avatar.png')
 
                 //Adicion de elemento imagen a icono de avatar inicio
                 avatarIconoValidacion.appendChild(imgAvatarIcnVal)
@@ -297,21 +305,22 @@ contenedorchat.classList.add('color-fondo-prin')
                 columnaCabeceraTitVal.classList.add('color-pri-color')
                 columnaCabeceraTitVal.innerHTML='Configuracion Tema'
 
-                // Creacion de boton 
+                // Creacion de boton para validacion de token
                 const btnSalidaVal= document.createElement('button-icon-chat')
                 btnSalidaVal.classList.add('color-pri-back')
                 btnSalidaVal.classList.add('color-pri-color')
                 btnSalidaVal.style.width='24px'
                 btnSalidaVal.style.height='24px'
                 btnSalidaVal.style.boxShadow='none'
-                btnSalidaVal.id='close-container-val-chat'
-                
+                btnSalidaVal.id='close-container-val-chat'                
 
+                    // Creacion de elemento imagen para boton de validacion
                     const imgbtnSldVal=document.createElement('span-icon-chat')
                     imgbtnSldVal.style.width='24px'
                     imgbtnSldVal.style.height='24px'
                     imgbtnSldVal.innerHTML='<svg viewBox="64 64 896 896" focusable="false" height="24px" width="24px" fill="currentColor"><path d="M872 474H286.9l350.2-304c5.6-4.9 2.2-14-5.2-14h-88.5c-3.9 0-7.6 1.4-10.5 3.9L155 487.8a31.96 31.96 0 000 48.3L535.1 866c1.5 1.3 3.3 2 5.2 2h91.5c7.4 0 10.8-9.2 5.2-14L286.9 550H872c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"/></svg>'
 
+                // Adicion de imagen a boton
                 btnSalidaVal.appendChild(imgbtnSldVal)
 
             //Adicion de elemento de columna a fila cabecera
@@ -328,6 +337,7 @@ contenedorchat.classList.add('color-fondo-prin')
             divToken.style.flexDirection='column'
 
                 const etiquetaToken=document.createElement('label-chat')
+                etiquetaToken.id='etiquetaToken'
                 etiquetaToken.setAttribute('for','token')
                 etiquetaToken.innerHTML="Token:"
 
@@ -397,7 +407,7 @@ contenedorchat.classList.add('color-fondo-prin')
                 divElegiblePrin.appendChild(spanColor8Prin)
                 divElegiblePrin.appendChild(spanColor9Prin)
 
-                const etiquetaColorPrin=document.createElement('label-chat')
+                const etiquetaColorPrin=document.createElement('label-chat')                
                 etiquetaColorPrin.setAttribute('for','color-pri')
                 etiquetaColorPrin.innerHTML="Color Primario:"
 
@@ -419,6 +429,7 @@ contenedorchat.classList.add('color-fondo-prin')
                 divElegibleSec.style.flexWrap="wrap"
                 divElegibleSec.style.position="relative"
                 divElegibleSec.style.justifyContent="center"
+
             
                     const spanColor1Sec=document.createElement('span-color-chat')
                     spanColor1Sec.classList.add("cambiar-color")
@@ -537,7 +548,12 @@ var audioRecordStartTime,elapsedTimeTimer,context;
 var audioRecordPausedTime=0
 let elapsedTime
 
-window.onload=obtenernToken;
+var diccionario={
+    "es":{"placeholder":"Escribe un mensaje","buttonToken":"Comprobar","saveHex":"Guardar Color HEX","configTheme":"Configurar Tema","principalColor":"Color Principal:","textColor":"Color Texto:"},
+    "en":{"placeholder":"Write a message","buttonToken":"Check","saveHex":"Save Color HEX","configTheme":"Theme Configuration","principalColor":"Principal Color:","textColor":"Text Color:"},
+}
+
+window.onload=funcionesInicio;
 
 inputMsg.addEventListener('input', () => {
     const scrollHeight = inputMsg.scrollHeight;
@@ -601,7 +617,7 @@ function alternarContenedorAvatar(){
     jQuery("contenedor-chat").toggle('scale');
 }
 
-function obtenernToken(){
+function obtenerToken(){
     axios.post(dominioAPI.concat('token'),{
         domain:window.location.host
     })
@@ -724,6 +740,8 @@ function sendTextMsg(message){
         console.error(error)
         window.alert("Error al enviar mensaje")
     })
+    jQuery('.input-chat').val("")
+    jQuery('#txtMsg').css({'overflowY':'hidden','height':'37px'});    
 }
 
 jQuery("#alternarContenedorAvatar").click(alternarContenedorAvatar)
@@ -734,12 +752,12 @@ jQuery('#btn-snd-msg').click(function(){
             sendMsgTxt()
             msgTipo=true
             cambiarIcnBtnInic()
-        }                
+        }else{
+            jQuery('.input-chat').val("")
+        }        
     }else{
         startRecording()
     }
-    jQuery('.input-chat').val("")
-    jQuery('#txtMsg').css({'overflowY':'hidden','height':'37px'});
 })
 
 function sendMsgTxt() {    
@@ -1224,4 +1242,30 @@ function validatHexadecimal(hex){
         window.alert("Codigo Hexadecimal invalido")
         return false        
     }
+}
+
+function obtenerIdioma(){
+    var lenguaje=document.documentElement.lang || navigator.language
+    if(/es/i.test(lenguaje)){
+        inputMsg.placeholder=diccionario["es"]["placeholder"]
+        btnSndTkn.innerHTML=diccionario["es"]["buttonToken"]
+        btnSndBackColor.innerHTML=diccionario["es"]["saveHex"]
+        btnSndTextColor.innerHTML=diccionario["es"]["saveHex"]
+        columnaCabeceraTitVal.innerHTML=diccionario["es"]["configTheme"]
+        etiquetaColorPrin.innerHTML=diccionario["es"]["principalColor"]
+        etiquetaColorSec.innerHTML=diccionario["es"]["textColor"]
+    }else{
+        inputMsg.placeholder=diccionario["en"]["placeholder"]
+        btnSndTkn.innerHTML=diccionario["en"]["buttonToken"]
+        btnSndBackColor.innerHTML=diccionario["en"]["saveHex"]
+        btnSndTextColor.innerHTML=diccionario["en"]["saveHex"]
+        columnaCabeceraTitVal.innerHTML=diccionario["en"]["configTheme"]
+        etiquetaColorPrin.innerHTML=diccionario["en"]["principalColor"]
+        etiquetaColorSec.innerHTML=diccionario["en"]["textColor"]
+    }    
+}
+
+function funcionesInicio(){
+    obtenerToken()
+    obtenerIdioma()    
 }
