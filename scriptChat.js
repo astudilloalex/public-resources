@@ -27,7 +27,7 @@ const botonAvatar=document.createElement('avatar-chat')
     //Creacion elemento img, lector de imagenes
     const imagenAvatar = new Image()
     imagenAvatar.classList.add('circle-avatar-chat')
-    imagenAvatar.src=dominioRepositorio.concat('avatar.jpg')
+    imagenAvatar.src=dominioRepositorio.concat('avatar.jpeg')
 
     //Adicion de la imagen al boton
     botonAvatar.appendChild(imagenAvatar)
@@ -61,7 +61,7 @@ contenedorchat.classList.add('color-fondo-prin')
                     //Creacion de elemento imagen para avatar boton inicio
                     const imagenAvatarIcono = new Image()
                     imagenAvatarIcono.classList.add('circle-avatar-chat')
-                    imagenAvatarIcono.src=dominioRepositorio.concat('avatar.jpg')
+                    imagenAvatarIcono.src=dominioRepositorio.concat('avatar.jpeg')
 
                 //Adicion de elemento imagen a icono de avatar inicio
                 avatarIcono.appendChild(imagenAvatarIcono)
@@ -294,7 +294,7 @@ contenedorchat.classList.add('color-fondo-prin')
                     //Creacion de elemento imagen para avatar boton inicio
                     const imgAvatarIcnVal = new Image()
                     imgAvatarIcnVal.classList.add('circle-avatar-chat')                    
-                    imgAvatarIcnVal.src=dominioRepositorio.concat('avatar.jpg')
+                    imgAvatarIcnVal.src=dominioRepositorio.concat('avatar.jpeg')
 
                 //Adicion de elemento imagen a icono de avatar inicio
                 avatarIconoValidacion.appendChild(imgAvatarIcnVal)
@@ -624,8 +624,7 @@ function obtenerToken(){
     })
     .then(function (response) {
         sessionStorage.setItem('token',response.data.token);
-        sessionStorage.setItem('id',response.data.id);
-        jQuery("avatar-chat").click(alternarContenedorAvatar)
+        sessionStorage.setItem('id',response.data.id);        
         consultarTema()
     })
     .catch(function(error){
@@ -1268,5 +1267,6 @@ function obtenerIdioma(){
 
 function funcionesInicio(){
     obtenerToken()
-    obtenerIdioma()    
+    obtenerIdioma()
+    jQuery("avatar-chat").click(alternarContenedorAvatar)    
 }
