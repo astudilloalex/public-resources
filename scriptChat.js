@@ -4,9 +4,9 @@
 const dominiosPermitidos = ['localhost', '127.0.0.1','bajajecuador.com','corporativo.curbe.com.ec','ebi.corp.ec']
 
 //Localicazion URL de servicio
-const dominioAPI='http://localhost:5000/'
+const dominioAPI='https://apichatgpt.dev.curbe.com.ec/'
 //Localicazion URL de repositorio contenedor
-const dominioRepositorio=''
+const dominioRepositorio='https://public.alexastudillo.com/'
 
 //Creacion de elemento link de css
 const css =document.createElement('link')
