@@ -4,9 +4,9 @@
 const dominiosPermitidos = ['localhost', '127.0.0.1','bajajecuador.com','corporativo.curbe.com.ec','ebi.corp.ec']
 
 //Localicazion URL de servicio
-const dominioAPI='https://apichatgpt.dev.curbe.com.ec/'
+const dominioAPI='http://localhost:5000/'
 //Localicazion URL de repositorio contenedor
-const dominioRepositorio='https://public.alexastudillo.com/'
+const dominioRepositorio=''
 
 //Creacion de elemento link de css
 const css =document.createElement('link')
@@ -607,7 +607,7 @@ var audioRecordStartTime,elapsedTimeTimer,context,elapsedTime;
 var audioRecordPausedTime=0
 // Variable para internacionalizacion
 var diccionario={
-    "es":{"placeholder":"Escribe un mensaje","buttonToken":"Comprobar","saveHex":"Guardar Color HEX","configTheme":"Configurar Tema","principalColor":"Color Principal:","textColor":"Color Texto:","DomainNotAllowed":"Dominio no permitido","SecTokenError":"Error sl obtener token seguridad","MsgError":"Error al enviar mensaje","NoValidToken":"Token de seguridad no valido","BackgError":"Error al guardar fondo en BD","ColorError":"Error al guardar color en BD","MsgInvalid":"Mensaje invalido o vacio, no se permiten caracteres especiales","HexError":"Codigo Hex no valido;#012345 Ej"},
+    "es":{"placeholder":"Escribe un mensaje","buttonToken":"Comprobar","saveHex":"Guardar Color HEX","configTheme":"Configurar Tema","principalColor":"Color Principal:","textColor":"Color Texto:","DomainNotAllowed":"Dominio no permitido","SecTokenError":"Error al obtener token seguridad","MsgError":"Error al enviar mensaje","NoValidToken":"Token de seguridad no valido","BackgError":"Error al guardar fondo en BD","ColorError":"Error al guardar color en BD","MsgInvalid":"Mensaje invalido o vacio, no se permiten caracteres especiales","HexError":"Codigo Hex no valido;#012345 Ej"},
     "en":{"placeholder":"Write a message","buttonToken":"Check","saveHex":"Save Color HEX","configTheme":"Theme Configuration","principalColor":"Principal Color:","textColor":"Text Color:","DomainNotAllowed":"Domain not allowed","SecTokenError":"Error obtaining security token","MsgError":"Error sending message","NoValidToken":"Invalid security token","BackgError":"Error when saving background to DB","ColorError":"Error when saving color in BD","MsgInvalid":"Invalid or empty message, no special characters allowed","HexError":"Invalid Hex code;#012345 Example"},
 }
 
