@@ -20,35 +20,32 @@ css.crossOrigin="anonymous"
 const fuente =document.createElement('style')
 fuente.innerHTML="@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');"
 
-// **Inicio creacion de elemnto flotante de inicio
 //Creacion de elemento de imagen avatar inicio chat
 const botonAvatar=document.createElement('avatar-chat')
 
     //Creacion elemento img, lector de imagenes
     const imagenAvatar = new Image()
-    imagenAvatar.classList.add('circle-avatar-chat')
-    imagenAvatar.src=dominioRepositorio.concat('avatarN.png')
+    imagenAvatar.classList.add('elemento-circular')
+    imagenAvatar.src=dominioRepositorio.concat('avatar.png')
 
     //Adicion de la imagen al boton
     botonAvatar.appendChild(imagenAvatar)
-// **Fin de creacion de elemnto flotante de inicio
 
-// ** Inicio creacion de contenedor de chat
 //Creacion de contenedor de elemento mensajeria
 const contenedorchat=document.createElement('contenedor-chat')
 contenedorchat.style.display='none'        
 contenedorchat.classList.add('borde-cir')
 contenedorchat.classList.add('no-sombreado')
-contenedorchat.classList.add('color-fondo-prin')
+contenedorchat.classList.add('color-fondo-primario')
 
-    // ** Inicio creacion de esquema de vista chat
     //Creacion elemnto de esquema de vista
     const esquema= document.createElement('esquema-chat') 
     esquema.id="esquema-inicial"
+
         //Creacion elemento de cabecera de esquema
         const cabecera=document.createElement('cabecera-chat')
         cabecera.classList.add('top-border-radius')
-        cabecera.classList.add('color-pri-back')
+        cabecera.classList.add('color-primario-fondo')
 
             //Creacion de elementos de cabecera
             const contenidoCabecera =document.createElement('fila-flexible-chat')
@@ -60,31 +57,26 @@ contenedorchat.classList.add('color-fondo-prin')
 
                     //Creacion de elemento imagen para avatar boton inicio
                     const imagenAvatarIcono = new Image()
-                    imagenAvatarIcono.classList.add('circle-avatar-chat')
-                    imagenAvatarIcono.src=dominioRepositorio.concat('avatarN.png')
+                    imagenAvatarIcono.classList.add('elemento-circular')
+                    imagenAvatarIcono.src=dominioRepositorio.concat('avatar.png')
 
                 //Adicion de elemento imagen a icono de avatar inicio
                 avatarIcono.appendChild(imagenAvatarIcono)
 
                 //Creacion elemento titulo de componente chat
-                const tituloCabecera=document.createElement('title-chat')
-                tituloCabecera.style.flex='1 1 auto'
-                tituloCabecera.classList.add('color-pri-color')
+                const tituloCabecera=document.createElement('titulo-chat')                
+                tituloCabecera.classList.add('color-primario-texto')
                 tituloCabecera.innerHTML='Gala'
 
-                // Creacion de elemento de botonn salida
+                // Creacion de elemento de boton salida
                 const btnSalida= document.createElement('button-icon-chat')
-                btnSalida.style.boxShadow='none'
-                btnSalida.style.width='24px'
-                btnSalida.style.height='24px'
-                btnSalida.classList.add('color-pri-back')
-                btnSalida.classList.add('color-pri-color')
+                btnSalida.classList.add('no-sombreado')                
+                btnSalida.classList.add('color-primario-fondo')
+                btnSalida.classList.add('color-primario-texto')
                 btnSalida.id='alternarContenedorAvatar'
 
                     // Creacion de elemento de icono para boton de salida
-                    const imgbtnSld=document.createElement('span-icon-chat')
-                    imgbtnSld.style.width='24px'
-                    imgbtnSld.style.height='24px'
+                    const imgbtnSld=document.createElement('span-icon-chat')                    
                     imgbtnSld.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="24px" height="24px"><path d="M563.8 512l262.5-312.9c4.4-5.2.7-13.1-6.1-13.1h-79.8c-4.7 0-9.2 2.1-12.3 5.7L511.6 449.8 295.1 191.7c-3-3.6-7.5-5.7-12.3-5.7H203c-6.8 0-10.5 7.9-6.1 13.1L459.4 512 196.9 824.9A7.95 7.95 0 00203 838h79.8c4.7 0 9.2-2.1 12.3-5.7l216.5-258.1 216.5 258.1c3 3.6 7.5 5.7 12.3 5.7h79.8c6.8 0 10.5-7.9 6.1-13.1L563.8 512z"></path></svg>'
                 
                 // Adicion de imagen a boton 
@@ -92,17 +84,13 @@ contenedorchat.classList.add('color-fondo-prin')
 
                 //Creacion de elemento boton de menu
                 const btnMenu= document.createElement('button-icon-chat')
-                btnMenu.style.boxShadow='none'
-                btnMenu.style.width='24px'
-                btnMenu.style.height='24px'
-                btnMenu.classList.add('color-pri-back')
-                btnMenu.classList.add('color-pri-color')
+                btnSalida.classList.add('no-sombreado')                
+                btnMenu.classList.add('color-primario-fondo')
+                btnMenu.classList.add('color-primario-texto')
                 btnMenu.id='menu-container-chat'
 
                     // Creacion de elemento imagen icono de boton menu
-                    const imgbtnMenu=document.createElement('span-icon-chat')
-                    imgbtnMenu.style.width='24px'
-                    imgbtnMenu.style.height='24px'
+                    const imgbtnMenu=document.createElement('span-icon-chat')                    
                     imgbtnMenu.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="24px" height="24px"><path d="M456 231a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0zm0 280a56 56 0 10112 0 56 56 0 10-112 0z"/></svg>'
 
                 //Adicion de imagen de salida a boton menu
@@ -127,14 +115,15 @@ contenedorchat.classList.add('color-fondo-prin')
 
                 //Creacion de elemento boton para scroll fondo
                 const btnScrollFin=document.createElement('button-icon-chat')
-                btnScrollFin.style="height: 24px;width: 24px;box-shadow: none;margin:0px"
+                btnScrollFin.classList.add('no-sombreado') 
                 btnScrollFin.classList.add('color-ter-back')
                 btnScrollFin.id='btn-scroll'
 
                     //Creacion de imagen para boton imagen
-                    const imgAbajo=document.createElement('span-icon-chat')
-                    imgAbajo.style="height: 24px;width: 24px;"
+                    const imgAbajo=document.createElement('span-icon-chat')                    
                     imgAbajo.classList.add('color-ter-color')
+                    imgAbajo.style.height="24px"
+                    imgAbajo.style.width="24px"
                     imgAbajo.innerHTML='<svg viewBox="0 0 1024 1024" focusable="false" fill="currentColor" width="24px" height="24px"><path d="M840.4 300H183.6c-19.7 0-30.7 20.8-18.5 35l328.4 380.8c9.4 10.9 27.5 10.9 37 0L858.9 335c12.2-14.2 1.2-35-18.5-35z"/></svg>'
 
                 // Adicion de imagen a boton
@@ -161,37 +150,44 @@ contenedorchat.classList.add('color-fondo-prin')
         const pie=document.createElement('footer-chat')
         pie.classList.add('bottom-border-radius')
 
-            // Creacionde elementos parte inferior
+            // Creacion de elementos parte inferior
             const filaPie= document.createElement('fila-flexible-chat')
             filaPie.classList.add('centrado-vertical')
             filaPie.classList.add('centrado-horizontal')
             filaPie.id='initRow'
 
+                //Creacion de contenendor parte inferior
                 const colunmaInputPie= document.createElement('col-flex-chat')
 
+                    // Creacion de elemento de entrada texto para mensaje
                     const inputMsg=document.createElement('textarea')
                     inputMsg.tabIndex=0
                     inputMsg.rows=1                    
                     inputMsg.wrap='off'
                     inputMsg.id="txtMsg"
-                    inputMsg.classList.add('input-chat')
+                    inputMsg.classList.add('input-chat')                    
                     
+                    // Creacion de elemento boton de envio mensaje
                     const buttonMic=document.createElement('button-icon-chat')
-                    buttonMic.classList.add('color-pri-back')
+                    buttonMic.classList.add('color-primario-fondo')
                     buttonMic.id='btn-snd-msg'
 
+                        //Creacion elemento imagen para boton envio de mensaje
                         const imgbtnMic=document.createElement('span-icon-chat')
-                        imgbtnMic.classList.add('color-pri-color')
+                        imgbtnMic.classList.add('color-primario-texto')
                         imgbtnMic.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="24px" height="24px"><path d="M512 624c93.9 0 170-75.2 170-168V232c0-92.8-76.1-168-170-168s-170 75.2-170 168v224c0 92.8 76.1 168 170 168zm330-170c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254S258 594.3 258 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 168.7 126.6 307.9 290 327.6V884H326.7c-13.7 0-24.7 14.3-24.7 32v36c0 4.4 2.8 8 6.2 8h407.6c3.4 0 6.2-3.6 6.2-8v-36c0-17.7-11-32-24.7-32H548V782.1c165.3-18 294-158 294-328.1z"/></svg>'
 
+                    // Adicion de imagen a boton envio de mensaje
                     buttonMic.appendChild(imgbtnMic)
                 
+                // Adicion de boton y elemento ingreso a contenedor
                 colunmaInputPie.appendChild(inputMsg)
                 colunmaInputPie.appendChild(buttonMic)
                 
+            //Adicion de contenedor a pie de esquema
             filaPie.appendChild(colunmaInputPie)
 
-            // fila de contenido al grabar
+            // Creacion de elemento fila de contenido al grabar
             const filaPieRec= document.createElement('fila-flexible-chat')
             filaPieRec.classList.add('centrado-vertical')
             filaPieRec.classList.add('centrado-horizontal')
@@ -200,71 +196,89 @@ contenedorchat.classList.add('color-fondo-prin')
             filaPieRec.classList.add('visible')
             filaPieRec.id='recRow'
 
+                // Creacion de elemento contador de segundos y onda de sonido; en modo pause viusliza reprod audio
                 contenidoPieRec=document.createElement('col-flex-chat')
                 contenidoPieRec.style.width='100%'
 
+                    // Creacion de elemento para ver segundos de grabacion
                     const txtPieSgRec=document.createElement('p-chat')
                     txtPieSgRec.style='color:black'
                     txtPieSgRec.innerHTML="00:00"
 
+                    // Creacion de elemento de visualizacion de onda de audio
                     const waveAud=document.createElement('canvas')
                     waveAud.classList.add('canvas-chat')
                     waveAud.id='wave-aud'
 
+                    // Creacion de elemnto para reproducir audio
                     const audio=new Audio()
                     audio.style.display="none"
                     audio.controls = true;
                     audio.id='audio-source-chat'
 
+                // Adicion de elementos de texto segundos, elemnto de onda audio y reprod audio a contenedor
                 contenidoPieRec.appendChild(txtPieSgRec)
                 contenidoPieRec.appendChild(waveAud)
                 contenidoPieRec.appendChild(audio)
 
+                // Creacion de contenedor de opciones de grabado de audio
                 const opcionesPieRec=document.createElement('col-flex-chat')
                 opcionesPieRec.style.width="100%"
                 opcionesPieRec.style.display="grid"
                 opcionesPieRec.style.gridAutoFlow="column"
 
+                    // Creacion de boton para eliminar audio
                     const btnElmAud=document.createElement('button-transparent-chat')
                     btnElmAud.id="del-rec-chat"
 
+                        // Creacion de imagen de boton para eliminar
                         const imgBtnDel=document.createElement('span-icon-chat')
                         imgBtnDel.style.color="#667781"
                         imgBtnDel.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="24px" height="24px"><path d="M864 256H736v-80c0-35.3-28.7-64-64-64H352c-35.3 0-64 28.7-64 64v80H160c-17.7 0-32 14.3-32 32v32c0 4.4 3.6 8 8 8h60.4l24.7 523c1.6 34.1 29.8 61 63.9 61h454c34.2 0 62.3-26.8 63.9-61l24.7-523H888c4.4 0 8-3.6 8-8v-32c0-17.7-14.3-32-32-32zm-200 0H360v-72h304v72z"/></svg>'
 
+                    // Adicion de imagen a boton eliminar audio
                     btnElmAud.appendChild(imgBtnDel)
 
+                    // Creacion de elemento para pausar grabacion de voz
                     const btnPausAud=document.createElement('button-transparent-chat')
                     btnPausAud.id='pause-rec-chat'
                     btnPausAud.style.justifySelf="center"
 
+                        // Creacion de imagen para boton pausa
                         const imgBtnPas=document.createElement('span-icon-chat')
                         imgBtnPas.style="color:red"
                         imgBtnPas.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="30px" height="30px"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M512 140c-205.4 0-372 166.6-372 372s166.6 372 372 372 372-166.6 372-372-166.6-372-372-372zm-80 524c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V360c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v304zm224 0c0 4.4-3.6 8-8 8h-48c-4.4 0-8-3.6-8-8V360c0-4.4 3.6-8 8-8h48c4.4 0 8 3.6 8 8v304z" fill="#ffffff"></path><path d="M424 352h-48c-4.4 0-8 3.6-8 8v304c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V360c0-4.4-3.6-8-8-8zm224 0h-48c-4.4 0-8 3.6-8 8v304c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V360c0-4.4-3.6-8-8-8z"></path></svg>'
 
+                    // Adicion de boton de pause
                     btnPausAud.appendChild(imgBtnPas)
 
+                    // Creacion de boton para enviar audio
                     const btnSndAud=document.createElement('button-icon-chat')
                     btnSndAud.id='stop-rec-chat'
                     btnSndAud.classList.add('btn-circle')
-                    btnSndAud.classList.add('color-pri-back')
+                    btnSndAud.classList.add('color-primario-fondo')
                     btnSndAud.style.justifySelf="end"
                     btnSndAud.style.marginTop="5px"
                     btnSndAud.style.marginBottom="5px"
 
+                        // Creacion de imagen para boton de envio de audio
                         const imgSndAud=document.createElement('span-icon-chat')
-                        imgSndAud.classList.add('color-pri-color')
+                        imgSndAud.classList.add('color-primario-texto')
                         imgSndAud.innerHTML='<svg viewBox="0 0 24 24" focusable="false" height="24px" width="24px" fill="currentColor"><path d="M1.101,21.757L23.8,12.028L1.101,2.3l0.011,7.912l13.623,1.816L1.112,13.845 L1.101,21.757z"></path></svg>'
 
+                    // Adicion de imagen al boton de envio de audio
                     btnSndAud.appendChild(imgSndAud)
 
+                // Adicion de botones: aliminar,pausar y enviar audio
                 opcionesPieRec.appendChild(btnElmAud)
                 opcionesPieRec.appendChild(btnPausAud)
                 opcionesPieRec.appendChild(btnSndAud)
 
+            // Adicion de contenedores de contenido y opciones de audio
             filaPieRec.appendChild(contenidoPieRec)
             filaPieRec.appendChild(opcionesPieRec)
 
+        // Adicion de contenedores a pie de esquema
         pie.appendChild(filaPie)
         pie.appendChild(filaPieRec)
 
@@ -272,16 +286,16 @@ contenedorchat.classList.add('color-fondo-prin')
     esquema.appendChild(cabecera)
     esquema.appendChild(contenido)
     esquema.appendChild(pie)
-    // ** Fin creacion de esquema de vista chat
-
-    // ** Inicio de creacion de seccion validacion
+    
+    // Creacion de esquema para componente de verificacion de token
     const esquemaValidacion=document.createElement('esquema-chat')
     esquemaValidacion.style.display='none'
     esquemaValidacion.id="esqval"
     
+        // Creacion de elemnto para cabecera de esquema
         const cabeceraValidacion=document.createElement('cabecera-chat')
         cabeceraValidacion.classList.add('top-border-radius')
-        cabeceraValidacion.classList.add('color-pri-back')
+        cabeceraValidacion.classList.add('color-primario-fondo')
 
             //Creacion de elementos de cabecera
             const filaCabeceraValidacion =document.createElement('fila-flexible-chat')
@@ -293,31 +307,26 @@ contenedorchat.classList.add('color-fondo-prin')
 
                     //Creacion de elemento imagen para avatar boton inicio
                     const imgAvatarIcnVal = new Image()
-                    imgAvatarIcnVal.classList.add('circle-avatar-chat')                    
-                    imgAvatarIcnVal.src=dominioRepositorio.concat('avatarN.png')
+                    imgAvatarIcnVal.classList.add('elemento-circular')                    
+                    imgAvatarIcnVal.src=dominioRepositorio.concat('avatar.png')
 
                 //Adicion de elemento imagen a icono de avatar inicio
                 avatarIconoValidacion.appendChild(imgAvatarIcnVal)
 
                 // Creacion de titulo de cabecera
-                const columnaCabeceraTitVal=document.createElement('title-chat')
-                columnaCabeceraTitVal.style.flex='1 1 auto'
-                columnaCabeceraTitVal.classList.add('color-pri-color')
+                const columnaCabeceraTitVal=document.createElement('titulo-chat')                
+                columnaCabeceraTitVal.classList.add('color-primario-texto')
                 columnaCabeceraTitVal.innerHTML='Configuracion Tema'
 
                 // Creacion de boton para validacion de token
                 const btnSalidaVal= document.createElement('button-icon-chat')
-                btnSalidaVal.classList.add('color-pri-back')
-                btnSalidaVal.classList.add('color-pri-color')
-                btnSalidaVal.style.width='24px'
-                btnSalidaVal.style.height='24px'
+                btnSalidaVal.classList.add('color-primario-fondo')
+                btnSalidaVal.classList.add('color-primario-texto')                
                 btnSalidaVal.style.boxShadow='none'
                 btnSalidaVal.id='close-container-val-chat'                
 
                     // Creacion de elemento imagen para boton de validacion
-                    const imgbtnSldVal=document.createElement('span-icon-chat')
-                    imgbtnSldVal.style.width='24px'
-                    imgbtnSldVal.style.height='24px'
+                    const imgbtnSldVal=document.createElement('span-icon-chat')                    
                     imgbtnSldVal.innerHTML='<svg viewBox="64 64 896 896" focusable="false" height="24px" width="24px" fill="currentColor"><path d="M872 474H286.9l350.2-304c5.6-4.9 2.2-14-5.2-14h-88.5c-3.9 0-7.6 1.4-10.5 3.9L155 487.8a31.96 31.96 0 000 48.3L535.1 866c1.5 1.3 3.3 2 5.2 2h91.5c7.4 0 10.8-9.2 5.2-14L286.9 550H872c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"/></svg>'
 
                 // Adicion de imagen a boton
@@ -327,33 +336,41 @@ contenedorchat.classList.add('color-fondo-prin')
             filaCabeceraValidacion.appendChild(avatarIconoValidacion)
             filaCabeceraValidacion.appendChild(columnaCabeceraTitVal)
             filaCabeceraValidacion.appendChild(btnSalidaVal)            
-        
+                
+        // Adicion de elementos a contenedor cabecera de esquema
         cabeceraValidacion.appendChild(filaCabeceraValidacion)
 
+        // Creacion de elemento contenedor 
         const contenidoVal=document.createElement('content-chat')
 
+            // Creacion de contenedor para validacion de token seguridad
             const divToken=document.createElement('div-chat')
             divToken.style.display='flex'
             divToken.style.flexDirection='column'
 
+                // Creacion de elemento etiqueta para ingreso token
                 const etiquetaToken=document.createElement('label-chat')
                 etiquetaToken.id='etiquetaToken'
                 etiquetaToken.setAttribute('for','token')
                 etiquetaToken.innerHTML="Token:"
 
+                // Creacion de elemento de ingreso de token de seguridad
                 const txtToken=document.createElement('input')
                 txtToken.classList.add('input-passwd-chat')
                 txtToken.id='token'
 
+            //Adicion de elemntos etiqueta y boton de token seguridad
             divToken.appendChild(etiquetaToken)
             divToken.appendChild(txtToken)
 
+            // Creacion de elemento contenedor de seleccionador de colores o ingreso de codigo
             const divColor=document.createElement('div-chat')
             divColor.style.display='none'
             divColor.style.flexDirection='column'
             divColor.style.height='100%'
             divColor.style.overflowY='auto'
 
+                //Creacion de elemento contendor de seleccion de colores
                 const divElegiblePrin=document.createElement('div-chat')
                 divElegiblePrin.style.display='flex'
                 divElegiblePrin.style.flexDirection='row'
@@ -361,42 +378,52 @@ contenedorchat.classList.add('color-fondo-prin')
                 divElegiblePrin.style.position="relative"
                 divElegiblePrin.style.justifyContent="center"
             
+                    //Creacion de elemento seleciconador de color
                     const spanColor1Prin=document.createElement('span-color-chat')
                     spanColor1Prin.classList.add('cambiar-fondo')
                     spanColor1Prin.style.backgroundColor='#00bc94'
                     
+                    //Creacion de elemento seleciconador de color
                     const spanColor2Prin=document.createElement('span-color-chat')
                     spanColor2Prin.classList.add('cambiar-fondo')
                     spanColor2Prin.style.backgroundColor='#235ba8'
                     
+                    //Creacion de elemento seleciconador de color
                     const spanColor3Prin=document.createElement('span-color-chat')
                     spanColor3Prin.classList.add('cambiar-fondo')
                     spanColor3Prin.style.backgroundColor='#cfd6e0'
                     
+                    //Creacion de elemento seleciconador de color
                     const spanColor4Prin=document.createElement('span-color-chat')
                     spanColor4Prin.classList.add('cambiar-fondo')
                     spanColor4Prin.style.backgroundColor='#ffffff'
 
+                    //Creacion de elemento seleciconador de color
                     const spanColor5Prin=document.createElement('span-color-chat')
                     spanColor5Prin.classList.add('cambiar-fondo')
                     spanColor5Prin.style.backgroundColor='#000000'
 
+                    //Creacion de elemento seleciconador de color
                     const spanColor6Prin=document.createElement('span-color-chat')
                     spanColor6Prin.classList.add('cambiar-fondo')
                     spanColor6Prin.style.backgroundColor='#f49100'
 
+                    //Creacion de elemento seleciconador de color
                     const spanColor7Prin=document.createElement('span-color-chat')
                     spanColor7Prin.classList.add('cambiar-fondo')
                     spanColor7Prin.style.backgroundColor='#ee2737'
 
+                    //Creacion de elemento seleciconador de color
                     const spanColor8Prin=document.createElement('span-color-chat')
                     spanColor8Prin.classList.add('cambiar-fondo')
                     spanColor8Prin.style.backgroundColor='#a5b9b2'
 
+                    //Creacion de elemento seleciconador de color
                     const spanColor9Prin=document.createElement('span-color-chat')
                     spanColor9Prin.classList.add('cambiar-fondo')
                     spanColor9Prin.style.backgroundColor='#857c72'
 
+                // Adiccion de seleecionadores de colores a contenedor
                 divElegiblePrin.appendChild(spanColor1Prin)
                 divElegiblePrin.appendChild(spanColor2Prin)
                 divElegiblePrin.appendChild(spanColor3Prin)
@@ -406,67 +433,80 @@ contenedorchat.classList.add('color-fondo-prin')
                 divElegiblePrin.appendChild(spanColor7Prin)
                 divElegiblePrin.appendChild(spanColor8Prin)
                 divElegiblePrin.appendChild(spanColor9Prin)
-
-                const etiquetaColorPrin=document.createElement('label-chat')                
+                
+                // Creacion de elemnto etiqueta 
+                const etiquetaColorPrin=document.createElement('label-chat')
                 etiquetaColorPrin.setAttribute('for','color-pri')
                 etiquetaColorPrin.innerHTML="Color Primario:"
 
+                // Creacion de elemento de elemento ingreso de codigo HEX Fondo
                 const txtColorPrin=document.createElement('input')
                 txtColorPrin.classList.add('input-passwd-chat')
                 txtColorPrin.id='color-pri'
 
+                // Creacion de boton para guardado de color por codigo HEX Fondo
                 const btnSndBackColor=document.createElement('button-chat')
                 btnSndBackColor.style.width="auto"
                 btnSndBackColor.id='background-btn'
                 btnSndBackColor.classList.add('block-button')
-                btnSndBackColor.classList.add('color-pri-back')
-                btnSndBackColor.classList.add('color-pri-color')
+                btnSndBackColor.classList.add('color-primario-fondo')
+                btnSndBackColor.classList.add('color-primario-texto')
                 btnSndBackColor.innerHTML="Guardar Codigo"
 
+                // Creacion de elemento contenedor de seleccionador de colores
                 const divElegibleSec=document.createElement('div-chat')
                 divElegibleSec.style.display='flex'
                 divElegibleSec.style.flexDirection='row'
                 divElegibleSec.style.flexWrap="wrap"
                 divElegibleSec.style.position="relative"
                 divElegibleSec.style.justifyContent="center"
-
             
+                    // Elemento seleccionador de color
                     const spanColor1Sec=document.createElement('span-color-chat')
                     spanColor1Sec.classList.add("cambiar-color")
                     spanColor1Sec.style.backgroundColor='#00bc94'
                     
+                    // Elemento seleccionador de color
                     const spanColor2Sec=document.createElement('span-color-chat')
                     spanColor2Sec.classList.add("cambiar-color")
                     spanColor2Sec.style.backgroundColor='#235ba8'
                     
+                    // Elemento seleccionador de color
                     const spanColor3Sec=document.createElement('span-color-chat')
                     spanColor3Sec.classList.add("cambiar-color")
                     spanColor3Sec.style.backgroundColor='#cfd6e0'
                     
+                    // Elemento seleccionador de color
                     const spanColor4Sec=document.createElement('span-color-chat')
                     spanColor4Sec.classList.add("cambiar-color")
                     spanColor4Sec.style.backgroundColor='#ffffff'
 
+                    // Elemento seleccionador de color
                     const spanColor5Sec=document.createElement('span-color-chat')
                     spanColor5Sec.classList.add("cambiar-color")
                     spanColor5Sec.style.backgroundColor='#000000'
 
+                    // Elemento seleccionador de color
                     const spanColor6Sec=document.createElement('span-color-chat')
                     spanColor6Sec.classList.add("cambiar-color")
                     spanColor6Sec.style.backgroundColor='#f49100'
 
+                    // Elemento seleccionador de color
                     const spanColor7Sec=document.createElement('span-color-chat')
                     spanColor7Sec.classList.add("cambiar-color")
                     spanColor7Sec.style.backgroundColor='#ee2737'
 
+                    // Elemento seleccionador de color
                     const spanColor8Sec=document.createElement('span-color-chat')
                     spanColor8Sec.classList.add("cambiar-color")
                     spanColor8Sec.style.backgroundColor='#a5b9b2'
 
+                    // Elemento seleccionador de color
                     const spanColor9Sec=document.createElement('span-color-chat')
                     spanColor9Sec.classList.add("cambiar-color")
                     spanColor9Sec.style.backgroundColor='#857c72'
 
+                // Adicion de elementos selccionadores a contenedor
                 divElegibleSec.appendChild(spanColor1Sec)
                 divElegibleSec.appendChild(spanColor2Sec)
                 divElegibleSec.appendChild(spanColor3Sec)
@@ -477,22 +517,26 @@ contenedorchat.classList.add('color-fondo-prin')
                 divElegibleSec.appendChild(spanColor8Sec)
                 divElegibleSec.appendChild(spanColor9Sec)
 
+                // Creacion de elemento etiqueta para ingreso de codigo color HEX texto
                 const etiquetaColorSec=document.createElement('label-chat')
                 etiquetaColorSec.setAttribute('for','color-sec')
                 etiquetaColorSec.innerHTML="Color Texto:"
 
+                // Creacion de elemento de ingreso de codigo HEX texto 
                 const txtColorSec=document.createElement('input')
                 txtColorSec.classList.add('input-passwd-chat')
                 txtColorSec.id='color-sec'
                 
+                // Creacion de elemento de boton para guardar color codigo HEX texto
                 const btnSndTextColor=document.createElement('button-chat')
                 btnSndTextColor.style.width="auto"
                 btnSndTextColor.id='text-btn'
                 btnSndTextColor.classList.add('block-button')
-                btnSndTextColor.classList.add('color-pri-back')
-                btnSndTextColor.classList.add('color-pri-color')
+                btnSndTextColor.classList.add('color-primario-fondo')
+                btnSndTextColor.classList.add('color-primario-texto')
                 btnSndTextColor.innerHTML="Guardar Codigo"
                             
+            // Adicion de elementos: seleccionadores de colores, etiquetas y botones a elemento contenedor
             divColor.appendChild(etiquetaColorPrin)
             divColor.appendChild(divElegiblePrin)
             divColor.appendChild(txtColorPrin)
@@ -502,32 +546,34 @@ contenedorchat.classList.add('color-fondo-prin')
             divColor.appendChild(txtColorSec)
             divColor.appendChild(btnSndTextColor)
         
+        // Adicion de contenedores: verificacion de token y seleccionador de color
         contenidoVal.appendChild(divToken)
         contenidoVal.appendChild(divColor)
 
+        // Creacion de elemento pie de esquema de validacion
         const pieVal=document.createElement('footer-chat')
         pieVal.classList.add('bottom-border-radius')
         pieVal.id="pie-validacion"
         
+            // Creacion de bootn para comprobacion de token de seguridad
             const btnSndTkn=document.createElement('button-chat')
             btnSndTkn.classList.add('block-button')
-            btnSndTkn.classList.add('color-pri-back')
-            btnSndTkn.classList.add('color-pri-color')
+            btnSndTkn.classList.add('color-primario-fondo')
+            btnSndTkn.classList.add('color-primario-texto')
             btnSndTkn.id='snd-token-chat'
             btnSndTkn.innerHTML="Comprobar"
         
+        // Adicion de boton verificador de token seguridad
         pieVal.appendChild(btnSndTkn)
     
+    // Adicion delementos: cabecera contenido y pie a esquema de validacion
     esquemaValidacion.appendChild(cabeceraValidacion)
     esquemaValidacion.appendChild(contenidoVal)
     esquemaValidacion.appendChild(pieVal)
-    // ** Fin de seccion validacion
-
-//Adicion del esquema a contenedor total
+    
+//Adicion del esquemas a contenedor padre
 contenedorchat.appendChild(esquema)
 contenedorchat.appendChild(esquemaValidacion)
-
-// ** Inicio de agrehacion de funcionalidades
 
 // Adicion de elementos a pagina principal
 if(dominiosPermitidos.includes(window.location.host)){
@@ -536,36 +582,54 @@ if(dominiosPermitidos.includes(window.location.host)){
     document.head.appendChild(css)
     document.head.appendChild(fuente)
 }else{
+    //En caso de no estar en la lista muestra mensaje de no permitido
     console.error("Domain not allowed")
     console.info(window.location.host)
     window.alert("Dominio no permitido")
 }
 
-var msgTipo=true
-var recordPause=false
-var contMsg=0
-var audioRecordStartTime,elapsedTimeTimer,context;
-var audioRecordPausedTime=0
-let elapsedTime
+// ** Inicio seccion de definicion de funciones
 
+// Varible para verificar tipo de mensaje (audio o texto)
+var msgTipo=true
+// Variable para verificar si el grabado de audio esta pausado
+var recordPause=false
+// Variable para conteo de mensajes
+var contMsg=0
+// Variables para controlar grabacion de audio: tiempo inicio de grabacion, manejador de tiempo, contexto, tiempo trascurrido
+var audioRecordStartTime,elapsedTimeTimer,context,elapsedTime;
+// Variable para contabilizar tiempo grabado en pausa
+var audioRecordPausedTime=0
+// Variable para internacionalizacion
 var diccionario={
     "es":{"placeholder":"Escribe un mensaje","buttonToken":"Comprobar","saveHex":"Guardar Color HEX","configTheme":"Configurar Tema","principalColor":"Color Principal:","textColor":"Color Texto:"},
     "en":{"placeholder":"Write a message","buttonToken":"Check","saveHex":"Save Color HEX","configTheme":"Theme Configuration","principalColor":"Principal Color:","textColor":"Text Color:"},
 }
 
+// Funcion para carga de token seguridad y verificacion de temas
 window.onload=funcionesInicio;
+// Funcion para cambio de idioma de pagina
 window.onlanguagechange=obtenerIdioma;
 
+// Funcion para control de tamaño entrada de mensaje
 inputMsg.addEventListener('input', () => {
+    // Obtener el tamaño de scroll de elemento ingreso
     const scrollHeight = inputMsg.scrollHeight;
+    // Obtencion de valor de entrada
     if(!jQuery("#txtMsg").val()){
+        // Tipo de mensaje texto
         msgTipo=true
+        // Cambio de propiedades de entrada
         inputMsg.style.overflowY = 'hidden';
         inputMsg.style.height = '37px';        
+        // Cambio de icono de microfono a envio
         cambiarIcnBtnInic()
     }else {
+        // Tipo de mensaje audio
         msgTipo=false
+        // Cambio de icono de microfono a envio
         cambiarIcnBtnInic()
+        // COntrol de tamaño conforme aumenta o disminuye el contenido de entrada
         if (scrollHeight > 100) {
             inputMsg.style.overflowY = 'scroll';
             inputMsg.style.height = '100px';
@@ -576,7 +640,8 @@ inputMsg.addEventListener('input', () => {
     }    
 });
 
-divLista.addEventListener('scroll',() => {    
+// Evento de escucha para scroll de elemento de contenedor, boton de desplazado a fondo
+divLista.addEventListener('scroll',() => {
     if (divLista.offsetHeight + divLista.scrollTop < divLista.scrollHeight) {
         divBoton.style.display='flex'
         divBoton.style.zIndex="100001"
@@ -585,6 +650,7 @@ divLista.addEventListener('scroll',() => {
     }
 })
 
+// Funcion para cambiar icono de envio mensaje
 function cambiarIcnBtnInic(){
     if(msgTipo){
         imgbtnMic.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="24px" height="24px"><path d="M512 624c93.9 0 170-75.2 170-168V232c0-92.8-76.1-168-170-168s-170 75.2-170 168v224c0 92.8 76.1 168 170 168zm330-170c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 140.3-113.7 254-254 254S258 594.3 258 454c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8 0 168.7 126.6 307.9 290 327.6V884H326.7c-13.7 0-24.7 14.3-24.7 32v36c0 4.4 2.8 8 6.2 8h407.6c3.4 0 6.2-3.6 6.2-8v-36c0-17.7-11-32-24.7-32H548V782.1c165.3-18 294-158 294-328.1z"/></svg>'
@@ -593,22 +659,31 @@ function cambiarIcnBtnInic(){
     }
 }
 
+// Funcion para generado de elemento carga
 function generateLoading(origin){
+    // Creacion de elemento para lista de mensajes
     const actualMsg=document.createElement('list-item-chat')
+    // Cambio de id para identificaicon de elemento carga
     actualMsg.id="loading"
+    // Condicion para diferenciar mensaje de sistema o usuario
     if(origin){
         actualMsg.classList.add('inverse-row')
     }
-    const loadingIcon=document.createElement('loading-chat')
+    // Creacion elemento de carga
+    const loadingIcon=document.createElement('loading-chat')    
     loadingIcon.classList.add('lds-dual-ring')
     loadingIcon.id="loadingIcon"
-        
+    // Adicion de elemento a contenedor
     actualMsg.appendChild(loadingIcon)
+    // Adicion de elemento a lista de mensajes
     listaMsg.appendChild(actualMsg)
+    // Vaciado de entrada
     inputMsg.value=""
+    // Accion de scroll al fondo elemento
     divLista.scrollTo(0, divLista.scrollHeight);
 }
 
+// Funcion para eliminar evento de carga
 function deleteLoading(){
     jQuery('#loading').remove()
 }
@@ -625,7 +700,8 @@ function obtenerToken(){
     .then(function (response) {
         sessionStorage.setItem('token',response.data.token);
         sessionStorage.setItem('id',response.data.id);        
-        consultarTema()
+        consultarTema()        
+        jQuery("avatar-chat").click(alternarContenedorAvatar)
     })
     .catch(function(error){
         console.error(error)
@@ -648,8 +724,8 @@ function createMsgElement(origin,message){
             containerMsg.innerHTML=message
         }
     }else{        
-        containerMsg.classList.add('color-pri-back')
-        containerMsg.classList.add('color-pri-color')
+        containerMsg.classList.add('color-primario-fondo')
+        containerMsg.classList.add('color-primario-texto')
         containerMsg.innerHTML=message
     }
     actualMsg.appendChild(containerMsg)
@@ -724,7 +800,8 @@ function loadAudio(recorderAudioAsBlob) {
 function sendTextMsg(message){        
     generateLoading(true)
     axios.post(dominioAPI.concat('bot-question'),{
-        question:message
+        question:message,
+        language:sessionStorage.getItem("idioma")
     },
     {
         headers: {
@@ -963,11 +1040,6 @@ function computeElapsedTime(startTime) {
         return totalHours + ":" + minutes + ":" + seconds;
     }
 }
-var dictionary={
-    'Recording...':{
-        'es':'Grabando...'
-    }
-}
 
 window.onlanguagechange=(event)=>{
     current_lang_index = ++current_lang_index % 2;
@@ -999,10 +1071,10 @@ function cambiarTema(colorfondo,colortexto){
             case ".color-back-prin":
                 reglas.cssRules[i].style.setProperty('background-color','#EFEAE2')
                 break;
-            case ".color-pri-back":
+            case ".color-primario-fondo":
                 reglas.cssRules[i].style.setProperty('background-color',colorfondo)
                 break;
-            case ".color-pri-color":
+            case ".color-primario-texto":
                 reglas.cssRules[i].style.setProperty('color',colortexto)
                 break;
             case ".color-sec-back":
@@ -1029,7 +1101,7 @@ function cambiarFondo(colorfondo){
     var reglas=buscarTema()
     for(let i =0;i<reglas.cssRules.length;i++){
         switch(reglas.cssRules[i].selectorText){            
-            case ".color-pri-back":
+            case ".color-primario-fondo":
                 reglas.cssRules[i].style.setProperty('background-color',colorfondo)
                 break;            
             case ".color-sec-back":
@@ -1050,7 +1122,7 @@ function cambiarColor(colortexto){
     var reglas=buscarTema()
     for(let i =0;i<reglas.cssRules.length;i++){
         switch(reglas.cssRules[i].selectorText){
-            case ".color-pri-color":
+            case ".color-primario-texto":
                 reglas.cssRules[i].style.setProperty('color',colortexto)
                 break;            
             case ".color-sec-color":
@@ -1147,8 +1219,7 @@ function consultarTema(){
         cambiarTema(response.data[1],response.data[2])
     })
     .catch(function(error){        
-        console.error("Tema inexistente para empresa")
-        
+        console.error("Tema inexistente para empresa")        
     })
 }
 
@@ -1246,6 +1317,7 @@ function validatHexadecimal(hex){
 
 function obtenerIdioma(){
     var lenguaje=document.documentElement.lang || navigator.language
+    sessionStorage.setItem('idioma',lenguaje)    
     if(/es/i.test(lenguaje)){
         inputMsg.placeholder=diccionario["es"]["placeholder"]
         btnSndTkn.innerHTML=diccionario["es"]["buttonToken"]
@@ -1267,6 +1339,5 @@ function obtenerIdioma(){
 
 function funcionesInicio(){
     obtenerToken()
-    obtenerIdioma()
-    jQuery("avatar-chat").click(alternarContenedorAvatar)    
+    obtenerIdioma()    
 }
