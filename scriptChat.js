@@ -26,7 +26,7 @@ const botonAvatar=document.createElement('avatar-chat')
     //Creacion elemento img, lector de imagenes
     const imagenAvatar = new Image()
     imagenAvatar.classList.add('elemento-circular')
-    imagenAvatar.src=dominioRepositorio.concat('avatar.png')
+    imagenAvatar.src=dominioRepositorio.concat('avatarN.png')
 
     //Adicion de la imagen al boton
     botonAvatar.appendChild(imagenAvatar)
@@ -58,7 +58,7 @@ contenedorchat.classList.add('color-fondo-primario')
                     //Creacion de elemento imagen para avatar boton inicio
                     const imagenAvatarIcono = new Image()
                     imagenAvatarIcono.classList.add('elemento-circular')
-                    imagenAvatarIcono.src=dominioRepositorio.concat('avatar.png')
+                    imagenAvatarIcono.src=dominioRepositorio.concat('avatarN.png')
 
                 //Adicion de elemento imagen a icono de avatar inicio
                 avatarIcono.appendChild(imagenAvatarIcono)
@@ -84,7 +84,7 @@ contenedorchat.classList.add('color-fondo-primario')
 
                 //Creacion de elemento boton de menu
                 const btnMenu= document.createElement('button-icon-chat')
-                btnSalida.classList.add('no-sombreado')                
+                btnMenu.classList.add('no-sombreado')                
                 btnMenu.classList.add('color-primario-fondo')
                 btnMenu.classList.add('color-primario-texto')
                 btnMenu.id='menu-container-chat'
@@ -308,7 +308,7 @@ contenedorchat.classList.add('color-fondo-primario')
                     //Creacion de elemento imagen para avatar boton inicio
                     const imgAvatarIcnVal = new Image()
                     imgAvatarIcnVal.classList.add('elemento-circular')                    
-                    imgAvatarIcnVal.src=dominioRepositorio.concat('avatar.png')
+                    imgAvatarIcnVal.src=dominioRepositorio.concat('avatarN.png')
 
                 //Adicion de elemento imagen a icono de avatar inicio
                 avatarIconoValidacion.appendChild(imgAvatarIcnVal)
@@ -585,7 +585,12 @@ if(dominiosPermitidos.includes(window.location.host)){
     //En caso de no estar en la lista muestra mensaje de no permitido
     console.error("Domain not allowed")
     console.info(window.location.host)
-    window.alert("Dominio no permitido")
+    if(sessionStorage.getItem("idioma")=="es"){
+        window.alert(diccionario["es"]["DomainNotAllowed"])
+    }else{
+        window.alert(diccionario["en"]["DomainNotAllowed"])
+    }
+    
 }
 
 // ** Inicio seccion de definicion de funciones
@@ -602,8 +607,8 @@ var audioRecordStartTime,elapsedTimeTimer,context,elapsedTime;
 var audioRecordPausedTime=0
 // Variable para internacionalizacion
 var diccionario={
-    "es":{"placeholder":"Escribe un mensaje","buttonToken":"Comprobar","saveHex":"Guardar Color HEX","configTheme":"Configurar Tema","principalColor":"Color Principal:","textColor":"Color Texto:"},
-    "en":{"placeholder":"Write a message","buttonToken":"Check","saveHex":"Save Color HEX","configTheme":"Theme Configuration","principalColor":"Principal Color:","textColor":"Text Color:"},
+    "es":{"placeholder":"Escribe un mensaje","buttonToken":"Comprobar","saveHex":"Guardar Color HEX","configTheme":"Configurar Tema","principalColor":"Color Principal:","textColor":"Color Texto:","DomainNotAllowed":"Dominio no permitido","SecTokenError":"Error sl obtener token seguridad","MsgError":"Error al enviar mensaje","NoValidToken":"Token de seguridad no valido","BackgError":"Error al guardar fondo en BD","ColorError":"Error al guardar color en BD","MsgInvalid":"Mensaje invalido o vacio, no se permiten caracteres especiales","HexError":"Codigo Hex no valido;#012345 Ej"},
+    "en":{"placeholder":"Write a message","buttonToken":"Check","saveHex":"Save Color HEX","configTheme":"Theme Configuration","principalColor":"Principal Color:","textColor":"Text Color:","DomainNotAllowed":"Domain not allowed","SecTokenError":"Error obtaining security token","MsgError":"Error sending message","NoValidToken":"Invalid security token","BackgError":"Error when saving background to DB","ColorError":"Error when saving color in BD","MsgInvalid":"Invalid or empty message, no special characters allowed","HexError":"Invalid Hex code;#012345 Example"},
 }
 
 // Funcion para carga de token seguridad y verificacion de temas
@@ -705,7 +710,11 @@ function obtenerToken(){
     })
     .catch(function(error){
         console.error(error)
-        window.alert("Error al tratar de obtener token de seguridad")
+        if(sessionStorage.getItem("idioma")=="es"){
+            window.alert(diccionario["es"]["SecTokenError"])
+        }else{
+            window.alert(diccionario["en"]["SecTokenError"])
+        }
     })
 }
 
@@ -815,7 +824,11 @@ function sendTextMsg(message){
     })
     .catch(function(error){
         console.error(error)
-        window.alert("Error al enviar mensaje")
+        if(sessionStorage.getItem("idioma")=="es"){
+            window.alert(diccionario["es"]["MsgError"])
+        }else{
+            window.alert(diccionario["en"]["MsgError"])
+        }
     })
 }
 
@@ -1040,23 +1053,6 @@ function computeElapsedTime(startTime) {
         return totalHours + ":" + minutes + ":" + seconds;
     }
 }
-
-window.onlanguagechange=(event)=>{
-    current_lang_index = ++current_lang_index % 2;
-    current_lang = langs[current_lang_index];
-    translate();
-}
-
-var langs = ['es','us'];
-var current_lang_index = 0;
-var current_lang = langs[current_lang_index];
-
-function translate() {
-    $("[data-translate]").each(function(){
-        var key = $(this).data('translate');
-        $(this).html(dictionary[key][current_lang] || "N/A");
-    });
-}
 function buscarTema(){
     for(let i=0;i<document.styleSheets.length;i++){
         if(document.styleSheets[i].title==="estiloChat"){
@@ -1196,7 +1192,11 @@ function verificarToken(){
     .catch(function(error){
         txtToken.value=""
         console.error(error)
-        window.alert("Token de seguridad no valido")
+        if(sessionStorage.getItem("idioma")=="es"){
+            window.alert(diccionario["es"]["NoValidToken"])
+        }else{
+            window.alert(diccionario["en"]["NoValidToken"])
+        }
     })
 }
 
@@ -1237,7 +1237,11 @@ function guardarFondo(colorFondo){
     })
     .catch(function(error){        
         console.error(error)
-        window.alert("Error al guardar el fondo en la base de datos")
+        if(sessionStorage.getItem("idioma")=="es"){
+            window.alert(diccionario["es"]["BackgError"])
+        }else{
+            window.alert(diccionario["en"]["BackgError"])
+        }
     })
 }
 function guardarColor(colorFondo){
@@ -1253,7 +1257,11 @@ function guardarColor(colorFondo){
     })
     .catch(function(error){        
         console.error(error)
-        window.alert("Error al guardar el color en la base de datos")
+        if(sessionStorage.getItem("idioma")=="es"){
+            window.alert(diccionario["es"]["ColorError"])
+        }else{
+            window.alert(diccionario["en"]["ColorError"])
+        }
     })
 }
 
@@ -1301,7 +1309,11 @@ function validarMensaje(texto){
     if(texto && /[a-zA-Z]+/g.test(texto) && !(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(texto))){        
         return true
     }else{
-        window.alert("Mensaje Vacio o Invalido")
+        if(sessionStorage.getItem("idioma")=="es"){
+            window.alert(diccionario["es"]["MsgInvalid"])
+        }else{
+            window.alert(diccionario["en"]["MsgInvalid"])
+        }
         return false
     }
 }
@@ -1310,7 +1322,11 @@ function validatHexadecimal(hex){
     if(hex && /^\u0023[0-9A-F]+$/.test(hex)){
         return true
     }else{
-        window.alert("Codigo Hexadecimal invalido")
+        if(sessionStorage.getItem("idioma")=="es"){
+            window.alert(diccionario["es"]["HexError"])
+        }else{
+            window.alert(diccionario["en"]["HexError"])
+        }
         return false        
     }
 }
