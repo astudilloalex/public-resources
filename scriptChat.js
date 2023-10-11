@@ -4,7 +4,7 @@
 const dominiosPermitidos = ['localhost', '127.0.0.1','bajajecuador.com','corporativo.curbe.com.ec','ebi.corp.ec']
 
 //Localicazion URL de servicio
-const dominioAPI='https://apichatgpt.dev.curbe.com.ec/'
+const dominioAPI='http://chatgptbank.dabpdthgaggcgtff.eastus.azurecontainer.io:5000'
 //Localicazion URL de repositorio contenedor
 const dominioRepositorio='https://public.alexastudillo.com/'
 
