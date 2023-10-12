@@ -16,6 +16,9 @@ css.type='text/css'
 css.title='estiloChat'
 css.crossOrigin="anonymous"
 
+const pdfjs= document.createElement('script')
+pdfjs.src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.min.js"
+
 //Creacion de elemento link fuente
 const fuente =document.createElement('style')
 fuente.innerHTML="@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');"
@@ -25,7 +28,7 @@ const botonAvatar=document.createElement('avatar-chat')
 
     //Creacion elemento img, lector de imagenes
     const imagenAvatar = new Image()
-    imagenAvatar.classList.add('elemento-circular')
+    imagenAvatar.classList.add('elemento-circular')    
     imagenAvatar.src=dominioRepositorio.concat('avatarN.png')
 
     //Adicion de la imagen al boton
@@ -583,6 +586,7 @@ if(dominiosPermitidos.includes(window.location.host)){
     document.body.appendChild(botonAvatar)
     document.head.appendChild(css)
     document.head.appendChild(fuente)
+    document.head.appendChild(pdfjs)
 }else{
     //En caso de no estar en la lista muestra mensaje de no permitido
     console.error("Domain not allowed")
@@ -609,14 +613,32 @@ var audioRecordStartTime,elapsedTimeTimer,context,elapsedTime;
 var audioRecordPausedTime=0
 // Variable para internacionalizacion
 var diccionario={
-    "es":{"placeholder":"Escribe un mensaje","buttonToken":"Comprobar","saveHex":"Guardar Color HEX","configTheme":"Configurar Tema","principalColor":"Color Principal:","textColor":"Color Texto:","DomainNotAllowed":"Dominio no permitido","SecTokenError":"Error al obtener token seguridad","MsgError":"Error al enviar mensaje","NoValidToken":"Token de seguridad no valido","BackgError":"Error al guardar fondo en BD","ColorError":"Error al guardar color en BD","MsgInvalid":"Mensaje invalido o vacio, no se permiten caracteres especiales","HexError":"Codigo Hex no valido;#012345 Ej"},
-    "en":{"placeholder":"Write a message","buttonToken":"Check","saveHex":"Save Color HEX","configTheme":"Theme Configuration","principalColor":"Principal Color:","textColor":"Text Color:","DomainNotAllowed":"Domain not allowed","SecTokenError":"Error obtaining security token","MsgError":"Error sending message","NoValidToken":"Invalid security token","BackgError":"Error when saving background to DB","ColorError":"Error when saving color in BD","MsgInvalid":"Invalid or empty message, no special characters allowed","HexError":"Invalid Hex code;#012345 Example"},
+    "es":{"placeholder":"Escribe un mensaje","buttonToken":"Comprobar","saveHex":"Guardar Color HEX","configTheme":"Configurar Tema","principalColor":"Color Principal:","textColor":"Color Texto:","DomainNotAllowed":"Dominio no permitido","SecTokenError":"Error sl obtener token seguridad","MsgError":"Error al enviar mensaje","NoValidToken":"Token de seguridad no valido","BackgError":"Error al guardar fondo en BD","ColorError":"Error al guardar color en BD","MsgInvalid":"Mensaje invalido o vacio, no se permiten caracteres especiales","HexError":"Codigo Hex no valido;#012345 Ej","pages":"páginas"},
+    "en":{"placeholder":"Write a message","buttonToken":"Check","saveHex":"Save Color HEX","configTheme":"Theme Configuration","principalColor":"Principal Color:","textColor":"Text Color:","DomainNotAllowed":"Domain not allowed","SecTokenError":"Error obtaining security token","MsgError":"Error sending message","NoValidToken":"Invalid security token","BackgError":"Error when saving background to DB","ColorError":"Error when saving color in BD","MsgInvalid":"Invalid or empty message, no special characters allowed","HexError":"Invalid Hex code;#012345 Example","pages":"pages"},
 }
+
+// Variables para lectura de pdf
+var loadingTask
+var pdfDoc=null
+var numPdf=0
 
 // Funcion para carga de token seguridad y verificacion de temas
 window.onload=funcionesInicio;
 // Funcion para cambio de idioma de pagina
 window.onlanguagechange=obtenerIdioma;
+
+function readPDF(path){    
+    loadingTask=pdfjsLib.getDocument(path)
+    loadingTask.promise.then(pdfDoc_ => {
+        pdfDoc = pdfDoc_;
+        if(sessionStorage.getItem("idioma")=="es"){
+            jQuery('#pag'+numPdf.toString()).html(diccionario["es"]["pages"]+" "+pdfDoc.numPages+" PDF")
+        }else{
+            jQuery('#pag'+numPdf.toString()).html(diccionario["en"]["pages"]+" "+pdfDoc.numPages+" PDF")
+        }
+        numPdf++
+    });
+}
 
 // Funcion para control de tamaño entrada de mensaje
 inputMsg.addEventListener('input', () => {
@@ -729,8 +751,9 @@ function createMsgElement(origin,message){
         // containerMsg.classList.add('color-sec-color')
         containerMsg.style.backgroundColor="#000000"
         containerMsg.style.backgroundColor="#FFFFFF"
-        if(message.search(".pdf{1}")!=-1){            
+        if(/.pdf{1}/i.test(message)){            
             downloadPDF(message.substring(message.indexOf("https"),message.indexOf(".pdf")+4),containerMsg)
+            readPDF(message.substring(message.indexOf("https"),message.indexOf(".pdf")+4),containerMsg)
         }else{
             containerMsg.innerHTML=message
         }
@@ -746,41 +769,48 @@ function createMsgElement(origin,message){
 }
 
 function downloadPDF(fileName,element){
-    const filaDscPdf = document.createElement('row-chat')
 
-    const columnaIcono=document.createElement('col-chat')
-    columnaIcono.classList.add('col-4')
+    const filaDscPdf = document.createElement('fila-flexible-chat')
+    filaDscPdf.style.flexDirection='row'
+
+    const columnaIcono=document.createElement('icon-chat')    
     columnaIcono.classList.add('centrado-vertical')
     columnaIcono.classList.add('centrado-horizontal')
     columnaIcono.style.color='#f34646'
-    columnaIcono.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="24px" height="24px"> <path d="M854.6 288.7c6 6 9.4 14.1 9.4 22.6V928c0 17.7-14.3 32-32 32H192c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32h424.7c8.5 0 16.7 3.4 22.7 9.4l215.2 215.3zM790.2 326L602 137.8V326h188.2zM633.22 637.26c-15.18-.5-31.32.67-49.65 2.96-24.3-14.99-40.66-35.58-52.28-65.83l1.07-4.38 1.24-5.18c4.3-18.13 6.61-31.36 7.3-44.7.52-10.07-.04-19.36-1.83-27.97-3.3-18.59-16.45-29.46-33.02-30.13-15.45-.63-29.65 8-33.28 21.37-5.91 21.62-2.45 50.07 10.08 98.59-15.96 38.05-37.05 82.66-51.2 107.54-18.89 9.74-33.6 18.6-45.96 28.42-16.3 12.97-26.48 26.3-29.28 40.3-1.36 6.49.69 14.97 5.36 21.92 5.3 7.88 13.28 13 22.85 13.74 24.15 1.87 53.83-23.03 86.6-79.26 3.29-1.1 6.77-2.26 11.02-3.7l11.9-4.02c7.53-2.54 12.99-4.36 18.39-6.11 23.4-7.62 41.1-12.43 57.2-15.17 27.98 14.98 60.32 24.8 82.1 24.8 17.98 0 30.13-9.32 34.52-23.99 3.85-12.88.8-27.82-7.48-36.08-8.56-8.41-24.3-12.43-45.65-13.12zM385.23 765.68v-.36l.13-.34a54.86 54.86 0 015.6-10.76c4.28-6.58 10.17-13.5 17.47-20.87 3.92-3.95 8-7.8 12.79-12.12 1.07-.96 7.91-7.05 9.19-8.25l11.17-10.4-8.12 12.93c-12.32 19.64-23.46 33.78-33 43-3.51 3.4-6.6 5.9-9.1 7.51a16.43 16.43 0 01-2.61 1.42c-.41.17-.77.27-1.13.3a2.2 2.2 0 01-1.12-.15 2.07 2.07 0 01-1.27-1.91zM511.17 547.4l-2.26 4-1.4-4.38c-3.1-9.83-5.38-24.64-6.01-38-.72-15.2.49-24.32 5.29-24.32 6.74 0 9.83 10.8 10.07 27.05.22 14.28-2.03 29.14-5.7 35.65zm-5.81 58.46l1.53-4.05 2.09 3.8c11.69 21.24 26.86 38.96 43.54 51.31l3.6 2.66-4.39.9c-16.33 3.38-31.54 8.46-52.34 16.85 2.17-.88-21.62 8.86-27.64 11.17l-5.25 2.01 2.8-4.88c12.35-21.5 23.76-47.32 36.05-79.77zm157.62 76.26c-7.86 3.1-24.78.33-54.57-12.39l-7.56-3.22 8.2-.6c23.3-1.73 39.8-.45 49.42 3.07 4.1 1.5 6.83 3.39 8.04 5.55a4.64 4.64 0 01-1.36 6.31 6.7 6.7 0 01-2.17 1.28z"/></svg>'
+    columnaIcono.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="24px" height="35px"> <path d="M854.6 288.7c6 6 9.4 14.1 9.4 22.6V928c0 17.7-14.3 32-32 32H192c-17.7 0-32-14.3-32-32V96c0-17.7 14.3-32 32-32h424.7c8.5 0 16.7 3.4 22.7 9.4l215.2 215.3zM790.2 326L602 137.8V326h188.2zM633.22 637.26c-15.18-.5-31.32.67-49.65 2.96-24.3-14.99-40.66-35.58-52.28-65.83l1.07-4.38 1.24-5.18c4.3-18.13 6.61-31.36 7.3-44.7.52-10.07-.04-19.36-1.83-27.97-3.3-18.59-16.45-29.46-33.02-30.13-15.45-.63-29.65 8-33.28 21.37-5.91 21.62-2.45 50.07 10.08 98.59-15.96 38.05-37.05 82.66-51.2 107.54-18.89 9.74-33.6 18.6-45.96 28.42-16.3 12.97-26.48 26.3-29.28 40.3-1.36 6.49.69 14.97 5.36 21.92 5.3 7.88 13.28 13 22.85 13.74 24.15 1.87 53.83-23.03 86.6-79.26 3.29-1.1 6.77-2.26 11.02-3.7l11.9-4.02c7.53-2.54 12.99-4.36 18.39-6.11 23.4-7.62 41.1-12.43 57.2-15.17 27.98 14.98 60.32 24.8 82.1 24.8 17.98 0 30.13-9.32 34.52-23.99 3.85-12.88.8-27.82-7.48-36.08-8.56-8.41-24.3-12.43-45.65-13.12zM385.23 765.68v-.36l.13-.34a54.86 54.86 0 015.6-10.76c4.28-6.58 10.17-13.5 17.47-20.87 3.92-3.95 8-7.8 12.79-12.12 1.07-.96 7.91-7.05 9.19-8.25l11.17-10.4-8.12 12.93c-12.32 19.64-23.46 33.78-33 43-3.51 3.4-6.6 5.9-9.1 7.51a16.43 16.43 0 01-2.61 1.42c-.41.17-.77.27-1.13.3a2.2 2.2 0 01-1.12-.15 2.07 2.07 0 01-1.27-1.91zM511.17 547.4l-2.26 4-1.4-4.38c-3.1-9.83-5.38-24.64-6.01-38-.72-15.2.49-24.32 5.29-24.32 6.74 0 9.83 10.8 10.07 27.05.22 14.28-2.03 29.14-5.7 35.65zm-5.81 58.46l1.53-4.05 2.09 3.8c11.69 21.24 26.86 38.96 43.54 51.31l3.6 2.66-4.39.9c-16.33 3.38-31.54 8.46-52.34 16.85 2.17-.88-21.62 8.86-27.64 11.17l-5.25 2.01 2.8-4.88c12.35-21.5 23.76-47.32 36.05-79.77zm157.62 76.26c-7.86 3.1-24.78.33-54.57-12.39l-7.56-3.22 8.2-.6c23.3-1.73 39.8-.45 49.42 3.07 4.1 1.5 6.83 3.39 8.04 5.55a4.64 4.64 0 01-1.36 6.31 6.7 6.7 0 01-2.17 1.28z"/></svg>'
     
-    const columnaNombre=document.createElement('col-chat')
-    columnaNombre.classList.add('col-16')
-    columnaNombre.classList.add('centrado-vertical')
-    columnaNombre.classList.add('centrado-horizontal')
-    columnaNombre.innerHTML=fileName.substring(fileName.lastIndexOf('/')+1,fileName.indexOf(".pdf")+4)
+    const div=document.createElement("div-chat")
+    div.style.display="flex"
+    div.style.flexDirection="column"
+    div.style.fontSize="12px"
 
-    const columnaDescargar=document.createElement('col-chat')
-    columnaDescargar.id='downloadPDF'
+        const columnaNombre=document.createElement('name-chat')    
+        columnaNombre.classList.add('centrado-vertical')
+        columnaNombre.classList.add('centrado-horizontal')
+        columnaNombre.style.fontsize="12px"
+        columnaNombre.innerHTML=fileName.substring(fileName.lastIndexOf('/')+1,fileName.indexOf(".pdf")+4)
+
+        const columnaDetalle=document.createElement('detail-chat')    
+        columnaDetalle.classList.add('centrado-vertical')
+        columnaDetalle.classList.add('centrado-horizontal')
+        columnaDetalle.style.fontsize="12px"
+        columnaDetalle.id="pag"+numPdf.toString()
     
-    columnaDescargar.classList.add('col-4')
-    columnaDescargar.classList.add('centrado-vertical')
-    columnaDescargar.classList.add('centrado-horizontal')
+    div.appendChild(columnaNombre)
+    div.appendChild(columnaDetalle)    
 
     const linkDesc= document.createElement('a')
+    linkDesc.style.display="flex"    
     linkDesc.href=fileName
     linkDesc.download=fileName.substring(fileName.lastIndexOf('/')+1,fileName.indexOf(".pdf")+4)
-    linkDesc.style="color:#000000"
-    linkDesc.innerHTML='<svg viewBox="64 64 896 896" focusable="false" fill="currentColor" width="32px" height="40px"><path d="M505.7 661a8 8 0 0012.6 0l112-141.7c4.1-5.2.4-12.9-6.3-12.9h-74.1V168c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v338.3H400c-6.7 0-10.4 7.7-6.3 12.9l112 141.8zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"/></svg>'   
-
-    columnaDescargar.appendChild(linkDesc)
+    linkDesc.style.color="#000000"
+   
+    linkDesc.appendChild(columnaIcono)
+    linkDesc.appendChild(div)
     
-    filaDscPdf.appendChild(columnaIcono)
-    filaDscPdf.appendChild(columnaNombre)
-    filaDscPdf.appendChild(columnaDescargar)
+    filaDscPdf.appendChild(linkDesc)
 
-    element.appendChild(filaDscPdf)        
+    element.appendChild(filaDscPdf)    
 }
 
 function stopTimer() {
