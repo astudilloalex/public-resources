@@ -621,28 +621,10 @@ var diccionario={
     "en":{"placeholder":"Write a message","buttonToken":"Check","saveHex":"Save Color HEX","configTheme":"Theme Configuration","principalColor":"Principal Color:","textColor":"Text Color:","DomainNotAllowed":"Domain not allowed","SecTokenError":"Error obtaining security token","MsgError":"Error sending message","NoValidToken":"Invalid security token","BackgError":"Error when saving background to DB","ColorError":"Error when saving color in BD","MsgInvalid":"Invalid, empty or not understandable message. No special characters allowed","HexError":"Invalid Hex code;#012345 Example","pages":"pages"},
 }
 
-// Variables para lectura de pdf
-var loadingTask
-var pdfDoc=null
-var numPdf=0
-
 // Funcion para carga de token seguridad y verificacion de temas
 window.onload=funcionesInicio;
 // Funcion para cambio de idioma de pagina
 window.onlanguagechange=obtenerIdioma;
-
-function readPDF(path){    
-    loadingTask=pdfjsLib.getDocument(path)
-    loadingTask.promise.then(pdfDoc_ => {
-        pdfDoc = pdfDoc_;
-        if(sessionStorage.getItem("idioma")=="es"){
-            jQuery('#pag'+numPdf.toString()).html(diccionario["es"]["pages"]+" "+pdfDoc.numPages+" PDF")
-        }else{
-            jQuery('#pag'+numPdf.toString()).html(diccionario["en"]["pages"]+" "+pdfDoc.numPages+" PDF")
-        }
-        numPdf++
-    });
-}
 
 // Funcion para control de tamaño entrada de mensaje
 inputMsg.addEventListener('input', () => {
@@ -754,24 +736,15 @@ function createMsgElement(origin,message){
         // containerMsg.classList.add('color-sec-back')
         // containerMsg.classList.add('color-sec-color')
         containerMsg.style.backgroundColor="#000000"
-        containerMsg.style.backgroundColor="#FFFFFF"
-        let msjLimpio=message.replace(/(\r\n|\n|\r)/gm, "")        
-        if(msjLimpio.indexOf('pdf')==msjLimpio.lastIndexOf('pdf') && msjLimpio.indexOf('pdf')!=-1){
-            downloadPDF(message.substring(message.indexOf("https"),message.indexOf(".pdf")+4),containerMsg)
-            readPDF(message.substring(message.indexOf("https"),message.indexOf(".pdf")+4),containerMsg)            
+        containerMsg.style.backgroundColor="#FFFFFF"        
+        if(/.pdf/.test(message)){
+            let enlaces=obtenerEnlaces(message)
+            for (let i=0;i<enlaces.length;i++){                
+                downloadPDF(enlaces[i],containerMsg)                
+            }            
         }else{
-            if(/.pdf/.test(message)){
-                if(sessionStorage.getItem('idioma')=='es'){
-                    containerMsg.innerHTML=diccionario['es']['MsgInvalid']
-                }else{
-                    containerMsg.innerHTML=diccionario['en']['MsgInvalid']
-                }
-                
-            }else{
-                containerMsg.innerHTML=message
-            }
-            
-        }
+            containerMsg.innerHTML=message
+        }        
     }else{        
         containerMsg.classList.add('color-primario-fondo')
         containerMsg.classList.add('color-primario-texto')
@@ -809,10 +782,10 @@ function downloadPDF(fileName,element){
         columnaDetalle.classList.add('centrado-vertical')
         columnaDetalle.classList.add('centrado-horizontal')
         columnaDetalle.style.fontsize="12px"
-        columnaDetalle.id="pag"+numPdf.toString()
+        columnaDetalle.innerHTML="PDF"
     
     div.appendChild(columnaNombre)
-    div.appendChild(columnaDetalle)    
+    div.appendChild(columnaDetalle)
 
     const linkDesc= document.createElement('a')
     linkDesc.style.display="flex"    
@@ -1406,3 +1379,9 @@ function funcionesInicio(){
     obtenerToken()
     obtenerIdioma()    
 }
+
+function obtenerEnlaces(cadena) {    
+    var regex = /((http|https):\/\/[^\s]+pdf)/g;
+    return cadena.match(regex);
+  }
+  
