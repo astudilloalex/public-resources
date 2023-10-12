@@ -809,6 +809,7 @@ function downloadPDF(fileName,element){
     linkDesc.href=fileName
     linkDesc.download=fileName.substring(fileName.lastIndexOf('/')+1,fileName.indexOf(".pdf")+4)
     linkDesc.style.color="#000000"
+    linkDesc.target="_blank"
    
     linkDesc.appendChild(columnaIcono)
     linkDesc.appendChild(div)
