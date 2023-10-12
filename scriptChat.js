@@ -1,12 +1,12 @@
 // ** Creacion de elemntos de chat en pagina web, inyeccion de html dentro de elemento body
 
 //Lista de dominios permitidos
-const dominiosPermitidos = ['localhost', '127.0.0.1','bajajecuador.com','corporativo.curbe.com.ec','ebi.corp.ec','promotions.curbe.com.ec']
+const dominiosPermitidos = ['localhost', '127.0.0.1','bajajecuador.com','corporativo.curbe.com.ec','ebi.corp.ec']
 
 //Localicazion URL de servicio
 const dominioAPI='https://apichatgpt.dev.curbe.com.ec/'
 //Localicazion URL de repositorio contenedor
-const dominioRepositorio='https://public.alexastudillo.com/'
+const dominioRepositorio=''
 
 //Creacion de elemento link de css
 const css =document.createElement('link')
@@ -617,8 +617,8 @@ var audioRecordStartTime,elapsedTimeTimer,context,elapsedTime;
 var audioRecordPausedTime=0
 // Variable para internacionalizacion
 var diccionario={
-    "es":{"placeholder":"Escribe un mensaje","buttonToken":"Comprobar","saveHex":"Guardar Color HEX","configTheme":"Configurar Tema","principalColor":"Color Principal:","textColor":"Color Texto:","DomainNotAllowed":"Dominio no permitido","SecTokenError":"Error sl obtener token seguridad","MsgError":"Error al enviar mensaje","NoValidToken":"Token de seguridad no valido","BackgError":"Error al guardar fondo en BD","ColorError":"Error al guardar color en BD","MsgInvalid":"Mensaje invalido o vacio, no se permiten caracteres especiales","HexError":"Codigo Hex no valido;#012345 Ej","pages":"páginas"},
-    "en":{"placeholder":"Write a message","buttonToken":"Check","saveHex":"Save Color HEX","configTheme":"Theme Configuration","principalColor":"Principal Color:","textColor":"Text Color:","DomainNotAllowed":"Domain not allowed","SecTokenError":"Error obtaining security token","MsgError":"Error sending message","NoValidToken":"Invalid security token","BackgError":"Error when saving background to DB","ColorError":"Error when saving color in BD","MsgInvalid":"Invalid or empty message, no special characters allowed","HexError":"Invalid Hex code;#012345 Example","pages":"pages"},
+    "es":{"placeholder":"Escribe un mensaje","buttonToken":"Comprobar","saveHex":"Guardar Color HEX","configTheme":"Configurar Tema","principalColor":"Color Principal:","textColor":"Color Texto:","DomainNotAllowed":"Dominio no permitido","SecTokenError":"Error al obtener token seguridad","MsgError":"Error al enviar mensaje","NoValidToken":"Token de seguridad no valido","BackgError":"Error al guardar fondo en BD","ColorError":"Error al guardar color en BD","MsgInvalid":"Mensaje invalido,vacio o no entendible. No se permiten Carecteres especiales","HexError":"Codigo Hex no valido;#012345 Ej","pages":"páginas"},
+    "en":{"placeholder":"Write a message","buttonToken":"Check","saveHex":"Save Color HEX","configTheme":"Theme Configuration","principalColor":"Principal Color:","textColor":"Text Color:","DomainNotAllowed":"Domain not allowed","SecTokenError":"Error obtaining security token","MsgError":"Error sending message","NoValidToken":"Invalid security token","BackgError":"Error when saving background to DB","ColorError":"Error when saving color in BD","MsgInvalid":"Invalid, empty or not understandable message. No special characters allowed","HexError":"Invalid Hex code;#012345 Example","pages":"pages"},
 }
 
 // Variables para lectura de pdf
@@ -755,12 +755,22 @@ function createMsgElement(origin,message){
         // containerMsg.classList.add('color-sec-color')
         containerMsg.style.backgroundColor="#000000"
         containerMsg.style.backgroundColor="#FFFFFF"
-        console.log(message)
-        if(/.pdf{1}/i.test(message)){
+        let msjLimpio=message.replace(/(\r\n|\n|\r)/gm, "")        
+        if(msjLimpio.indexOf('pdf')==msjLimpio.lastIndexOf('pdf')){
             downloadPDF(message.substring(message.indexOf("https"),message.indexOf(".pdf")+4),containerMsg)
-            readPDF(message.substring(message.indexOf("https"),message.indexOf(".pdf")+4),containerMsg)
-        }else{            
-            containerMsg.innerHTML=message            
+            readPDF(message.substring(message.indexOf("https"),message.indexOf(".pdf")+4),containerMsg)            
+        }else{
+            if(/.pdf/.test(message)){
+                if(sessionStorage.getItem('idioma')=='es'){
+                    containerMsg.innerHTML=diccionario['es']['MsgInvalid']
+                }else{
+                    containerMsg.innerHTML=diccionario['en']['MsgInvalid']
+                }
+                
+            }else{
+                containerMsg.innerHTML=message
+            }
+            
         }
     }else{        
         containerMsg.classList.add('color-primario-fondo')
@@ -807,9 +817,9 @@ function downloadPDF(fileName,element){
     const linkDesc= document.createElement('a')
     linkDesc.style.display="flex"    
     linkDesc.href=fileName
+    linkDesc.target="_blank"
     linkDesc.download=fileName.substring(fileName.lastIndexOf('/')+1,fileName.indexOf(".pdf")+4)
     linkDesc.style.color="#000000"
-    linkDesc.target="_blank"
    
     linkDesc.appendChild(columnaIcono)
     linkDesc.appendChild(div)
