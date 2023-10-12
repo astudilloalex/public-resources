@@ -756,7 +756,7 @@ function createMsgElement(origin,message){
         containerMsg.style.backgroundColor="#000000"
         containerMsg.style.backgroundColor="#FFFFFF"
         let msjLimpio=message.replace(/(\r\n|\n|\r)/gm, "")        
-        if(msjLimpio.indexOf('pdf')==msjLimpio.lastIndexOf('pdf')){
+        if(msjLimpio.indexOf('pdf')==msjLimpio.lastIndexOf('pdf') && msjLimpio.indexOf('pdf')!=-1){
             downloadPDF(message.substring(message.indexOf("https"),message.indexOf(".pdf")+4),containerMsg)
             readPDF(message.substring(message.indexOf("https"),message.indexOf(".pdf")+4),containerMsg)            
         }else{
