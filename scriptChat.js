@@ -1,7 +1,7 @@
 // ** Creacion de elemntos de chat en pagina web, inyeccion de html dentro de elemento body
 
 //Lista de dominios permitidos
-const dominiosPermitidos = ['localhost', '127.0.0.1','bajajecuador.com','corporativo.curbe.com.ec','ebi.corp.ec']
+const dominiosPermitidos = ['localhost', '127.0.0.1','bajajecuador.com','corporativo.curbe.com.ec','ebi.corp.ec','promotions.curbe.com.ec']
 
 //Localicazion URL de servicio
 const dominioAPI='https://apichatgpt.dev.curbe.com.ec/'
@@ -760,9 +760,7 @@ function createMsgElement(origin,message){
             downloadPDF(message.substring(message.indexOf("https"),message.indexOf(".pdf")+4),containerMsg)
             readPDF(message.substring(message.indexOf("https"),message.indexOf(".pdf")+4),containerMsg)
         }else{            
-                containerMsg.innerHTML=message
-            
-            
+            containerMsg.innerHTML=message            
         }
     }else{        
         containerMsg.classList.add('color-primario-fondo')
