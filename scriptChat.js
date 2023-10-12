@@ -756,15 +756,12 @@ function createMsgElement(origin,message){
         containerMsg.style.backgroundColor="#000000"
         containerMsg.style.backgroundColor="#FFFFFF"
         console.log(message)
-        if(/.pdf .pdf/.test(message)){
+        if(/.pdf{1}/i.test(message)){
             downloadPDF(message.substring(message.indexOf("https"),message.indexOf(".pdf")+4),containerMsg)
             readPDF(message.substring(message.indexOf("https"),message.indexOf(".pdf")+4),containerMsg)
-        }else{
-            if(/.pdf/.test(message)){
-                containerMsg.innerHTML="Nombre de Archivo no comprensible"
-            }else{
+        }else{            
                 containerMsg.innerHTML=message
-            }
+            
             
         }
     }else{        
