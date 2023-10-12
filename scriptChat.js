@@ -19,6 +19,9 @@ css.crossOrigin="anonymous"
 const pdfjs= document.createElement('script')
 pdfjs.src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.min.js"
 
+const audioRecord= document.createElement('script')
+audioRecord.src=dominioRepositorio.concat("audio-recording.js")
+
 //Creacion de elemento link fuente
 const fuente =document.createElement('style')
 fuente.innerHTML="@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');"
@@ -582,11 +585,12 @@ contenedorchat.appendChild(esquemaValidacion)
 
 // Adicion de elementos a pagina principal
 if(dominiosPermitidos.includes(window.location.host)){
-    document.body.appendChild(contenedorchat)
-    document.body.appendChild(botonAvatar)
     document.head.appendChild(css)
     document.head.appendChild(fuente)
     document.head.appendChild(pdfjs)
+    document.head.appendChild(audioRecord)
+    document.body.appendChild(contenedorchat)
+    document.body.appendChild(botonAvatar)    
 }else{
     //En caso de no estar en la lista muestra mensaje de no permitido
     console.error("Domain not allowed")
@@ -751,11 +755,17 @@ function createMsgElement(origin,message){
         // containerMsg.classList.add('color-sec-color')
         containerMsg.style.backgroundColor="#000000"
         containerMsg.style.backgroundColor="#FFFFFF"
-        if(/.pdf{1}/i.test(message)){            
+        console.log(message)
+        if(/.pdf .pdf/.test(message)){
             downloadPDF(message.substring(message.indexOf("https"),message.indexOf(".pdf")+4),containerMsg)
             readPDF(message.substring(message.indexOf("https"),message.indexOf(".pdf")+4),containerMsg)
         }else{
-            containerMsg.innerHTML=message
+            if(/.pdf/.test(message)){
+                containerMsg.innerHTML="Nombre de Archivo no comprensible"
+            }else{
+                containerMsg.innerHTML=message
+            }
+            
         }
     }else{        
         containerMsg.classList.add('color-primario-fondo')
