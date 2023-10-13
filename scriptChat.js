@@ -830,6 +830,10 @@ function loadAudio(recorderAudioAsBlob) {
 
 function sendTextMsg(message){        
     generateLoading(true)
+    if(message){
+        deleteLoading()        
+        createMsgElement(true,"Hola, en que puedo ayudarte")
+    }else{    
     axios.post(dominioAPI.concat('bot-question'),{
         question:message,
         language:sessionStorage.getItem("idioma")
@@ -852,6 +856,7 @@ function sendTextMsg(message){
             window.alert(diccionario["en"]["MsgError"])
         }
     })
+}
 }
 
 jQuery("#alternarContenedorAvatar").click(alternarContenedorAvatar)
