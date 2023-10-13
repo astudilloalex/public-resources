@@ -830,7 +830,7 @@ function loadAudio(recorderAudioAsBlob) {
 
 function sendTextMsg(message){        
     generateLoading(true)
-    if(message){
+    if(message=="hola" || message=="Hola" || "HOLA"){
         deleteLoading()        
         createMsgElement(true,"Hola, en que puedo ayudarte")
     }else{    
