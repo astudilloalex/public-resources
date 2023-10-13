@@ -734,18 +734,21 @@ function createMsgElement(origin,message){
     if(origin){
         actualMsg.classList.add('inverse-row')        
         // containerMsg.classList.add('color-sec-back')
-        // containerMsg.classList.add('color-sec-color')
-        containerMsg.style.backgroundColor="#000000"
-        containerMsg.style.backgroundColor="#FFFFFF"        
-        if(/.pdf/.test(message)){
-            let enlaces=obtenerEnlaces(message)
+        // containerMsg.classList.add('color-sec-color')        
+        containerMsg.style.backgroundColor="#FFFFFF"
+        var msjLimpio = message.replace(/(\r\n|\n|\r)/gm, "")
+        msjLimpio = msjLimpio.replace(/(\(|\)|\[|\])/gm, " ")
+        console.log(msjLimpio)
+        if(/.pdf/.test(msjLimpio)){
+            let enlaces=obtenerEnlaces(msjLimpio)
+            console.log(enlaces)
             for (let i=0;i<enlaces.length;i++){                
                 downloadPDF(enlaces[i],containerMsg)                
             }            
         }else{
-            if(/http/.test(message)){
-                let link=message.substring(message.indexOf('http'),message.indexOf('.com')+4)                
-                let aux=message.replace('http',"<a style='color:blue' target='_blank' href=http")
+            if(/http/.test(msjLimpio)){
+                let link=msjLimpio.substring(msjLimpio.indexOf('http'),msjLimpio.indexOf('.com')+4)                
+                let aux=messamsjLimpioge.replace('http',"<a style='color:blue' target='_blank' href=http")
                 aux=aux.replace('.com','.com/>'+link+'</a>')
                 containerMsg.innerHTML=aux
             }else{
@@ -838,38 +841,28 @@ function loadAudio(recorderAudioAsBlob) {
 
 function sendTextMsg(message){        
     generateLoading(true)
-    if(message=="hola" || message=="Hola" || message=="HOLA"){
+    axios.post(dominioAPI.concat('bot-question'),{
+        question:message,
+        language:sessionStorage.getItem("idioma")
+    },
+    {
+        headers: {
+            Authorization: "Bearer ".concat(sessionStorage.getItem('token'))
+        }
+    })
+    .then(function (response) {
+        contMsg++
         deleteLoading()        
-        createMsgElement(true,"Hola, en que puedo ayudarte")
-    }else{  
-        if(/reclamo/.test(message)){
-            deleteLoading()        
-            createMsgElement(true,"Para reclamos puedes ir a la pagina de Austrobank,https://recaustrobank.com/ ")
+        createMsgElement(true,response.data)
+    })
+    .catch(function(error){
+        console.error(error)
+        if(sessionStorage.getItem("idioma")=="es"){
+            window.alert(diccionario["es"]["MsgError"])
         }else{
-            axios.post(dominioAPI.concat('bot-question'),{
-                question:message,
-                language:sessionStorage.getItem("idioma")
-            },
-            {
-                headers: {
-                    Authorization: "Bearer ".concat(sessionStorage.getItem('token'))
-                }
-            })
-            .then(function (response) {
-                contMsg++
-                deleteLoading()        
-                createMsgElement(true,response.data)
-            })
-            .catch(function(error){
-                console.error(error)
-                if(sessionStorage.getItem("idioma")=="es"){
-                    window.alert(diccionario["es"]["MsgError"])
-                }else{
-                    window.alert(diccionario["en"]["MsgError"])
-                }
-            })
-        }    
-    }
+            window.alert(diccionario["en"]["MsgError"])
+        }
+    })
 }
 
 jQuery("#alternarContenedorAvatar").click(alternarContenedorAvatar)
@@ -1399,7 +1392,7 @@ function funcionesInicio(){
 }
 
 function obtenerEnlaces(cadena) {    
-    var regex = /((http|https):\/\/[^\s]+pdf)/g;
-    return cadena.match(regex);
+    var regex = /(http|https):\/\/[\S]+[pdf]/g;
+    return [...new Set(cadena.match(regex))];
   }
   
