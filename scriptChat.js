@@ -833,30 +833,35 @@ function sendTextMsg(message){
     if(message=="hola" || message=="Hola" || "HOLA"){
         deleteLoading()        
         createMsgElement(true,"Hola, en que puedo ayudarte")
-    }else{    
-    axios.post(dominioAPI.concat('bot-question'),{
-        question:message,
-        language:sessionStorage.getItem("idioma")
-    },
-    {
-        headers: {
-            Authorization: "Bearer ".concat(sessionStorage.getItem('token'))
-        }
-    })
-    .then(function (response) {
-        contMsg++
-        deleteLoading()        
-        createMsgElement(true,response.data)
-    })
-    .catch(function(error){
-        console.error(error)
-        if(sessionStorage.getItem("idioma")=="es"){
-            window.alert(diccionario["es"]["MsgError"])
+    }else{  
+        if(/reclamo/.test(message)){
+            deleteLoading()        
+            createMsgElement(true,"Para reclamos puedes ir a la pagina de Austrobank,https://recaustrobank.com/ ")
         }else{
-            window.alert(diccionario["en"]["MsgError"])
-        }
-    })
-}
+            axios.post(dominioAPI.concat('bot-question'),{
+                question:message,
+                language:sessionStorage.getItem("idioma")
+            },
+            {
+                headers: {
+                    Authorization: "Bearer ".concat(sessionStorage.getItem('token'))
+                }
+            })
+            .then(function (response) {
+                contMsg++
+                deleteLoading()        
+                createMsgElement(true,response.data)
+            })
+            .catch(function(error){
+                console.error(error)
+                if(sessionStorage.getItem("idioma")=="es"){
+                    window.alert(diccionario["es"]["MsgError"])
+                }else{
+                    window.alert(diccionario["en"]["MsgError"])
+                }
+            })
+        }    
+    }
 }
 
 jQuery("#alternarContenedorAvatar").click(alternarContenedorAvatar)
