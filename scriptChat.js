@@ -743,7 +743,15 @@ function createMsgElement(origin,message){
                 downloadPDF(enlaces[i],containerMsg)                
             }            
         }else{
-            containerMsg.innerHTML=message
+            if(/http/.test(message)){
+                let link=message.substring(message.indexOf('http'),message.indexOf('.com')+4)                
+                let aux=message.replace('http',"<a style='color:blue' target='_blank' href=http")
+                aux=aux.replace('.com','.com/>'+link+'</a>')
+                containerMsg.innerHTML=aux
+            }else{
+                containerMsg.innerHTML=message
+            }
+            
         }        
     }else{        
         containerMsg.classList.add('color-primario-fondo')
