@@ -748,7 +748,7 @@ function createMsgElement(origin,message){
         }else{
             if(/http/.test(msjLimpio)){
                 let link=msjLimpio.substring(msjLimpio.indexOf('http'),msjLimpio.indexOf('.com')+4)                
-                let aux=messamsjLimpioge.replace('http',"<a style='color:blue' target='_blank' href=http")
+                let aux=msjLimpio.replace('http',"<a style='color:blue' target='_blank' href=http")
                 aux=aux.replace('.com','.com/>'+link+'</a>')
                 containerMsg.innerHTML=aux
             }else{
