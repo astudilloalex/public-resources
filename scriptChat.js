@@ -736,7 +736,7 @@ function createMsgElement(origin,message){
         // containerMsg.classList.add('color-sec-back')
         // containerMsg.classList.add('color-sec-color')        
         containerMsg.style.backgroundColor="#FFFFFF"
-        var msjLimpio = message.replace(/(\r\n|\n|\r)/gm, "")
+        var msjLimpio = message.replace(/(\r\n|\n|\r)/gm, " ")
         msjLimpio = msjLimpio.replace(/(\(|\)|\[|\])/gm, " ")
         console.log(msjLimpio)
         if(/.pdf/.test(msjLimpio)){
