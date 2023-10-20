@@ -341,7 +341,11 @@ span-color-chat{
 titulo-chat{
     flex:1 1 auto
 }
-/* img{
+avatar-chat > img{
     width: inherit;
     height: inherit;
-} */
+}
+avatar-icono-chat > img{
+    width: inherit;
+    height: inherit;
+}
