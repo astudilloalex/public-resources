@@ -743,6 +743,7 @@ function createMsgElement(origin,message){
             let enlaces=obtenerEnlaces(msjLimpio)
             console.log(enlaces)
             if(/siniestro/.test(msjLimpio)){
+                console.log("siniestro")                
                 createMsgElement(true,"Para poder registrar tu siniestro deber llenar el siguiente formulario : ")
             }
             for (let i=0;i<enlaces.length;i++){
