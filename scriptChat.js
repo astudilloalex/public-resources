@@ -742,7 +742,10 @@ function createMsgElement(origin,message){
         if(/.pdf/.test(msjLimpio)){
             let enlaces=obtenerEnlaces(msjLimpio)
             console.log(enlaces)
-            for (let i=0;i<enlaces.length;i++){                
+            if(/siniestro/.test(msjLimpio)){
+                createMsgElement(true,"Para poder registrar tu siniestro deber llenar el siguiente formulario : ")
+            }
+            for (let i=0;i<enlaces.length;i++){
                 downloadPDF(enlaces[i],containerMsg)                
             }            
         }else{
