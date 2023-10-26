@@ -844,7 +844,7 @@ async function sendTextMsg(message){
     if(/siniestro/.test(message)){
         await new Promise(r => setTimeout(r, 3000));
         deleteLoading()
-        createMsgElement(true,"Para poder registrar tu siniestro deber llenar el siguiente formulario : ")
+        createMsgElement(true,"Para poder registrar tu siniestro debes llenar el siguiente formulario : ")
         createMsgElement(true,"https://segurosunidos.ec/wp-content/uploads/2022/09/SEGUROSUNIDOS-Formulario-Denuncia-Siniestro.pdf")
     }else{
         axios.post(dominioAPI.concat('bot-question'),{
