@@ -741,12 +741,8 @@ function createMsgElement(origin,message){
         console.log(msjLimpio)
         if(/.pdf/.test(msjLimpio)){
             let enlaces=obtenerEnlaces(msjLimpio)
-            console.log(enlaces)
-            if(/siniestro/.test(msjLimpio)){
-                console.log("siniestro")                
-                createMsgElement(true,"Para poder registrar tu siniestro deber llenar el siguiente formulario : ")
-            }
-            for (let i=0;i<enlaces.length;i++){
+            console.log(enlaces)            
+            for (let i=0;i<enlaces.length;i++){                
                 downloadPDF(enlaces[i],containerMsg)                
             }            
         }else{
@@ -843,30 +839,37 @@ function loadAudio(recorderAudioAsBlob) {
     reader.readAsDataURL(recorderAudioAsBlob);
 }
 
-function sendTextMsg(message){        
+async function sendTextMsg(message){        
     generateLoading(true)
-    axios.post(dominioAPI.concat('bot-question'),{
-        question:message,
-        language:sessionStorage.getItem("idioma")
-    },
-    {
-        headers: {
-            Authorization: "Bearer ".concat(sessionStorage.getItem('token'))
-        }
-    })
-    .then(function (response) {
-        contMsg++
-        deleteLoading()        
-        createMsgElement(true,response.data)
-    })
-    .catch(function(error){
-        console.error(error)
-        if(sessionStorage.getItem("idioma")=="es"){
-            window.alert(diccionario["es"]["MsgError"])
-        }else{
-            window.alert(diccionario["en"]["MsgError"])
-        }
-    })
+    if(/siniestro/.test(message)){
+        await new Promise(r => setTimeout(r, 3000));
+        deleteLoading()
+        createMsgElement(true,"Para poder registrar tu siniestro deber llenar el siguiente formulario : ")
+        createMsgElement(true,"https://segurosunidos.ec/wp-content/uploads/2022/09/SEGUROSUNIDOS-Formulario-Denuncia-Siniestro.pdf")
+    }else{
+        axios.post(dominioAPI.concat('bot-question'),{
+            question:message,
+            language:sessionStorage.getItem("idioma")
+        },
+        {
+            headers: {
+                Authorization: "Bearer ".concat(sessionStorage.getItem('token'))
+            }
+        })
+        .then(function (response) {
+            contMsg++
+            deleteLoading()        
+            createMsgElement(true,response.data)
+        })
+        .catch(function(error){
+            console.error(error)
+            if(sessionStorage.getItem("idioma")=="es"){
+                window.alert(diccionario["es"]["MsgError"])
+            }else{
+                window.alert(diccionario["en"]["MsgError"])
+            }
+        })
+    }    
 }
 
 jQuery("#alternarContenedorAvatar").click(alternarContenedorAvatar)
