@@ -102186,7 +102186,7 @@ a3p(a,b){var s=0,r=A.H(t.d),q,p=this,o,n,m,l
 var $async$hc=A.D(function(c,d){if(c===1)return A.E(d,r)
 while(true)switch(s){case 0:o=p.a
 m=o
-l=A.cQ("http://localhost:5099/api/v1/auth/login",0,null)
+l=A.cQ("https://gatewayapi.curbe.com.ec/api/v1/auth/login",0,null)
 s=4
 return A.x(o.tS(A.ao(["email",a,"password",b],t.N,t.z)),$async$hc)
 case 4:s=3
@@ -102297,7 +102297,7 @@ a23(a){var s=0,r=A.H(t.d),q,p=this,o,n,m
 var $async$l9=A.D(function(b,c){if(b===1)return A.E(c,r)
 while(true)switch(s){case 0:o=p.a
 s=3
-return A.x(o.ky("GET",A.cQ("http://localhost:5099/api/v1/company/all-by-organization/"+a,0,null),null),$async$l9)
+return A.x(o.ky("GET",A.cQ("https://gatewayapi.curbe.com.ec/api/v1/company/all-by-organization/"+a,0,null),null),$async$l9)
 case 3:n=c
 m=A
 s=4
@@ -102312,7 +102312,7 @@ a20(a){var s=0,r=A.H(t.d),q,p=this,o,n,m
 var $async$l8=A.D(function(b,c){if(b===1)return A.E(c,r)
 while(true)switch(s){case 0:o=p.a
 s=3
-return A.x(o.ky("GET",A.cQ("http://localhost:5099/api/v1/company/get/"+a,0,null),null),$async$l8)
+return A.x(o.ky("GET",A.cQ("https://gatewayapi.curbe.com.ec/api/v1/company/get/"+a,0,null),null),$async$l8)
 case 3:n=c
 m=A
 s=4
@@ -102349,7 +102349,7 @@ as_(a,b){var s=0,r=A.H(t.d),q,p=this,o,n,m
 var $async$hn=A.D(function(c,d){if(c===1)return A.E(d,r)
 while(true)switch(s){case 0:o=p.a
 s=3
-return A.x(o.ky("GET",A.cQ("http://localhost:5099/api/v1/country/all?page="+a+"&size="+b,0,null),null),$async$hn)
+return A.x(o.ky("GET",A.cQ("https://gatewayapi.curbe.com.ec/api/v1/country/all?page="+a+"&size="+b,0,null),null),$async$hn)
 case 3:n=d
 m=A
 s=4
@@ -102430,7 +102430,7 @@ as2(a){var s=0,r=A.H(t.d),q,p=this,o,n,m
 var $async$x3=A.D(function(b,c){if(b===1)return A.E(c,r)
 while(true)switch(s){case 0:o=p.a
 s=3
-return A.x(o.ky("GET",A.cQ("http://localhost:5099/api/v1/menu/all-childrens/"+a,0,null),null),$async$x3)
+return A.x(o.ky("GET",A.cQ("https://gatewayapi.curbe.com.ec/api/v1/menu/all-childrens/"+a,0,null),null),$async$x3)
 case 3:n=c
 m=A
 s=4
@@ -102489,7 +102489,7 @@ as0(a,b){var s=0,r=A.H(t.d),q,p=this,o,n,m
 var $async$hn=A.D(function(c,d){if(c===1)return A.E(d,r)
 while(true)switch(s){case 0:o=p.a
 s=3
-return A.x(o.ky("GET",A.cQ("http://localhost:5099/api/v1/permission/all?page="+a+"&size="+b,0,null),null),$async$hn)
+return A.x(o.ky("GET",A.cQ("https://gatewayapi.curbe.com.ec/api/v1/permission/all?page="+a+"&size="+b,0,null),null),$async$hn)
 case 3:n=d
 m=A
 s=4
@@ -102504,7 +102504,7 @@ as3(a){var s=0,r=A.H(t.d),q,p=this,o,n,m
 var $async$x4=A.D(function(b,c){if(b===1)return A.E(c,r)
 while(true)switch(s){case 0:o=p.a
 s=3
-return A.x(o.ky("GET",A.cQ("http://localhost:5099/api/v1/permission/all-ids-by-role-code/"+a,0,null),null),$async$x4)
+return A.x(o.ky("GET",A.cQ("https://gatewayapi.curbe.com.ec/api/v1/permission/all-ids-by-role-code/"+a,0,null),null),$async$x4)
 case 3:n=c
 m=A
 s=4
@@ -102587,7 +102587,7 @@ as4(a){var s=0,r=A.H(t.d),q,p=this,o,n,m
 var $async$x5=A.D(function(b,c){if(b===1)return A.E(c,r)
 while(true)switch(s){case 0:o=p.a
 s=3
-return A.x(o.ky("GET",A.cQ("http://localhost:5099/api/v1/person-document-type/all-by-country/"+a,0,null),null),$async$x5)
+return A.x(o.ky("GET",A.cQ("https://gatewayapi.curbe.com.ec/api/v1/person-document-type/all-by-country/"+a,0,null),null),$async$x5)
 case 3:n=c
 m=A
 s=4
@@ -102667,7 +102667,7 @@ as1(a,b){var s=0,r=A.H(t.d),q,p=this,o,n,m
 var $async$hn=A.D(function(c,d){if(c===1)return A.E(d,r)
 while(true)switch(s){case 0:o=p.a
 s=3
-return A.x(o.ky("GET",A.cQ("http://localhost:5099/api/v1/role/all?page="+a+"&size="+b,0,null),null),$async$hn)
+return A.x(o.ky("GET",A.cQ("https://gatewayapi.curbe.com.ec/api/v1/role/all?page="+a+"&size="+b,0,null),null),$async$hn)
 case 3:n=d
 m=A
 s=4
@@ -102682,7 +102682,7 @@ a2s(a,b){var s=0,r=A.H(t.d),q,p=this,o,n,m,l
 var $async$iM=A.D(function(c,d){if(c===1)return A.E(d,r)
 while(true)switch(s){case 0:o=p.a
 m=o
-l=A.cQ("http://localhost:5099/api/v1/role/create",0,null)
+l=A.cQ("https://gatewayapi.curbe.com.ec/api/v1/role/create",0,null)
 s=4
 return A.x(o.tS(A.aUT(b)),$async$iM)
 case 4:s=3
@@ -102701,7 +102701,7 @@ axN(a,b){var s=0,r=A.H(t.d),q,p=this,o,n,m,l
 var $async$bw=A.D(function(c,d){if(c===1)return A.E(d,r)
 while(true)switch(s){case 0:o=p.a
 m=o
-l=A.cQ("http://localhost:5099/api/v1/role/update/"+b.b,0,null)
+l=A.cQ("https://gatewayapi.curbe.com.ec/api/v1/role/update/"+b.b,0,null)
 s=4
 return A.x(o.tS(A.aUT(b)),$async$bw)
 case 4:s=3
@@ -102794,7 +102794,7 @@ geM(a){var s=0,r=A.H(t.d),q,p=this,o,n,m
 var $async$geM=A.D(function(b,c){if(b===1)return A.E(c,r)
 while(true)switch(s){case 0:o=p.a
 s=3
-return A.x(o.ky("GET",A.cQ("http://localhost:5099/api/v1/user/current",0,null),null),$async$geM)
+return A.x(o.ky("GET",A.cQ("https://gatewayapi.curbe.com.ec/api/v1/user/current",0,null),null),$async$geM)
 case 3:n=c
 m=A
 s=4
@@ -102809,7 +102809,7 @@ aoy(a,b){var s=0,r=A.H(t.d),q,p=this,o,n,m
 var $async$vY=A.D(function(c,d){if(c===1)return A.E(d,r)
 while(true)switch(s){case 0:o=p.a
 s=3
-return A.x(o.ky("GET",A.cQ("http://localhost:5099/api/v1/user/all-in-company?page="+a+"&size="+b,0,null),null),$async$vY)
+return A.x(o.ky("GET",A.cQ("https://gatewayapi.curbe.com.ec/api/v1/user/all-in-company?page="+a+"&size="+b,0,null),null),$async$vY)
 case 3:n=d
 m=A
 s=4
@@ -102824,7 +102824,7 @@ a2t(a,b){var s=0,r=A.H(t.d),q,p=this,o,n,m,l
 var $async$iM=A.D(function(c,d){if(c===1)return A.E(d,r)
 while(true)switch(s){case 0:o=p.a
 m=o
-l=A.cQ("http://localhost:5099/api/v1/user/create",0,null)
+l=A.cQ("https://gatewayapi.curbe.com.ec/api/v1/user/create",0,null)
 s=4
 return A.x(o.tS(A.aUO(b)),$async$iM)
 case 4:s=3
